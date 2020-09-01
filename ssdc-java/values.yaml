@@ -1,0 +1,21 @@
+# Default values for ssdc-admin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: ctsi
+imagePullSecrets: docker-local
+env: {}
+nodeSelector: {}
+resources:
+  requests:
+    memory: 200
+    cpu: 500   
+  limits:
+    memory: 2048
+    cpu: 4096
+java:
+  image: ctsi/ssdc-admin:1.0.0
+  imagePullPolicy: Always
+  replicas: 1
+  containerPort: 9000
+  javaOpts: 

@@ -1,0 +1,126 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.web.containerPort }}
+      protocol: TCP
+      targetPort: {{ .Values.web.containerPort }}
+      name: http-container
+    - port: {{ .Values.web.exporterPort }}
+      protocol: TCP
+      targetPort: {{ .Values.web.exporterPort }}
+      name: http-exporter     
+  selector:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.web.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+        release: {{ .Release.Name }}
+    spec:
+      {{- if .Values.env }}    
+      initContainers:
+      - name: {{ .Release.Name }}-init
+        image: {{ .Values.web.image }}
+        imagePullPolicy: {{ .Values.web.imagePullPolicy }}
+        command:
+        - sh
+        - /init/pre-start.sh
+        volumeMounts:
+        - mountPath: /init/.env
+          name: config
+          subPath: .env
+        - mountPath: /init/pre-start.sh
+          name: config
+          subPath: pre-start.sh
+        - mountPath: /usr/share/nginx/html
+          name: workdir
+      {{- end}}
+      containers:
+      - name: {{ .Release.Name }}-exporter
+        image:  {{ .Values.web.exporterImage }}
+        imagePullPolicy: {{ .Values.web.imagePullPolicy }}
+        ports:
+        - containerPort: {{ .Values.web.exporterPort }}  
+      - name: {{ .Release.Name }}-app
+        image: {{ .Values.web.image }}
+        imagePullPolicy: {{ .Values.web.imagePullPolicy }}
+        resources:
+          requests:
+            memory: {{ cat .Values.resources.requests.memory "Mi"| nospace | quote}}
+            cpu:  {{ cat .Values.resources.requests.cpu "m" | nospace | quote}}    
+          limits:
+            memory: {{ cat .Values.resources.limits.memory "Mi"| nospace | quote}}
+            cpu:  {{ cat .Values.resources.limits.cpu "m" | nospace | quote}}        
+        ports:
+        - containerPort: {{ .Values.web.containerPort }}      
+        volumeMounts:
+        {{- if .Values.env }}
+        - mountPath: /usr/share/nginx/html
+          name: workdir
+        {{- end}}
+        {{- if .Values.param }}
+        - name: param
+          mountPath: /usr/share/nginx/html/configs/micro-service-config.js
+          subPath: micro-service-config.js
+        {{- end}}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets}}      
+      volumes:
+      {{- if .Values.env }}
+      - name: workdir
+        emptyDir: {}  
+      - name: config
+        configMap:
+          name: configmap-{{ .Release.Name }}
+      {{- end}}
+      {{- if .Values.param }}
+      - name: param
+        configMap:
+          name: param-{{ .Release.Name }}
+      {{- end}}      
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+  name:  {{ .Release.Name }}-app-monitor
+  namespace: monitoring 
+spec:
+  endpoints:
+  - interval: 10s
+    path: /metrics
+    port: http-exporter
+  namespaceSelector:
+    matchNames:
+    - {{ .Values.namespace }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+      release: {{ .Release.Name }}

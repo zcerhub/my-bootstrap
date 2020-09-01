@@ -1,0 +1,89 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: {{ .Values.java.containerPort }}
+      protocol: TCP
+      targetPort: {{ .Values.java.containerPort }}
+      name: http-container
+  selector:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.java.replicas }} 
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+        release: {{ .Release.Name }}
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/path: /actuator/prometheus
+        prometheus.io/port: {{ quote .Values.java.containerPort }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.java.image }}
+          imagePullPolicy: {{ .Values.java.imagePullPolicy }}
+          resources:
+            requests:
+              memory: {{ cat .Values.resources.requests.memory "Mi"| nospace | quote}}
+              cpu:  {{ cat .Values.resources.requests.cpu "m" | nospace | quote}}    
+            limits:
+              memory: {{ cat .Values.resources.limits.memory "Mi"| nospace | quote}}
+              cpu:  {{ cat .Values.resources.limits.cpu "m" | nospace | quote}}
+          ports:
+          - containerPort: {{ .Values.java.containerPort }}   
+          env:
+          {{- range $key, $value :=  .Values.env }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+      {{ toYaml .Values.nodeSelector | indent 2 }}
+      {{- end }}
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets}}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    k8s-app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+  name:  {{ .Release.Name }}-app-monitor
+  namespace: monitoring 
+spec:
+  endpoints:
+  - interval: 10s
+    path: /actuator/prometheus
+    port: http-container
+  namespaceSelector:
+    matchNames:
+    - {{ .Values.namespace }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+      release: {{ .Release.Name }}

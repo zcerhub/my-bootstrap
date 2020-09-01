@@ -1,0 +1,23 @@
+# Default values for ssdc-admin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: ctsi
+imagePullSecrets: docker-local
+env: {}
+param: {}
+nodeSelector: {}
+resources:
+  requests:
+    memory: 100
+    cpu: 250   
+  limits:
+    memory: 512
+    cpu: 2048
+web:
+  image: ctsi/admin-project:1.0.0
+  exporterImage: ctsi/nginx-vts-exporter:0.10.3
+  imagePullPolicy: Always
+  replicas: 1
+  containerPort: 80
+  exporterPort: 9913
