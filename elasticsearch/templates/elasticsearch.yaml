@@ -1,0 +1,64 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1beta1
+kind: Elasticsearch
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+  version: {{ .Values.image.tag }}
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true  
+  nodeSets:
+  - name: default
+    count: {{ .Values.nodeCount }}
+    config:
+      node.master: true
+      node.data: true
+      node.ingest: true
+    podTemplate:
+      metadata:
+        labels:
+          release: {{ .Release.Name }}
+        annotations:
+          sidecar.istio.io/inject: "false"          
+      spec:
+        initContainers:
+        - name: sysctl
+          securityContext:
+            privileged: true
+          command: ['sh', '-c', 'sysctl -w vm.max_map_count=262144']
+        {{- if .Values.plugins }}
+        - name: install-plugins
+          command: ["/bin/sh","-c"]
+          args: ["{{- range .Values.plugins }}bin/elasticsearch-plugin install --batch {{ . }}; {{- end }}"]
+        {{- end }}
+        containers:
+        - name: elasticsearch
+          env:
+          {{- range $key, $value :=  .Values.env }}
+          - name: {{ $key }}
+            value: {{ $value | quote }}
+          {{- end }}          
+          - name: elastic
+            valueFrom:
+              secretKeyRef:
+                key: elastic
+                name: {{ .Release.Name }}-es-elastic-user
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory| nospace | quote}}
+              cpu:  {{ .Values.resources.requests.cpu | nospace | quote}} 
+            limits:
+              memory: {{ .Values.resources.limits.memory| nospace | quote}}
+              cpu:  {{ .Values.resources.limits.cpu | nospace | quote}}
+  volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: {{ .Values.volume.size }}

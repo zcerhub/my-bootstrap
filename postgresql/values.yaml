@@ -1,0 +1,19 @@
+# Default values for postgresql.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+teamId: postgresql
+volume:
+  size: 1Gi
+numberOfInstances: 2 #实例数
+postgresql:
+  version: 10 #版本号，支持 9.6 10 11
+
+resources:
+  requests:
+    memory: 100Mi
+    cpu: 10m
+  limits:
+    memory: 800Mi
+    cpu: 3000m
+exporter: true

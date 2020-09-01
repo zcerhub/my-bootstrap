@@ -1,0 +1,42 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ .Values.teamId }}-{{ .Release.Name }}
+spec:
+  endpoints:
+  - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+    interval: 15s
+    port: postgresql
+    relabelings:
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+          - job
+        replacement: postgresql
+        targetLabel: job
+      - action: labeldrop
+        regex: endpoint
+      - action: replace
+        regex: ([^:]+)(?::\d+)?
+        sourceLabels:
+        - __address__
+        replacement: "$1:9187"
+        targetLabel: __address__
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+        - __meta_kubernetes_service_label_spilo_role
+        replacement: "$1"
+        targetLabel: role
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+        - __meta_kubernetes_service_label_release
+        replacement: "$1"
+        targetLabel: service
+    scheme: http
+    tlsConfig:
+      insecureSkipVerify: true
+  selector:
+    matchLabels:
+      release: {{ .Release.Name }}

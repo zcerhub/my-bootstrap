@@ -1,0 +1,23 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: ingress-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  rules:
+    - host: {{ .Release.Name }}.ingress.ctbiyi.com
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-es-http
+              servicePort: 9200
+    - host: {{ .Release.Name }}.ingress.ssdc.solutions
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-es-http
+              servicePort: 9200              
+{{- end -}}

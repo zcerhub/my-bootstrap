@@ -1,0 +1,24 @@
+# Default values for ssdc-admin.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: ms-monitor
+imagePullSecrets: docker-local
+env: {}
+param: {}
+nodeSelector: {}
+resources:
+  requests:
+    memory: 100
+    cpu: 250   
+  limits:
+    memory: 512
+    cpu: 2048
+web:
+#  image: nginx:stable-alpine
+  image: gaciaga/nginx-vts:1.11.10-alpine-vts-0.1.12
+  exporterImage: ctsi/nginx-vts-exporter:0.10.3
+  imagePullPolicy: IfNotPresent
+  replicas: 1
+  containerPort: 80
+  exporterPort: 9913
