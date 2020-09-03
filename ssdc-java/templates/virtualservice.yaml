@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-vs
+spec:
+  gateways:
+  - biyi-gateway.istio-system
+  hosts:
+  - {{ .Release.Name }}.ingress.ctbiyi.com
+  - {{ .Release.Name }}.ingress.ctbiyi.cn
+  http:
+  - route:
+    - destination:
+        host: {{ .Release.Name }}
+    {{- if .Values.timeout.enabled }}
+    #负载均衡
+    timeout: {{ .Values.timeout.time }}
+    {{- end -}}

@@ -19,3 +19,22 @@ java:
   replicas: 1
   containerPort: 9000
   javaOpts: 
+circuitBreaker: 
+  enabled: false
+  consecutiveErrors: 1
+  interval: 1s
+  baseEjectionTime: 1m
+  maxEjectionPercent: 100
+currentLimiting: 
+  enabled: false
+  maxConnections: 100
+  conetTimeout: 30ms
+  tcpKeepalive: 
+    time: 7200
+    interval: 75s
+loadBalancer: 
+  enabled: false
+  tpye: ROUND_ROBIN
+timeout: 
+  enabled: false
+  time: 15s
