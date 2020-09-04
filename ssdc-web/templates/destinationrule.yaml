@@ -1,0 +1,35 @@
+{{- if or .Values.circuitBreaker.enabled .Values.currentLimiting.enabled .Values.loadBalancer.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ .Release.Name }}-dr
+spec:
+  host: {{ .Release.Name }}
+  trafficPolicy:
+    connectionPool:
+      {{- if .Values.currentLimiting.enabled }}
+      #限流
+      tcp:
+        maxConnections: {{ .Values.currentLimiting.maxConnections }}
+        conetTimeout: {{ .Values.currentLimiting.conetTimeout }}
+        tcpKeepalive: 
+          time: {{ .Values.currentLimiting.tcpKeepalive.time }}
+          interval: {{ .Values.currentLimiting.tcpKeepalive.interval }}
+      http:
+        http1MaxPendingRequests: 1000
+        maxRequestsPerConnection: 10
+      {{- end -}}
+    {{- if .Values.circuitBreaker.enabled }}  
+    #熔断
+    outlierDetection:
+      consecutiveErrors: {{ .Values.circuitBreaker.consecutiveErrors }} 
+      interval: {{ .Values.circuitBreaker.interval }} 
+      baseEjectionTime: {{ .Values.circuitBreaker.baseEjectionTime }} 
+      maxEjectionPercent: {{ .Values.circuitBreaker.maxEjectionPercent }} 
+    {{- end -}}
+    {{- if .Values.loadBalancer.enabled }}
+    #负载均衡
+    loadBalancer: 
+      simple: {{ .Values.loadBalancer.type }}
+    {{- end -}}
+{{- end -}}
