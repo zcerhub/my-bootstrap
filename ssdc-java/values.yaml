@@ -34,7 +34,7 @@ currentLimiting:
     interval: 75s
 loadBalancer: 
   enabled: false
-  tpye: ROUND_ROBIN
+  type: ROUND_ROBIN
 timeout: 
   enabled: false
   time: 15s
