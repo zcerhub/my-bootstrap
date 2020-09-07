@@ -32,7 +32,7 @@ currentLimiting:
   maxConnections: 100
   conetTimeout: 30ms
   tcpKeepalive: 
-    time: 7200
+    time: 7200s
     interval: 75s
 loadBalancer: 
   enabled: false

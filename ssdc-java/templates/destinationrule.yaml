@@ -6,8 +6,8 @@ metadata:
 spec:
   host: {{ .Release.Name }}
   trafficPolicy:
+    {{- if .Values.currentLimiting.enabled }}
     connectionPool:
-      {{- if .Values.currentLimiting.enabled }}
       #限流
       tcp:
         maxConnections: {{ .Values.currentLimiting.maxConnections }}
