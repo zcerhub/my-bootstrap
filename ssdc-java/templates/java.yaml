@@ -42,6 +42,16 @@ spec:
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: {{ quote .Values.java.containerPort }}
     spec:
+      {{- if .Values.skywalking.enabled }}
+      #Skywalking初始化容器
+      initContainers:
+        - name: skywalking-agent
+          image: ctsi/skywalking-agent:8.1.0
+          command: ["cp", "-rf", "/agent", "/tmp"]
+          volumeMounts:
+            - mountPath: /tmp
+              name: sky-agent-volume
+      {{- end -}}
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.java.image }}
@@ -60,6 +70,39 @@ spec:
           - name: {{ $key }}
             value: {{ $value | quote }}
           {{- end }}
+          {{- if .Values.skywalking.enabled }}
+          #Skywalking环境变量配置
+          - name: POD_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: MY_POD_NAME
+            value: "-Dskywalking.agent.instance_name=$(POD_NAME)"
+          - name: MY_JAVA_OPTS
+            valueFrom:
+              configMapKeyRef:
+                key: jvm.options
+                name: app-version-api-config
+          - name: SERVICE_NAME
+            value: {{ .Values.skywalking.servicename }}
+          - name: MY_SERVICE_NAME
+            value: "-Dskywalking.agent.service_name=$(SERVICE_NAME)"
+          - name: JAVA_OPTS
+            value: "$(MY_JAVA_OPTS) $(MY_POD_NAME) $(MY_SERVICE_NAME)"
+          {{- end -}}
+          {{- if .Values.skywalking.enabled }}
+          #Skywalking挂载agent
+          volumeMounts:
+          - mountPath: /skywalking
+            name: sky-agent-volume
+          {{- end -}}
+      {{- if .Values.skywalking.enabled }}
+      #Skywalking初始化agent空文件夹
+      volumes:
+        - name: sky-agent-volume
+          emptyDir: {}
+      {{- end -}}
       {{- if .Values.nodeSelector }}
       nodeSelector:
       {{ toYaml .Values.nodeSelector | indent 2 }}

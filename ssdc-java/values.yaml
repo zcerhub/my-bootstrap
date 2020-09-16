@@ -38,3 +38,6 @@ loadBalancer:
 timeout: 
   enabled: false
   time: 15s
+skywalking:
+  enabled: false
+  servicename: default
