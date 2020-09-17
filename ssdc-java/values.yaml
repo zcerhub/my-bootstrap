@@ -38,7 +38,7 @@ loadBalancer:
 timeout: 
   enabled: false
   time: 15s
-blackWhiteList
+blackWhiteList:
   enabled: false
   type: ALLOW
   list: ["biyi"]
