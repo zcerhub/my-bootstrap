@@ -42,4 +42,4 @@ blackWhiteList:
   enabled: false
   type: ALLOW
   list: 
-    -biyi
+    - biyi
