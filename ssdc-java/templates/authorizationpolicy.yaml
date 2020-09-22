@@ -13,5 +13,6 @@ spec:
   - from:
     - source:
         namespaces: 
-          {{- range .Values.blackWhiteList.list}} 
+          - biyi
+          - ceshi001
 {{- end -}}
