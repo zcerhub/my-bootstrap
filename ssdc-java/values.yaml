@@ -41,4 +41,5 @@ timeout:
 blackWhiteList:
   enabled: false
   type: ALLOW
-  list: "biyi"
+  list: 
+    -biyi
