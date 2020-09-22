@@ -56,6 +56,13 @@ spec:
         - name: {{ .Release.Name }}
           image: {{ .Values.java.image }}
           imagePullPolicy: {{ .Values.java.imagePullPolicy }}
+          {{- if .Values.skywalking.enabled }}
+          #Skywalking挂载agent
+          volumeMounts:
+            - mountPath: /skywalking
+              name: sky-agent-volume
+          command: ["sh", "-c", "java ${JAVA_OPTS} -javaagent:skywalking/agent/skywalking-agent.jar -Djava.security.egd=file:/dev/./urandom -jar /app.war"]
+          {{- end -}}
           resources:
             requests:
               memory: {{ cat .Values.resources.requests.memory "Mi"| nospace | quote}}
@@ -72,30 +79,17 @@ spec:
           {{- end }}
           {{- if .Values.skywalking.enabled }}
           #Skywalking环境变量配置
-          - name: POD_NAME
+          - name: SW_INSTANCE_NAME_PRE
             valueFrom:
               fieldRef:
                 apiVersion: v1
                 fieldPath: metadata.name
-          - name: MY_POD_NAME
-            value: "-Dskywalking.agent.instance_name=$(POD_NAME)"
-          - name: MY_JAVA_OPTS
-            valueFrom:
-              configMapKeyRef:
-                key: jvm.options
-                name: app-version-api-config
-          - name: SERVICE_NAME
-            value: {{ .Values.skywalking.servicename }}
-          - name: MY_SERVICE_NAME
-            value: "-Dskywalking.agent.service_name=$(SERVICE_NAME)"
-          - name: JAVA_OPTS
-            value: "$(MY_JAVA_OPTS) $(MY_POD_NAME) $(MY_SERVICE_NAME)"
-          {{- end -}}
-          {{- if .Values.skywalking.enabled }}
-          #Skywalking挂载agent
-          volumeMounts:
-          - mountPath: /skywalking
-            name: sky-agent-volume
+          - name: SW_INSTANCE_NAME
+            value: "$(SW_INSTANCE_NAME_PRE)"
+          - name: SW_AGENT_NAME
+            value: {{ .Release.Name }}
+          - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+            value: "skywalking-oap-dev.biyi:11800"
           {{- end -}}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹

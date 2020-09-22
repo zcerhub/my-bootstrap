@@ -40,4 +40,3 @@ timeout:
   time: 15s
 skywalking:
   enabled: false
-  servicename: default
