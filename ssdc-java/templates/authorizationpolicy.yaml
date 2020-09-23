@@ -1,3 +1,4 @@
+{{- if .Values.blackWhiteList.enabled }}
 apiVersion: "security.istio.io/v1beta1"
 kind: AuthorizationPolicy
 metadata:
@@ -12,5 +13,5 @@ spec:
   - from:
     - source:
         namespaces: 
-          - biyi
-          - ceshi001
+        {{ - range .Values.blackWhiteList.list }}
+{{- end -}}
