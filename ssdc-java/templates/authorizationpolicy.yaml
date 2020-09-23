@@ -12,5 +12,8 @@ spec:
   rules:
   - from:
     - source:
-        namespaces: {{- range .Values.blackWhiteList.list }}
+        namespaces: 
+        {{- range .Values.blackWhiteList.list }}
+        - {{ .value }}
+        {{- end -}}
 {{- end -}}
