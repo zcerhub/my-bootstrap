@@ -51,7 +51,7 @@ spec:
           volumeMounts:
             - mountPath: /tmp
               name: sky-agent-volume
-      {{- end -}}
+      {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.java.image }}
@@ -62,7 +62,7 @@ spec:
             - mountPath: /skywalking
               name: sky-agent-volume
           command: ["sh", "-c", "java ${JAVA_OPTS} -javaagent:skywalking/agent/skywalking-agent.jar -Djava.security.egd=file:/dev/./urandom -jar /app.war"]
-          {{- end -}}
+          {{- end }}
           resources:
             requests:
               memory: {{ cat .Values.resources.requests.memory "Mi"| nospace | quote}}
