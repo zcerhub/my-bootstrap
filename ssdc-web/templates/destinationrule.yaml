@@ -3,6 +3,7 @@ apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
   name: {{ .Release.Name }}-dr
+  namespace: {{ .Values.namespace }}
 spec:
   host: {{ .Release.Name }}
   trafficPolicy:
