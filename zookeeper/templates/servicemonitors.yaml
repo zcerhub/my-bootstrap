@@ -42,6 +42,12 @@ spec:
   {{- range $key, $port := .Values.exporters.zookeeper.ports }}
     - port: {{ $key }}
       path: {{ $.Values.exporters.zookeeper.path }}
+      relabelings:
+        - action: replace
+          regex: (.*)
+          sourceLabels:
+            - __meta_kubernetes_service_label_release
+          targetLabel: service
       interval: {{ $.Values.exporters.zookeeper.serviceMonitor.interval }}
       scrapeTimeout: {{ $.Values.exporters.zookeeper.serviceMonitor.scrapeTimeout }}
       scheme: {{ $.Values.exporters.zookeeper.serviceMonitor.scheme }}
