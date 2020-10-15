@@ -80,6 +80,12 @@ spec:
   - interval: 10s
     path: /actuator/prometheus
     port: http-container
+    relabelings:
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+          - __meta_kubernetes_service_label_release
+        targetLabel: service
   namespaceSelector:
     matchNames:
     - {{ .Values.namespace }}
