@@ -12,7 +12,7 @@ spec:
       #限流
       tcp:
         maxConnections: {{ .Values.currentLimiting.maxConnections }}
-        conetTimeout: {{ .Values.currentLimiting.conetTimeout }}
+        connectTimeout: {{ .Values.currentLimiting.conetTimeout }}
         tcpKeepalive: 
           time: {{ .Values.currentLimiting.tcpKeepalive.time }}
           interval: {{ .Values.currentLimiting.tcpKeepalive.interval }}
