@@ -42,3 +42,5 @@ blackWhiteList:
   enabled: false
   type: ALLOW
   list: []
+skywalking:
+  enabled: false

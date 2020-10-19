@@ -42,10 +42,27 @@ spec:
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: {{ quote .Values.java.containerPort }}
     spec:
+      {{- if .Values.skywalking.enabled }}
+      #Skywalking初始化容器
+      initContainers:
+        - name: skywalking-agent
+          image: ctsi/skywalking-agent:8.1.0
+          command: ["cp", "-rf", "/agent", "/tmp"]
+          volumeMounts:
+            - mountPath: /tmp
+              name: sky-agent-volume
+      {{- end }}
       containers:
         - name: {{ .Release.Name }}
           image: {{ .Values.java.image }}
           imagePullPolicy: {{ .Values.java.imagePullPolicy }}
+          {{- if .Values.skywalking.enabled }}
+          #Skywalking挂载agent
+          volumeMounts:
+            - mountPath: /skywalking
+              name: sky-agent-volume
+          command: ["sh", "-c", "java ${JAVA_OPTS} -javaagent:skywalking/agent/skywalking-agent.jar -Djava.security.egd=file:/dev/./urandom -jar /app.war"]
+          {{- end }}
           resources:
             requests:
               memory: {{ cat .Values.resources.requests.memory "Mi"| nospace | quote}}
@@ -60,6 +77,26 @@ spec:
           - name: {{ $key }}
             value: {{ $value | quote }}
           {{- end }}
+          {{- if .Values.skywalking.enabled }}
+          #Skywalking环境变量配置
+          - name: SW_INSTANCE_NAME_PRE
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.name
+          - name: SW_INSTANCE_NAME
+            value: "$(SW_INSTANCE_NAME_PRE)"
+          - name: SW_AGENT_NAME
+            value: {{ .Release.Name }}
+          - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+            value: "skywalking-oap-dev.biyi:11800"
+          {{- end -}}
+      {{- if .Values.skywalking.enabled }}
+      #Skywalking初始化agent空文件夹
+      volumes:
+        - name: sky-agent-volume
+          emptyDir: {}
+      {{- end -}}
       {{- if .Values.nodeSelector }}
       nodeSelector:
       {{ toYaml .Values.nodeSelector | indent 2 }}
