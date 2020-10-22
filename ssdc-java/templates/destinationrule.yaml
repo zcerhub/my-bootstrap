@@ -5,7 +5,7 @@ metadata:
   name: {{ .Release.Name }}-dr
   namespace: {{ .Values.namespace }}
 spec:
-  host: {{ .Release.Name }}
+  host: {{ .Release.Name }}-service
   trafficPolicy:
     {{- if .Values.currentLimiting.enabled }}
     connectionPool:
