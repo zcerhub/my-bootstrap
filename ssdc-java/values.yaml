@@ -32,6 +32,8 @@ currentLimiting:
   tcpKeepalive: 
     time: 7200s
     interval: 75s
+  httpHttp1MaxPendingRequests: 1000
+  httpMaxRequestsPerConnection: 10
 loadBalancer: 
   enabled: false
   type: ROUND_ROBIN
