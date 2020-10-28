@@ -1,8 +1,8 @@
 ## mysql image version
 ## ref: https://hub.docker.com/r/library/mysql/tags/
 ##
-image: "mysql"
-imageTag: "5.7.14"
+image: "ctsi/mysql"
+imageTag: "5.7.28"
 
 ## Specify password for root user
 ##
