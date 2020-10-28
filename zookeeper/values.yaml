@@ -130,7 +130,7 @@ persistence:
 exporters:
 
   jmx:
-    enabled: false
+    enabled: true
     image:
       repository: sscaling/jmx-prometheus-exporter
       tag: 0.3.0
@@ -191,7 +191,7 @@ exporters:
   ## - https://github.com/carlpett/zookeeper_exporter
   ## - https://hub.docker.com/r/josdotso/zookeeper-exporter/
   ## - https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/#zookeeper-metrics
-    enabled: false
+    enabled: true
     image:
       repository: josdotso/zookeeper-exporter
       tag: v1.1.2
@@ -233,7 +233,7 @@ exporters:
 prometheus:
   serviceMonitor:
     ## If true a ServiceMonitor for each enabled exporter will be installed
-    enabled: false
+    enabled: true
     ## The namespace where the ServiceMonitor(s) will be installed
     # namespace: monitoring
     ## The selector the Prometheus instance is searching for

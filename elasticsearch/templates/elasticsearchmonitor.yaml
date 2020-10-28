@@ -102,6 +102,12 @@ spec:
     honorLabels: true
     port: http
     path:  /metrics
+    relabelings:
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+          - __meta_kubernetes_service_label_release
+        targetLabel: service
     scheme: http
   jobLabel: "{{ .Release.Name }}"
   selector:

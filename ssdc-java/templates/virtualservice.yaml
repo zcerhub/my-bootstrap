@@ -12,7 +12,7 @@ spec:
   http:
   - route:
     - destination:
-        host: {{ .Release.Name }}
+        host: {{ .Release.Name }}-service
     {{- if .Values.timeout.enabled }}
     #超时
     timeout: {{ .Values.timeout.time }}
