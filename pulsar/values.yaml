@@ -119,9 +119,9 @@ extra:
   # Replace pulsar-dashboard with pulsar-manager
   dashboard: false
   # pulsar manager
-  pulsar_manager: false
+  pulsar_manager: true
   # Monitoring stack (prometheus and grafana)
-  monitoring: false
+  monitoring: true
   # Configure Kubernetes runtime for Functions
   functionsAsPods: false
 
@@ -263,7 +263,7 @@ zookeeper:
   # If using Prometheus-Operator enable this PodMonitor to discover zookeeper scrape targets
   # Prometheus-Operator does not add scrape targets based on k8s annotations
   podMonitor:
-    enabled: false
+    enabled: true
     interval: 10s
     scrapeTimeout: 10s
   ports:
@@ -376,7 +376,7 @@ bookkeeper:
   # If using Prometheus-Operator enable this PodMonitor to discover bookie scrape targets
   # Prometheus-Operator does not add scrape targets based on k8s annotations
   podMonitor:
-    enabled: false
+    enabled: true
     interval: 10s
     scrapeTimeout: 10s
   ports:
@@ -558,7 +558,7 @@ broker:
   # If using Prometheus-Operator enable this PodMonitor to discover broker scrape targets
   # Prometheus-Operator does not add scrape targets based on k8s annotations
   podMonitor:
-    enabled: false
+    enabled: true
     interval: 10s
     scrapeTimeout: 10s
   ports:
