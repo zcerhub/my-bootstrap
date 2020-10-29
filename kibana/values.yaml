@@ -20,4 +20,5 @@ serviceMonitor:
   ## If true, a ServiceMonitor CRD is created for a prometheus operator
   enabled: true
 #  kibanaPassword: i1M6L378N2o7m41BPdBAwrW3
+exporter: 
   image: ctsi/kibana-prometheus-exporter:v7.5.x.1
