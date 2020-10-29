@@ -16,4 +16,4 @@ name: redis-ha
 sources:
 - https://github.com/smileisak/docker-images/tree/master/redis
 - https://github.com/diegocn/docker-images/tree/master/redis
-version: 2.2.0
+version: 2.2.0.1
