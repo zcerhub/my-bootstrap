@@ -33,6 +33,7 @@ exporter:
   serviceMonitor:
 ## If true, a ServiceMonitor CRD is created for a prometheus operator
     enabled: true
+  image: ctsi/elasticsearch_exporter:1.1.0
 
 
   

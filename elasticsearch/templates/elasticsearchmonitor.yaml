@@ -52,7 +52,7 @@ spec:
                 secretKeyRef:
                   key: elastic
                   name: {{ .Release.Name }}-es-elastic-user
-          image: "justwatch/elasticsearch_exporter:1.1.0"
+          image:  {{ .Values.exporter.image }}
           imagePullPolicy: IfNotPresent
           command: ["elasticsearch_exporter",
                     "--es.all",
