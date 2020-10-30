@@ -118,3 +118,5 @@ resources: #{}
   requests:
     cpu: 100m
     memory: 128Mi
+vs:
+  host: ["pgadmin1.ctbiyi.cn","pgadmin1.ctbiyi.com"]

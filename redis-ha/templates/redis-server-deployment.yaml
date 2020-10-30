@@ -57,7 +57,7 @@ spec:
           - mountPath: /redis-master-data
             name: data
       - name: metrics
-        image: docker.io/bitnami/redis-exporter:1.1.1-debian-9-r10
+        image: {{ .Values.metrics.image.registry }}/{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}
         imagePullPolicy: {{ .Values.metrics.image.pullPolicy | quote }}
         command:
         - /bin/bash
