@@ -116,7 +116,7 @@ spec:
         {{- end }}
       {{- if .Values.metrics.enabled }}
       - name: metrics
-        image: "ctsi/mysqld-exporter:v0.12.1"
+        image: {{ .Values.metrics.image }}
         imagePullPolicy: "IfNotPresent"
         env:
           - name: MYSQL_ROOT_PASSWORD

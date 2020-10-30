@@ -95,6 +95,7 @@ metrics:
   enabled: true
   serviceMonitor:
     enabled: true
+  image: ctsi/mysqld-exporter:v0.12.1
 
 ## Configure the service
 ## ref: http://kubernetes.io/docs/user-guide/services/
