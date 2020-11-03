@@ -4,6 +4,8 @@
 image: "ctsi/mysql"
 imageTag: "5.7.28"
 
+initContainersImage: "ctsi/busybox:1.25.0"
+
 ## Specify password for root user
 ##
 ## Default: random 10 character string
