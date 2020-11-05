@@ -2,7 +2,8 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: {{ template "pgadmin.fullname" . }}
+  name: {{ .Release.Name }}-vs
+  namespace: {{ .Release.Namespace | quote }}
 spec:
   gateways:
   - biyi-gateway.istio-system
@@ -12,5 +13,5 @@ spec:
   http:
   - route:
     - destination:
-        host: {{ template "pgadmin.fullname" . }}
+        host: {{ .Release.Name }}-es-http
 {{- end }}
