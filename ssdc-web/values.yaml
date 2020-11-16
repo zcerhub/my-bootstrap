@@ -46,3 +46,4 @@ blackWhiteList:
   enabled: false
   type: ALLOW
   list: []
+domain: entry.ctbiyi.com
