@@ -46,3 +46,4 @@ blackWhiteList:
   list: []
 skywalking:
   enabled: false
+domain: entry.ctbiyi.com
