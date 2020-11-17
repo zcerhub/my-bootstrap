@@ -22,3 +22,5 @@ serviceMonitor:
 #  kibanaPassword: i1M6L378N2o7m41BPdBAwrW3
 exporter: 
   image: ctsi/kibana-prometheus-exporter:v7.5.x.1
+
+domain: entry.ctbiyi.com

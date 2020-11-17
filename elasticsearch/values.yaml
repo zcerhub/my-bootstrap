@@ -35,6 +35,8 @@ exporter:
     enabled: true
   image: ctsi/elasticsearch_exporter:1.1.0
 
+domain: entry.ctbiyi.com
+
 
   
 

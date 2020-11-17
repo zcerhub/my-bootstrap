@@ -8,8 +8,7 @@ spec:
   gateways:
   - biyi-gateway.istio-system
   hosts:
-  - {{ .Release.Name }}.ingress.ctbiyi.com
-  - {{ .Release.Name }}.ingress.ctbiyi.cn
+  - {{ .Release.Name }}.{{ .Values.domain }}
   http:
   - route:
     - destination:
