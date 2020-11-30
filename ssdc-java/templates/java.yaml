@@ -61,7 +61,6 @@ spec:
           volumeMounts:
             - mountPath: /skywalking
               name: sky-agent-volume
-          command: ["sh", "-c", "java ${JAVA_OPTS} -javaagent:skywalking/agent/skywalking-agent.jar -Djava.security.egd=file:/dev/./urandom -jar /app.war"]
           {{- end }}
           resources:
             requests:
@@ -90,6 +89,8 @@ spec:
             value: {{ .Release.Name }}
           - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
             value: "skywalking-oap-dev.biyi:11800"
+          - name: JAVA_TOOL_OPTIONS
+            value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end -}}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹
