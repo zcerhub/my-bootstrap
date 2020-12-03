@@ -19,6 +19,12 @@ spec:
     - port: service
       path: /minio/prometheus/metrics
       relabelings:
+        {{- if eq .Values.mode "distributed" }}
+        - action: keep
+          sourceLabels:
+            - __meta_kubernetes_service_name
+          regex: {{ template "minio.fullname" . }}-svc
+        {{- end }}
         - action: replace
           regex: (.*)
           sourceLabels:
