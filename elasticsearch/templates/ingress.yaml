@@ -8,16 +8,10 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
 spec:
   rules:
-    - host: {{ .Release.Name }}.ingress.ctbiyi.com
+    - host: {{ .Release.Name }}.{{ .Values.domain }}
       http:
         paths:
           - backend:
               serviceName: {{ .Release.Name }}-es-http
-              servicePort: 9200
-    - host: {{ .Release.Name }}.ingress.ssdc.solutions
-      http:
-        paths:
-          - backend:
-              serviceName: {{ .Release.Name }}-es-http
-              servicePort: 9200              
+              servicePort: 9200         
 {{- end -}}

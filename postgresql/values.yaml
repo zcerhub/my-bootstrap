@@ -16,4 +16,6 @@ resources:
   limits:
     memory: 800Mi
     cpu: 3000m
-exporter: true
+exporter: 
+  enabled: true
+  image: ctsi/postgres_exporter:biyi-v0.1.0

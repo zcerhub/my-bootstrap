@@ -13,7 +13,7 @@ spec:
 #      secretName:  tls-ingress-secret  
 #      namespace: {{ .Values.namespace }}
   rules:
-    - host: {{ .Release.Name }}.ingress.ssdc.solutions
+    - host: {{ .Release.Name }}.{{ .Values.domain }}
       http:
         paths:
           - backend:

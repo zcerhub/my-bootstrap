@@ -25,10 +25,10 @@ spec:
     limits:
       memory: {{ .Values.resources.limits.memory| nospace | quote}}
       cpu:  {{ .Values.resources.limits.cpu | nospace | quote}} 
-{{- if .Values.exporter }}
+{{- if .Values.exporter.enabled }}
   sidecars:
     - name: "exporter"
-      image: "jinlingan/postgres_exporter:biyi-v0.1.0"
+      image: {{ .Values.exporter.image }}
       ports:
         - name: exporter
           containerPort: 9187

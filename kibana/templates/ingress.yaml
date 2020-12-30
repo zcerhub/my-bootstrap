@@ -7,15 +7,9 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
 spec:
   rules:
-    - host: {{ .Release.Name }}.ingress.ctbiyi.com
+    - host: {{ .Release.Name }}.{{ .Values.domain }}
       http:
         paths:
           - backend:
               serviceName: {{ .Release.Name }}-kb-http
               servicePort: 5601
-    - host: {{ .Release.Name }}.ingress.ssdc.solutions
-      http:
-        paths:
-          - backend:
-              serviceName: {{ .Release.Name }}-kb-http
-              servicePort: 5601              

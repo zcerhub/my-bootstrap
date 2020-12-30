@@ -50,7 +50,7 @@ spec:
       restartPolicy: Always
       containers:
         - name: {{ .Chart.Name }}-exporter
-          image: "chamilad/kibana-prometheus-exporter:v7.5.x.1"
+          image: {{ .Values.exporter.image }}
           imagePullPolicy: IfNotPresent
           env:
             {{ if .Values.serviceMonitor.kibanaPassword }}

@@ -98,6 +98,8 @@ spec:
           if [[ ! -f /opt/bitnami/redis/etc/redis.conf ]];then
             cp /opt/bitnami/redis/mounted-etc/redis.conf /opt/bitnami/redis/etc/redis.conf
           fi
+          echo "" >> /opt/bitnami/redis/etc/replica.conf
+          echo "replica-announce-ip $POD_IP" >> /opt/bitnami/redis/etc/replica.conf
           ARGS=("--port" "${REDIS_PORT}")
           ARGS+=("--slaveof" "${REDIS_MASTER_HOST}" "${REDIS_MASTER_PORT_NUMBER}")
           {{- if .Values.usePassword }}
@@ -127,6 +129,10 @@ spec:
           value: {{ .Values.redisPort | quote }}
         - name: REDIS_MASTER_PORT_NUMBER
           value: {{ .Values.redisPort | quote }}
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         {{- if .Values.usePassword }}
         {{- if .Values.usePasswordFile }}
         - name: REDIS_PASSWORD_FILE

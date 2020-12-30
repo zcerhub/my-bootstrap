@@ -1,0 +1,15 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: {{ template "pgadmin.fullname" . }}
+spec:
+  gateways:
+  - biyi-gateway.istio-system
+  hosts:
+  - {{ .Release.Name }}.{{ .Values.domain}}
+  http:
+  - route:
+    - destination:
+        host: {{ template "pgadmin.fullname" . }}
+{{- end }}

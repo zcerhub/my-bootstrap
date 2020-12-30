@@ -1,8 +1,10 @@
 ## mysql image version
 ## ref: https://hub.docker.com/r/library/mysql/tags/
 ##
-image: "mysql"
-imageTag: "5.7.14"
+image: "ctsi/mysql"
+imageTag: "5.7.28"
+
+initContainersImage: "ctsi/busybox:1.25.0"
 
 ## Specify password for root user
 ##
@@ -95,6 +97,7 @@ metrics:
   enabled: true
   serviceMonitor:
     enabled: true
+  image: ctsi/mysqld-exporter:v0.12.1
 
 ## Configure the service
 ## ref: http://kubernetes.io/docs/user-guide/services/

@@ -52,7 +52,7 @@ spec:
                 secretKeyRef:
                   key: elastic
                   name: {{ .Release.Name }}-es-elastic-user
-          image: "justwatch/elasticsearch_exporter:1.1.0"
+          image:  {{ .Values.exporter.image }}
           imagePullPolicy: IfNotPresent
           command: ["elasticsearch_exporter",
                     "--es.all",
@@ -102,6 +102,12 @@ spec:
     honorLabels: true
     port: http
     path:  /metrics
+    relabelings:
+      - action: replace
+        regex: (.*)
+        sourceLabels:
+          - __meta_kubernetes_service_label_release
+        targetLabel: service
     scheme: http
   jobLabel: "{{ .Release.Name }}"
   selector:

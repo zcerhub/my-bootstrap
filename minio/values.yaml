@@ -7,7 +7,7 @@ clusterDomain: cluster.local
 image:
   repository: minio/minio
   tag: RELEASE.2019-08-07T01-59-21Z
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 ## Set default image, imageTag, and imagePullPolicy for the `mc` (the minio
 ## client used to create a default bucket).
@@ -15,7 +15,7 @@ image:
 mcImage:
   repository: minio/mc
   tag: RELEASE.2019-08-07T23-14-43Z
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 ## minio server mode, i.e. standalone or distributed.
 ## Distributed Minio ref: https://docs.minio.io/docs/distributed-minio-quickstart-guide
@@ -112,7 +112,7 @@ service:
 ##
 
 ingress:
-  enabled: false
+  enabled: true
   annotations: {
     nginx.ingress.kubernetes.io/proxy-body-size: 3000m
   }
@@ -170,7 +170,7 @@ resources:
 ## Create a bucket after minio install
 ##
 defaultBucket:
-  enabled: true
+  enabled: false
   ## If enabled, must be a string with length > 0
   name: bucket
   ## Can be one of none|download|upload|public
@@ -270,8 +270,9 @@ serviceAccount:
 metrics:
   # Metrics can not be disabled yet: https://github.com/minio/minio/issues/7493
   serviceMonitor:
-    enabled: false
+    enabled: true
     additionalLabels: {}
     # namespace: monitoring
     # interval: 30s
     # scrapeTimeout: 10s
+domain: ingress.ctbiyi.cn

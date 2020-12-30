@@ -22,7 +22,7 @@ spec:
       {{- end }}
       initContainers:
       - name: "remove-lost-found"
-        image: "busybox:1.25.0"
+        image: {{ .Values.initContainersImage }}
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
         command:  ["rm", "-fr", "/var/lib/mysql/lost+found"]
         volumeMounts:
@@ -116,7 +116,7 @@ spec:
         {{- end }}
       {{- if .Values.metrics.enabled }}
       - name: metrics
-        image: "prom/mysqld-exporter:v0.12.1"
+        image: {{ .Values.metrics.image }}
         imagePullPolicy: "IfNotPresent"
         env:
           - name: MYSQL_ROOT_PASSWORD
