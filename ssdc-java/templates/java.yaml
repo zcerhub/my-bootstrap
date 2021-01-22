@@ -46,7 +46,7 @@ spec:
       #Skywalking初始化容器
       initContainers:
         - name: skywalking-agent
-          image: ctsi/skywalking-agent:8.1.0
+          image: {{ .Values.skywalking.image }}
           command: ["cp", "-rf", "/agent", "/tmp"]
           volumeMounts:
             - mountPath: /tmp
