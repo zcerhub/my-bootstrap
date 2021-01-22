@@ -46,4 +46,5 @@ blackWhiteList:
   list: []
 skywalking:
   enabled: false
+  image: ctsi/skywalking-agent:1.1.0N
 domain: entry.ctbiyi.com
