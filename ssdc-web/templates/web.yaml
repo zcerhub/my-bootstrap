@@ -111,7 +111,7 @@ metadata:
     k8s-app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
   name:  {{ .Release.Name }}-app-monitor
-  namespace: monitoring 
+  namespace: {{ .Values.namespace }} 
 spec:
   endpoints:
   - interval: 10s
