@@ -273,6 +273,6 @@ metrics:
     enabled: true
     additionalLabels: {}
     # namespace: monitoring
-    # interval: 30s
+    interval: 60s
     # scrapeTimeout: 10s
 domain: ingress.ctbiyi.cn
