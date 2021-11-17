@@ -10,14 +10,14 @@ spec:
 #    - hosts:
 #      - api.ctsi.ingress.ssdc.solutions
 #      - web.ctsi.ingress.ssdc.solutions
-#      secretName:  tls-ingress-secret  
+#      secretName:  tls-ingress-secret
 #      namespace: {{ .Values.namespace }}
   rules:
     - host: {{ .Release.Name }}.{{ .Values.domain }}
       http:
         paths:
           - backend:
-              namespace: {{ .Values.namespace }}
+#              namespace: {{ .Values.namespace }}
               serviceName: {{ .Release.Name }}-service
               servicePort: {{ .Values.java.containerPort }}
             path: /
@@ -25,7 +25,7 @@ spec:
       http:
         paths:
           - backend:
-              namespace: {{ .Values.namespace }}
+#              namespace: {{ .Values.namespace }}
               serviceName: {{ .Release.Name }}-service
               servicePort: {{ .Values.java.containerPort }}
             path: /
