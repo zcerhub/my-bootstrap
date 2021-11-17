@@ -83,7 +83,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   endpoints:
-    - interval: 15s
+    - interval: 60s
       port: http
       path: /metrics
       relabelings:
