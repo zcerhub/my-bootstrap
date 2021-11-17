@@ -41,6 +41,8 @@ spec:
       labels:
         app: {{ .Release.Name }}-app
         release: {{ .Release.Name }}
+      annotations:
+        sidecar.istio.io/inject: "false"
     spec:
       {{- if .Values.env }}    
       initContainers:
@@ -111,10 +113,10 @@ metadata:
     k8s-app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
   name:  {{ .Release.Name }}-app-monitor
-  namespace: {{ .Values.namespace }} 
+  namespace: monitoring 
 spec:
   endpoints:
-  - interval: 10s
+  - interval: 60s
     path: /metrics
     port: http-exporter
     relabelings:
