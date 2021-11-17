@@ -41,6 +41,11 @@ spec:
         prometheus.io/scrape: 'true'
         prometheus.io/path: /actuator/prometheus
         prometheus.io/port: {{ quote .Values.java.containerPort }}
+        {{- if or .Values.circuitBreaker.enabled .Values.currentLimiting.enabled .Values.loadBalancer.enabled .Values.timeout.enabled .Values.blackWhiteList.enabled }}
+        sidecar.istio.io/inject: 'true'
+        {{- else }}
+        sidecar.istio.io/inject: 'false'
+        {{- end }}
     spec:
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化容器
@@ -115,7 +120,7 @@ metadata:
   namespace: {{ .Values.namespace }} 
 spec:
   endpoints:
-  - interval: 10s
+  - interval: 60s
     path: /actuator/prometheus
     port: http-container
     relabelings:
