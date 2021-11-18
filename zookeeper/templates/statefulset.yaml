@@ -30,13 +30,8 @@ spec:
         {{ $key }}: {{ $value | quote }}
         {{- end }}
       {{- end }}
-{{- if .Values.podAnnotations }}
       annotations:
-        ## Custom pod annotations
-        {{- range $key, $value := .Values.podAnnotations }}
-        {{ $key }}: {{ $value | quote }}
-        {{- end }}
-{{- end }}
+        sidecar.istio.io/inject: "false"
     spec:
       terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
 {{- if .Values.schedulerName }}

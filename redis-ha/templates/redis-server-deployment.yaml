@@ -22,6 +22,8 @@ spec:
         component: server
         name: {{ template "redis-ha.fullname" . }}-server
         redis-node: "true"
+      annotations:
+        sidecar.istio.io/inject: "false"
     spec:
       serviceAccountName: {{ template "redis-ha.serviceAccountName" . }}
       {{- if .Values.nodeSelector }}
