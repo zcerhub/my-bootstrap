@@ -42,8 +42,8 @@ spec:
         {{- if .Values.podLabels }}
         {{- include "common.tplvalues.render" (dict "value" .Values.podLabels "context" $) | nindent 8 }}
         {{- end }}
-      {{- if or (include "kafka.createConfigmap" .) (include "kafka.createJaasSecret" .) .Values.externalAccess.enabled (include "kafka.metrics.jmx.createConfigmap" .) .Values.podAnnotations }}
       annotations:
+        sidecar.istio.io/inject: "false"
         {{- if (include "kafka.createConfigmap" .) }}
         checksum/configuration: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
         {{- end }}
@@ -62,7 +62,6 @@ spec:
         {{- if .Values.podAnnotations }}
         {{- include "common.tplvalues.render" (dict "value" .Values.podAnnotations "context" $) | nindent 8 }}
         {{- end }}
-      {{- end }}
     spec:
       {{- include "kafka.imagePullSecrets" . | nindent 6 }}
       {{- if .Values.hostAliases }}
