@@ -5,6 +5,8 @@ metadata:
   labels:
     release: {{ .Release.Name }}
 spec:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
   teamId: {{ .Values.teamId }}
   volume:
     size: {{ .Values.volume.size }}
