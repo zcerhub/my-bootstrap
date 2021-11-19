@@ -182,7 +182,7 @@ exporters:
       failureThreshold: 8
       successThreshold: 1
     serviceMonitor:
-      interval: 30s
+      interval: 60s
       scrapeTimeout: 30s
       scheme: http
 
@@ -225,7 +225,7 @@ exporters:
       failureThreshold: 8
       successThreshold: 1
     serviceMonitor:
-      interval: 30s
+      interval: 60s
       scrapeTimeout: 30s
       scheme: http
 

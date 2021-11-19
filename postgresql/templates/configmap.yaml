@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.teamId }}-{{ .Release.Name }}-pgconfig
+  labels: 
+    release: {{ .Release.Name }}
+data:
+  postgresql.conf: |-
+{{ .Values.config | indent 4 }}

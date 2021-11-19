@@ -17,7 +17,7 @@ image:
   ## Bitnami Redis image tag
   ## ref: https://github.com/bitnami/bitnami-docker-redis#supported-tags-and-respective-dockerfile-links
   ##
-  tag: 5.0.5-debian-9-r138
+  tag: 6.0.8
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -56,7 +56,7 @@ sentinel:
     ## Bitnami Redis image tag
     ## ref: https://github.com/bitnami/bitnami-docker-redis-sentinel#supported-tags-and-respective-dockerfile-links
     ##
-    tag: 5.0.5-debian-9-r131
+    tag: 6.0.8
     ## Specify a imagePullPolicy
     ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
     ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -473,7 +473,7 @@ metrics:
     ## Specify a namespace if needed
     # namespace: monitoring
     # fallback to the prometheus default unless specified
-    # interval: 10s
+    interval: 60s
     ## Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
     ## [Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#prometheus-operator-1)
     ## [Kube Prometheus Selector Label](https://github.com/helm/charts/tree/master/stable/prometheus-operator#exporters)

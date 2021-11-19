@@ -13,6 +13,8 @@ spec:
       app: {{ template "mysql.fullname" . }}
   template:
     metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
       labels:
         app: {{ template "mysql.fullname" . }}
     spec:

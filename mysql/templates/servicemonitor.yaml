@@ -20,7 +20,12 @@ spec:
           sourceLabels:
             - __meta_kubernetes_service_label_release
           targetLabel: service
-      interval: 30s
+      interval: 60s
+      metricRelabelings:
+        - action: drop
+          regex: mysql_perf_schema_file_instances_total|mysql_global_status_commands_total|mysql_perf_schema_table_io_waits_total|mysql_perf_schema_table_io_waits_seconds_total|mysql_perf_schema_sql_lock_waits_seconds_total|mysql_perf_schema_file_events_seconds_total|mysql_info_schema_threads|mysql_info_schema_threads_seconds|node_ipvs_backend_connections_active|mysql_perf_schema_index_io_waits_total|mysql_perf_schema_events_waits_total|mysql_perf_schema_events_waits_seconds_total|mysql_perf_schema_file_events_total|mysql_perf_schema_sql_lock_waits_total|mysql_perf_schema_file_events_bytes_total|mysql_perf_schema_index_io_waits_seconds_total|mysql_perf_schema_file_instances_bytes
+          sourceLabels:
+            - __name__
   selector:
     matchLabels:
       app: {{ include "mysql.fullname" . }}
