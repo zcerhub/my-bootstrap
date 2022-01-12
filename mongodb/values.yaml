@@ -70,14 +70,14 @@ usePassword: true
 ## MongoDB admin password
 ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#setting-the-root-password-on-first-run
 ##
-mongodbRootPassword: ctsi123456
+mongodbRootPassword: testing
 
 ## MongoDB custom user and database
 ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#creating-a-user-and-database-on-first-run
 ##
-# mongodbUsername: username
-# mongodbPassword: password
-# mongodbDatabase: database
+mongodbUsername: ctsi
+mongodbPassword: test123456
+mongodbDatabase: test
 
 ## Whether enable/disable IPv6 on MongoDB
 ## ref: https://github.com/bitnami/bitnami-docker-mongodb/blob/master/README.md#enabling/disabling-ipv6
@@ -427,8 +427,8 @@ configmap:
 #  setParameter:
 #     enableLocalhostAuthBypass: true
 #  # security options
-#  security:
-#    authorization: disabled
+#   security:
+#     authorization: enabled
 #    #keyFile: /opt/bitnami/mongodb/conf/keyfile
 
 ## Prometheus Exporter / Metrics
