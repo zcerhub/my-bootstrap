@@ -1,0 +1,25 @@
+namespace: xtydemo
+imagePullSecrets: docker-local
+env: {}
+nodeSelector: {}
+resources:
+  requests:
+    memory: 200
+    cpu: 200   
+  limits:
+    memory: 2048
+    cpu: 4096
+java:
+  image: xty-group/springboot-api:1.0.0
+  imagePullPolicy: Always
+  replicas: 1
+  containerPort: 9000
+  javaOpts: 
+istio:
+  enabled: false
+service:
+  nodeport:
+    enabled: true
+    nodeport: 30001
+  clusterip:
+    enabled: false

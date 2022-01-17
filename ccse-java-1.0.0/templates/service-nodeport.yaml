@@ -1,0 +1,21 @@
+{{- if .Values.service.nodeport.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+  name: {{ .Release.Name }}-nodeport-service
+  namespace: {{ .Values.namespace }}
+spec:
+  ports:
+  - name: http-container
+    nodePort: {{ .Values.service.nodeport.nodeport }}
+    port: {{ .Values.java.containerPort }}
+    protocol: TCP
+    targetPort: {{ .Values.java.containerPort }}
+  selector:
+    app: {{ .Release.Name }}-app
+    release: {{ .Release.Name }}
+  type: NodePort
+{{- end }}
