@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-code-server-service
+  namespace: {{ .Values.namespace }}
+spec:
+ ports:
+ - port: 80
+   targetPort: {{ .Values.codeServer.containerPort }}
+   name: code-server
+ selector:
+   service: code-server
+   
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-app-service
+  namespace: {{ .Values.namespace }}
+spec:
+ ports:
+ - port: 8000
+   targetPort: {{ .Values.codeApp.containerPort }}
+   name: code-app
+ selector:
+   service: code-server
