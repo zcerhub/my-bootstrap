@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    #nginx.ingress.kubernetes.io/secure-backends: "true"
+    #nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+  name: ingress-{{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+spec:
+#  tls:
+#    - hosts:
+#      - api.ctsi.ingress.ssdc.solutions
+#      - web.ctsi.ingress.ssdc.solutions
+#      secretName:  tls-ingress-secret
+#      namespace: {{ .Values.namespace }}
+  rules:
+    - host: {{ .Release.Name }}.{{ .Values.domain }}
+      http:
+        paths:
+          - backend:
+#              namespace: {{ .Values.namespace }}
+              serviceName: {{ .Release.Name }}-service
+              servicePort: {{ .Values.web.containerPort }}
+            path: /
+    - host: {{ .Release.Name }}.ingress.ctbiyi.com
+      http:
+        paths:
+          - backend:
+#              namespace: {{ .Values.namespace }}
+              serviceName: {{ .Release.Name }}-service
+              servicePort: {{ .Values.web.containerPort }}
+            path: /
