@@ -1,0 +1,55 @@
+{{- if .Values.metrics.rocketmq.enabled }}
+apiVersion: v1
+data:
+  jvm.options: |-
+    -Drocketmq.config.enableACL=true
+    -Drocketmq.config.namesrvAddr={{ .Release.Name }}-name-server:9876
+    -Drocketmq.config.accessKey={{.Values.configmap.adminaccessKey}}
+    -Drocketmq.config.secretKey={{.Values.configmap.adminsecretKey}}
+    -Drocketmq.config.rocketmqVersion=V4_5_0
+
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-rocketmq-metric
+  namespace: {{ .Release.Namespace | quote }}
+---
+
+
+
+apiVersion: {{ include "common.capabilities.deployment.apiVersion" . }}
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-exporter
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels: {{- include "common.labels.matchLabels" . | nindent 6 }}
+      app.kubernetes.io/component: metrics
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels: {{- include "common.labels.standard" . | nindent 8 }}
+        app.kubernetes.io/component: metrics
+    spec:
+      containers:
+        - name: rocketmq-exporter
+          image: {{ .Values.metrics.rocketmq.image }}
+          imagePullPolicy: {{ .Values.metrics.rocketmq.pullPolicy | quote }}
+          env:
+            - name: JAVA_OPTS
+              valueFrom:
+                configMapKeyRef:
+                  key: jvm.options
+                  name: {{ .Release.Name }}-rocketmq-metric
+
+
+{{- end }}

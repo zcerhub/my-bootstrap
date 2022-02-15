@@ -1,0 +1,32 @@
+{{- if .Values.metrics.rocketmq.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-metrics
+  labels: {{- include "common.labels.standard" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+    {{- if .Values.commonLabels }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- if or .Values.metrics.rocketmq.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- if .Values.metrics.rocketmq.service.annotations }}
+    {{ include "common.tplvalues.render" ( dict "value" .Values.metrics.rocketmq.service.annotations "context" $) | nindent 4 }}
+    {{- end }}
+    {{- if .Values.commonAnnotations }}
+    {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+    {{- end }}
+  {{- end }}
+spec:
+  type: {{ .Values.metrics.rocketmq.service.type }}
+  {{- if and (eq .Values.metrics.rocketmq.service.type "ClusterIP") .Values.metrics.rocketmq.service.clusterIP }}
+  clusterIP: {{ .Values.metrics.rocketmq.service.clusterIP }}
+  {{- end }}
+  ports:
+    - name: metrics
+      port: {{ .Values.metrics.rocketmq.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.metrics.rocketmq.service.port }}
+  selector: {{- include "common.labels.matchLabels" . | nindent 4 }}
+    app.kubernetes.io/component: metrics
+{{- end }}

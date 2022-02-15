@@ -1,0 +1,21 @@
+{{- if .Values.ingress.enabled -}}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-{{ .Release.Name }}
+  namespace: {{ .Release.Namespace | quote }}
+spec:
+  rules:
+    - host: {{ .Release.Name }}.{{ .Values.domain }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-console
+              servicePort: 8080
+    - host: {{ .Release.Name }}.nameserver.{{ .Values.domain }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ .Release.Name }}-name-server
+              servicePort: 9876             
+{{- end -}}
