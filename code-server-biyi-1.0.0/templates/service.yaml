@@ -9,7 +9,7 @@ spec:
    targetPort: {{ .Values.codeServer.containerPort }}
    name: code-server
  selector:
-   service: code-server
+   service: {{ .Release.Name }}-code-server
    
 ---
 
@@ -24,4 +24,4 @@ spec:
    targetPort: {{ .Values.codeApp.containerPort }}
    name: code-app
  selector:
-   service: code-server
+   service: {{ .Release.Name }}-code-server

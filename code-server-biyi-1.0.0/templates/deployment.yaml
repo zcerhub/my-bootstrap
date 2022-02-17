@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: code-server
+    service: {{ .Release.Name }}-code-server
   name: {{ .Release.Name }}-deployment
   namespace: {{ .Values.namespace }}
 spec:
   selector:
     matchLabels:
-      service: code-server
+      service: {{ .Release.Name }}-code-server
   template:
     metadata:
       labels:
-        service: code-server
+        service: {{ .Release.Name }}-code-server
     spec:
       containers:
       - image: {{ .Values.codeServer.image }}
