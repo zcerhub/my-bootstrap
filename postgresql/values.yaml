@@ -7,7 +7,7 @@ volume:
   size: 1Gi
 numberOfInstances: 2 #实例数
 postgresql:
-  version: 12 #版本号，支持 9.5 9.6 10 11 12 13 14
+  version: 12 #版本号，支持 9.6 10 11 12
 
 resources:
   requests:
