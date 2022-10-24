@@ -8,8 +8,6 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: {{ template "mysql.fullname" . }}
@@ -17,8 +15,6 @@ spec:
     metadata:
       labels:
         app: {{ template "mysql.fullname" . }}
-      annotations:
-        sidecar.istio.io/inject: "false"
     spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
