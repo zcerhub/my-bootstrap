@@ -92,15 +92,6 @@ ingress:
 metrics:
   rocketmq:
     enabled: true
-    image: biyi/rocketmq-exporter:1.0.2
-    pullPolicy: IfNotPresent
-    service:
-      type: ClusterIP
-      port: 5557
-      annotations:
-        prometheus.io/scrape: "true"
-        prometheus.io/port: "5557"
-        prometheus.io/path: "/metrics"
   #Prometheus Operator ServiceMonitor configuration
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled if `true`, creates a Prometheus Operator ServiceMonitor

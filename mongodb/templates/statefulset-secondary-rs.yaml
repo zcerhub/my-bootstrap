@@ -13,7 +13,6 @@ metadata:
     {{- end }}
   {{- with .Values.annotations }}
   annotations:
-    sidecar.istio.io/inject: "false"
 {{ toYaml . | indent 4 }}
   {{- end }}
 spec:
@@ -42,6 +41,7 @@ spec:
       {{- end }}
       {{- if or .Values.podAnnotations .Values.metrics.enabled }}
       annotations:
+        sidecar.istio.io/inject: "false"
 {{- if .Values.podAnnotations }}
 {{ toYaml .Values.podAnnotations | indent 8 }}
 {{- end }}

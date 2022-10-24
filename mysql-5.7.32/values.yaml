@@ -125,5 +125,3 @@ ssl:
 #      -----BEGIN RSA PRIVATE KEY-----
 #      ...
 #      -----END RSA PRIVATE KEY-----
-
-domain: ctbiyi.cn

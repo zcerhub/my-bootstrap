@@ -12,8 +12,7 @@ metadata:
 {{ toYaml . | indent 4 }}
     {{- end }}
   {{- with .Values.annotations }}
-
-
+  annotations:
 {{ toYaml . | indent 4 }}
   {{- end }}
 spec:
