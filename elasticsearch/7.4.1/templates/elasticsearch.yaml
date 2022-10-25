@@ -11,7 +11,7 @@ spec:
       selfSignedCertificate:
         disabled: true  
   nodeSets:
-  - name: default
+  - name: wj-test
     count: {{ .Values.nodeCount }}
     config:
       node.master: true
@@ -47,12 +47,7 @@ spec:
                 key: elastic
                 name: {{ .Release.Name }}-es-elastic-user
           resources:
-            requests:
-              memory: {{ .Values.resources.requests.memory| nospace | quote}}
-              cpu:  {{ .Values.resources.requests.cpu | nospace | quote}} 
-            limits:
-              memory: {{ .Values.resources.limits.memory| nospace | quote}}
-              cpu:  {{ .Values.resources.limits.cpu | nospace | quote}}
+{{- toYaml .Values.resources | nindent 12 }}
   volumeClaimTemplates:
     - metadata:
         name: elasticsearch-data

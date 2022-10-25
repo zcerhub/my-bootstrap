@@ -6,7 +6,7 @@ nodeCount: 3
 
 image:
   repository: elasticsearch/elasticsearch
-  tag: 7.4.1  #可选 7.4.1
+  tag: 7.4.1  #可选 6.8.4 7.4.1
 
 ingress:
   enabled: false
@@ -20,19 +20,15 @@ env:
   ES_JAVA_OPTS: "-Xms2G -Xmx2G -XX:-UseConcMarkSweepGC -XX:-UseCMSInitiatingOccupancyOnly -XX:+UseG1GC -XX:G1ReservePercent=25 -XX:InitiatingHeapOccupancyPercent=30"
 
 resources:
-  requests:
-    memory: 4Gi
-    cpu: 500m
-  limits:
-    memory: 4Gi
-    cpu: 4000m
+  requests: {}
+  limits: {}
 
   
 ##es-exporter
 exporter:
   serviceMonitor:
 ## If true, a ServiceMonitor CRD is created for a prometheus operator
-    enabled: true
+    enabled: false
   image: ctsi/elasticsearch_exporter:1.1.0
 
 domain: entry.ctbiyi.com

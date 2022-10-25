@@ -1,4 +1,4 @@
-namespace: xtydemo
+namespace: wjtest
 codeServer:
   password: biyi@chinatelecom.cn
   image: biyi/biyi-codeserver:1.0
@@ -8,3 +8,6 @@ codeServer:
 codeApp:
   containerPort: 9000
   domain: entry.ctbiyi.cn
+resources:
+  requests: {}
+  limits: {}

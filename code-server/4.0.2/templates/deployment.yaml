@@ -23,3 +23,5 @@ spec:
         env:
         - name: PASSWORD
           value: {{ .Values.codeServer.password }}
+        resources:
+{{- toYaml .Values.resources | nindent 10 }}
