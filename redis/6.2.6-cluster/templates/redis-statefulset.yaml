@@ -257,8 +257,7 @@ spec:
           {{- end }}
           {{- end }}
           {{- if .Values.redis.resources }}
-          resources:
-          {{- include "common.tplvalues.render" (dict "value" .Values.redis.resources "context" $) | nindent 12 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
           {{- end }}
           volumeMounts:
             - name: scripts

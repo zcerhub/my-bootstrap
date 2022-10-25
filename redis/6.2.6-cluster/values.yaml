@@ -774,7 +774,10 @@ metrics:
   ## @param metrics.resources Metrics exporter resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  resources: {}
+  resources:
+    limits:
+      memory: 200Mi
+      CPU: 100m
   ## @param metrics.extraArgs Extra arguments for the binary; possible values [here](https://github.com/oliver006/redis_exporter
   ## extraArgs:
   ##   check-keys: myKey,myOtherKey
@@ -936,3 +939,7 @@ sysctlImage:
     ##    cpu: 100m
     ##    memory: 128Mi
     requests: {}
+
+resources:
+  limits: {}
+  requests: {}

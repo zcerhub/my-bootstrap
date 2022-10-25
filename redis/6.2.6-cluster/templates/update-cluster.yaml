@@ -187,7 +187,7 @@ spec:
             {{- end }}
           {{- end }}
           {{- if .Values.updateJob.resources }}
-          resources: {{- toYaml .Values.updateJob.resources | nindent 12 }}
+          resources: {{- toYaml .Values.resources | nindent 12 }}
           {{- end }}
           {{- if or .Values.tls.enabled .Values.updateJob.extraVolumeMounts }}
           volumeMounts:
