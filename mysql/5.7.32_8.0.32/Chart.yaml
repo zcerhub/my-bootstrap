@@ -1,4 +1,4 @@
-appVersion: 8.0.22
+appVersion: 8.0.32
 description: Fast, reliable, scalable, and easy to use open-source relational database
   system.
 engine: gotpl
@@ -15,4 +15,4 @@ name: mysql
 sources:
 - https://github.com/kubernetes/charts
 - https://github.com/docker-library/mysql
-version: 8.0.22
+version: 22.3.1

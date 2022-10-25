@@ -16,4 +16,4 @@ keywords:
 name: mongodb
 sources:
 - https://github.com/bitnami/bitnami-docker-mongodb
-version: 0.1.0
+version: 22.3.1
