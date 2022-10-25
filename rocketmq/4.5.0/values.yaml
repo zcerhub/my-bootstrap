@@ -91,11 +91,11 @@ ingress:
 ## Prometheus Exporters / Metrics
 metrics:
   rocketmq:
-    enabled: true
+    enabled: false
   #Prometheus Operator ServiceMonitor configuration
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled if `true`, creates a Prometheus Operator ServiceMonitor
-    enabled: true
+    enabled: false
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     namespace: ""
     ## @param metrics.serviceMonitor.interval Interval at which metrics should be scraped

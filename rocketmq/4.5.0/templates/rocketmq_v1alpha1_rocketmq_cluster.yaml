@@ -124,12 +124,7 @@ spec:
   imagePullPolicy: Always
   # resources describes the compute resource requirements and limits
   resources:
-    requests:
-      memory: "2048Mi"
-      cpu: "250m"
-    limits:
-      memory: "12288Mi"
-      cpu: "500m"
+{{ toYaml .Values.broker.resources | indent 4 }}
   # allowRestart defines whether allow pod restart
   allowRestart: true
   # storageMode can be EmptyDir, HostPath, StorageClass

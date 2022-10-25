@@ -370,8 +370,8 @@ spec:
                   - -c
                   - /opt/bitnami/scripts/start-scripts/prestop-sentinel.sh
           {{- end }}
-          {{- if .Values.sentinel.resources }}
-          resources: {{- toYaml .Values.sentinel.resources | nindent 12 }}
+          {{- if .Values.repalica.resources }}
+          resources: {{- toYaml .Values.repalica.resources | nindent 12 }}
           {{- end }}
           volumeMounts:
             - name: start-scripts

@@ -135,7 +135,7 @@ spec:
             {{- end }}
           {{- end }}
           resources:
-{{ toYaml .Values.exporters.jmx.resources | indent 12 }}
+{{ toYaml .Values.resources | indent 12 }}
           volumeMounts:
             - name: config-jmx-exporter
               mountPath: /opt/jmx_exporter/config.yml
@@ -167,7 +167,7 @@ spec:
               value: {{ $value | quote }}
           {{- end }}
           resources:
-{{ toYaml .Values.exporters.zookeeper.resources | indent 12 }}
+{{ toYaml .Values.resources | indent 12 }}
 {{- end }}
 
     {{- with .Values.nodeSelector }}

@@ -222,8 +222,8 @@ master:
   customReadinessProbe: {}
   ## Redis&trade; master resource requests and limits
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param master.resources.limits The resources limits for the Redis&trade; master containers
-  ## @param master.resources.requests The requested resources for the Redis&trade; master containers
+  ## @param resources.limits The resources limits for the Redis&trade; master containers
+  ## @param resources.requests The requested resources for the Redis&trade; master containers
   ##
   resources:
     limits: {}
@@ -893,8 +893,8 @@ sentinel:
   customReadinessProbe: {}
   ## Redis&trade; Sentinel resource requests and limits
   ## ref: https://kubernetes.io/docs/user-guide/compute-resources/
-  ## @param sentinel.resources.limits The resources limits for the Redis&trade; Sentinel containers
-  ## @param sentinel.resources.requests The requested resources for the Redis&trade; Sentinel containers
+  ## @param repalica.resources.limits The resources limits for the Redis&trade; Sentinel containers
+  ## @param repalica.resources.requests The requested resources for the Redis&trade; Sentinel containers
   ##
   resources:
     limits: {}
@@ -1165,7 +1165,9 @@ metrics:
   ## @param metrics.resources.requests The requested resources for the Redis&trade; exporter container
   ##
   resources:
-    limits: {}
+    limits:
+      cpu: 100m
+      memory: 100Mi
     requests: {}
   ## @param metrics.podLabels Extra labels for Redis&trade; exporter pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
@@ -1375,3 +1377,6 @@ sysctl:
   resources:
     limits: {}
     requests: {}
+resources:
+  limits: {}
+  requests: {}

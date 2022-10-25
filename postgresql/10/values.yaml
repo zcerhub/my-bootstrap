@@ -16,7 +16,9 @@ resources:
   limits:
     memory: 800Mi
     cpu: 3000m
-exporter: true
+exporter:
+  enabled: false
+
 
 config: |-
   include 'postgresql.base.conf'
