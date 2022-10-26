@@ -233,7 +233,7 @@ exporters:
 prometheus:
   serviceMonitor:
     ## If true a ServiceMonitor for each enabled exporter will be installed
-    enabled: true
+    enabled: false
     ## The namespace where the ServiceMonitor(s) will be installed
     # namespace: monitoring
     ## The selector the Prometheus instance is searching for

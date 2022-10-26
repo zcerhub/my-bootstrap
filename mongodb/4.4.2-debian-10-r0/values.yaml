@@ -484,7 +484,7 @@ metrics:
   ##      https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md
   serviceMonitor:
     ## If the operator is installed in your cluster, set to true to create a Service Monitor Entry
-    enabled: true
+    enabled: false
 
     ## Specify a namespace if needed
     # namespace: monitoring

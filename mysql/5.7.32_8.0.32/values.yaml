@@ -92,9 +92,9 @@ initializationFiles:
 #    CREATE DATABASE IF NOT EXISTS second DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
 
 metrics:
-  enabled: true
+  enabled: false
   serviceMonitor:
-    enabled: true
+    enabled: false
   image: prom/mysqld-exporter:v0.12.1
 
 ## Configure the service

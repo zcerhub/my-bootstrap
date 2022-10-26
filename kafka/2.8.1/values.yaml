@@ -917,7 +917,7 @@ metrics:
   kafka:
     ## @param metrics.kafka.enabled Whether or not to create a standalone Kafka exporter to expose Kafka metrics
     ##
-    enabled: true
+    enabled: false
     ## Bitnami Kafka exporter image
     ## ref: https://hub.docker.com/r/bitnami/kafka-exporter/tags/
     ## @param metrics.kafka.image.registry Kafka exporter image registry
@@ -1166,7 +1166,7 @@ metrics:
   serviceMonitor:
     ## @param metrics.serviceMonitor.enabled if `true`, creates a Prometheus Operator ServiceMonitor (requires `metrics.kafka.enabled` or `metrics.jmx.enabled` to be `true`)
     ##
-    enabled: true
+    enabled: false
     ## @param metrics.serviceMonitor.namespace Namespace in which Prometheus is running
     ##
     namespace: ""
