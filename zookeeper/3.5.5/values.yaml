@@ -130,7 +130,7 @@ persistence:
 exporters:
 
   jmx:
-    enabled: true
+    enabled: false
     image:
       repository: sscaling/jmx-prometheus-exporter
       tag: 0.3.0
@@ -191,7 +191,7 @@ exporters:
   ## - https://github.com/carlpett/zookeeper_exporter
   ## - https://hub.docker.com/r/josdotso/zookeeper-exporter/
   ## - https://www.datadoghq.com/blog/monitoring-kafka-performance-metrics/#zookeeper-metrics
-    enabled: true
+    enabled: false
     image:
       repository: josdotso/zookeeper-exporter
       tag: v1.1.2

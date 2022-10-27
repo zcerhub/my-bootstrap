@@ -46,7 +46,7 @@ spec:
         configMap:
           name: {{ .Values.teamId }}-{{ .Release.Name }}-pgconfigyml
   {{- end -}}
-  {{- if .Values.exporter }}
+  {{- if .Values.exporter.enabled }}
   sidecars:
     - name: "exporter"
       image: "jinlingan/postgres_exporter:biyi-v0.1.0"
