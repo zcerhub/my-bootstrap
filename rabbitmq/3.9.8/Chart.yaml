@@ -19,7 +19,7 @@ keywords:
 maintainers:
   - email: containers@bitnami.com
     name: Bitnami
-name: rabbitmq
+name: rabbitmq-3.9.8
 sources:
   - https://github.com/bitnami/bitnami-docker-rabbitmq
   - https://www.rabbitmq.com

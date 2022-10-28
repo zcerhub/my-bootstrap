@@ -12,7 +12,7 @@ maintainers:
   name: smileisak
 - email: ianmaddox@google.com
   name: ianmaddox
-name: redis-ha
+name: redis-4.0.8-sentinel
 sources:
 - https://github.com/smileisak/docker-images/tree/master/redis
 - https://github.com/diegocn/docker-images/tree/master/redis

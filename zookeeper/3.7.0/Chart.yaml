@@ -17,7 +17,7 @@ keywords:
 maintainers:
   - email: containers@bitnami.com
     name: Bitnami
-name: zookeeper
+name: zookeeper-3.7.0
 sources:
   - https://github.com/bitnami/bitnami-docker-zookeeper
   - https://zookeeper.apache.org/

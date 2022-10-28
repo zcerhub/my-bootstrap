@@ -20,7 +20,7 @@ keywords:
 maintainers:
 - email: containers@bitnami.com
   name: Bitnami
-name: redis-cluster
+name: redis-6.2.6-cluster
 sources:
 - https://github.com/bitnami/bitnami-docker-redis
 - http://redis.io/

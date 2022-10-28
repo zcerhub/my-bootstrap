@@ -24,7 +24,7 @@ keywords:
 maintainers:
 - email: containers@bitnami.com
   name: Bitnami
-name: kafka
+name: kafka-2.8.1
 sources:
 - https://github.com/bitnami/bitnami-docker-kafka
 - https://kafka.apache.org/

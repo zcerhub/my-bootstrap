@@ -13,7 +13,7 @@ keywords:
 - cluster
 - replicaset
 - replication
-name: mongodb
+name: mongodb-4.4.2-debian-10-r0
 sources:
 - https://github.com/bitnami/bitnami-docker-mongodb
 version: 22.3.0
