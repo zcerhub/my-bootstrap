@@ -70,6 +70,8 @@ spec:
                     "-kibana.uri", "http://{{ .Release.Name }}-kb-http:5601",
                     "-kibana.username", "elastic",
                     "-kibana.password", "$(kibanaPassword)"]
+          resources:
+{{- toYaml .Values.metrics.resources | nindent 12 }}
 ---
 # Source: serviceMonitor.yaml
 apiVersion: monitoring.coreos.com/v1

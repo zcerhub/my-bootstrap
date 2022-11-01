@@ -980,15 +980,15 @@ metrics:
     ##
     resources:
       ## Example:
-      ## limits:
-      ##    cpu: 100m
-      ##    memory: 128Mi
-      limits: {}
+      limits:
+        cpu: 100m
+        memory: 128Mi
+#      limits: {}
       ## Examples:
-      ## requests:
-      ##    cpu: 100m
-      ##    memory: 128Mi
-      requests: {}
+      requests:
+        cpu: 100m
+        memory: 128Mi
+#      requests: {}
     ## @param metrics.kafka.affinity Affinity for Kafka Exporter pod assignment
     ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
     ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set

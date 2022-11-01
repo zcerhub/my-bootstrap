@@ -23,9 +23,4 @@ spec:
       containers:
       - name: kibana
         resources:
-          requests:
-            memory: {{ .Values.resources.requests.memory| nospace | quote}}
-            cpu:  {{ .Values.resources.requests.cpu | nospace | quote}} 
-          limits:
-            memory: {{ .Values.resources.limits.memory| nospace | quote}}
-            cpu:  {{ .Values.resources.limits.cpu | nospace | quote}}
+{{- toYaml .Values.resources | nindent 10 }}
