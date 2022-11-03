@@ -15,4 +15,4 @@ name: mysql-5.7.28
 sources:
 - https://github.com/kubernetes/charts
 - https://github.com/docker-library/mysql
-version: 22.3.0
+version: 22.3.1

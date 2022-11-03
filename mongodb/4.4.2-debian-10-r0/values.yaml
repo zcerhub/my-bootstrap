@@ -208,13 +208,13 @@ podLabels: {}
 resources: {}
 # Define separate resources per arbiter, which are less then primary or secondary
 # used only when replica set is enabled
-resourcesArbiter: {}
-# limits:
-#   cpu: 500m
-#   memory: 512Mi
-# requests:
-#   cpu: 100m
-#   memory: 256Mi
+resourcesArbiter:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
 
 ## Pod priority
 ## https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/
@@ -506,5 +506,12 @@ metrics:
       ## Used to pass Labels that are used by the Prometheus installed in your cluster to select Prometheus Rules to work with
       ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#prometheusspec
       additionalLabels: {}
+    resources:
+      requests:
+        cpu: 100m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
 
 domain: ctbiyi.cn

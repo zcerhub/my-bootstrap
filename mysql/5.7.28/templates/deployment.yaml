@@ -145,7 +145,8 @@ spec:
             port: metrics
           initialDelaySeconds: 5
           timeoutSeconds: 1
-        resources: {}
+        resources:
+{{ toYaml .Values.metrics.resources | indent 10 }}
         {{- end }}
       volumes:
       {{- if .Values.configurationFiles }}
