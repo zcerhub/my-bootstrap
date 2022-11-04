@@ -1167,7 +1167,7 @@ metrics:
   resources:
     limits:
       cpu: 100m
-      memory: 100Mi
+      memory: 128Mi
     requests: {}
   ## @param metrics.podLabels Extra labels for Redis&trade; exporter pods
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/

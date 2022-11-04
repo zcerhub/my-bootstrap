@@ -125,3 +125,6 @@ commonLabels: {}
 commonAnnotations: {}
 
 domain: entry.ctbiyi.cn
+resources:
+  limits: {}
+  requests: {}

@@ -157,7 +157,13 @@ exporters:
             memberType: "$3"
       startDelaySeconds: 30
     env: {}
-    resources: {}
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 100m
+      limits:
+        memory: 128Mi
+        cpu: 100m
     path: /metrics
     ports:
       jmxxp:
@@ -200,7 +206,13 @@ exporters:
       logLevel: info
       resetOnScrape: "true"
     env: {}
-    resources: {}
+    resources:
+      requests:
+        memory: 128Mi
+        cpu: 100m
+      limits:
+        memory: 128Mi
+        cpu: 100m
     path: /metrics
     ports:
       zookeeperxp:

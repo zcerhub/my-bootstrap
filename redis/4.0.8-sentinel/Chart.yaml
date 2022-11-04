@@ -16,4 +16,4 @@ name: redis-4.0.8-sentinel
 sources:
 - https://github.com/smileisak/docker-images/tree/master/redis
 - https://github.com/diegocn/docker-images/tree/master/redis
-version: 22.3.0
+version: 22.3.1

@@ -10,12 +10,8 @@ postgresql:
   version: 12 #版本号，支持 9.6 10 11 12
 
 resources:
-  requests:
-    memory: 100Mi
-    cpu: 10m
-  limits:
-    memory: 800Mi
-    cpu: 3000m
+  requests: {}
+  limits: {}
 exporter:
   enabled: false
 

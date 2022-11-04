@@ -3,17 +3,18 @@
 ##
 resources:
   server:
-    requests:
-      memory: 200Mi
-      cpu: 100m
-    limits:
-      memory: 700Mi
+    requests: {}
+    limits: {}
   sentinel:
+    requests: {}
+    limits: {}
+  metrics:
     requests:
-      memory: 200Mi
       cpu: 100m
+      memory: 128Mi
     limits:
-      memory: 200Mi
+      cpu: 100m
+      memory: 128Mi
 
 ## Node labels, tolerations, and affinities for pod assignment
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector

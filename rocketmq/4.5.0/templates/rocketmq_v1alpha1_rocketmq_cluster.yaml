@@ -189,12 +189,7 @@ spec:
   dnsPolicy: ClusterFirstWithHostNet
   # resources describes the compute resource requirements and limits
   resources:
-    requests:
-      memory: "512Mi"
-      cpu: "250m"
-    limits:
-      memory: "1024Mi"
-      cpu: "500m"
+{{ toYaml .Values.resources | indent 4 }}
   # storageMode can be EmptyDir, HostPath, StorageClass
   storageMode: EmptyDir
   # hostPath is the local path to store data

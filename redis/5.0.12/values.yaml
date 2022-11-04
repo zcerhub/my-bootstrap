@@ -98,8 +98,9 @@ sentinel:
     failureThreshold: 5
   ## Redis Sentinel resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  # resources:
-  #   requests:
+  resources:
+    requests: {}
+    limits: {}
   #     memory: 256Mi
   #     cpu: 100m
   ## Redis Sentinel Service properties
@@ -231,8 +232,9 @@ master:
 
   ## Redis Master resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
-  # resources:
-  #   requests:
+  resources:
+    requests:
+    limits: {}
   #     memory: 256Mi
   #     cpu: 100m
   ## Use an alternate scheduler, e.g. "stork".
@@ -383,8 +385,9 @@ slave:
     failureThreshold: 5
 
   ## Redis slave Resource
-  # resources:
-  #   requests:
+  resources:
+    requests: {}
+    limits: {}
   #     memory: 256Mi
   #     cpu: 100m
 
@@ -454,7 +457,13 @@ metrics:
   ## Metrics exporter resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   ##
-  # resources: {}
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
   ## Extra arguments for Metrics exporter, for example:
   ## extraArgs:
