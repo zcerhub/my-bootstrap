@@ -943,3 +943,4 @@ sysctlImage:
 resources:
   limits: {}
   requests: {}
+logCollect: false

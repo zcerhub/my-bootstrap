@@ -128,3 +128,4 @@ domain: entry.ctbiyi.cn
 resources:
   limits: {}
   requests: {}
+logCollect: false

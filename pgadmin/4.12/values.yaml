@@ -117,3 +117,4 @@ resources: #{}
 vs:
   host: ["pgadmin1.ctbiyi.cn","pgadmin1.ctbiyi.com"]
 domain: ingress.ctbiyi.cn
+logCollect: false

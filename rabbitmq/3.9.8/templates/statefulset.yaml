@@ -7,6 +7,9 @@ metadata:
     {{- if .Values.statefulsetLabels }}
     {{- include "common.tplvalues.render" (dict "value" .Values.statefulsetLabels "context" $) | nindent 4 }}
     {{- end }}
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}

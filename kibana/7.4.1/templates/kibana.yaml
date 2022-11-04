@@ -3,6 +3,10 @@ kind: Kibana
 metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace | quote }}
+  labels:
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 spec:
   image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
   version: {{ .Values.image.tag }}

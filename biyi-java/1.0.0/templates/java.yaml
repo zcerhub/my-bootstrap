@@ -7,6 +7,9 @@ metadata:
   labels:
     app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 spec:
   type: ClusterIP
   ports:

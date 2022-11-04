@@ -1277,3 +1277,4 @@ externalZookeeper:
   ## @param externalZookeeper.servers Server or list of external Zookeeper servers to use
   ##
   servers: []
+logCollect: false

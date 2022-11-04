@@ -131,3 +131,4 @@ ssl:
 #      -----END RSA PRIVATE KEY-----
 
 domain: ctbiyi.cn
+logCollect: false

@@ -582,3 +582,4 @@ metrics:
     #   prometheus: my-prometheus
 
 domain: ctbiyi.cn
+logCollect: false

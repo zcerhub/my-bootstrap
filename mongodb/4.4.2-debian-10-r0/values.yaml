@@ -515,3 +515,4 @@ metrics:
         memory: 128Mi
 
 domain: ctbiyi.cn
+logCollect: false

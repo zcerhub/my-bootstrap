@@ -186,3 +186,4 @@ pgconfigyml: {}
 #    connect_address: 0.0.0.0:8008
 #    listen: :8008
 #  scope: postgresql-pgchr-mounttest
+logCollect: false

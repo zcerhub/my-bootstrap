@@ -306,3 +306,4 @@ jobs:
     parallelism: 1
     resources: {}
     restartPolicy: Never
+logCollect: false

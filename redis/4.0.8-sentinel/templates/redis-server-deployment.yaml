@@ -6,6 +6,9 @@ metadata:
   labels:
     name: {{ template "redis-ha.fullname" . }}-server
     redis-node: "true"
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 {{ include "labels.standard" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas.servers }}

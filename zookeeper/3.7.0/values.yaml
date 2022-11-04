@@ -805,3 +805,4 @@ tls:
   resources:
     limits: {}
     requests: {}
+logCollect: false

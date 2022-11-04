@@ -8,6 +8,9 @@ metadata:
     chart: {{ template "minio.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 spec:
   strategy:
     type: {{ .Values.DeploymentUpdate.type }}

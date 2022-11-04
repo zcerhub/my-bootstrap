@@ -7,6 +7,9 @@ metadata:
     chart: {{ template "redis.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 spec:
   selector:
     matchLabels:

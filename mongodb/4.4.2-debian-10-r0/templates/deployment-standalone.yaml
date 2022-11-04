@@ -8,6 +8,9 @@ metadata:
     chart: {{ template "mongodb.chart" . }}
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
     {{- with .Values.labels }}
 {{ toYaml . | indent 4 }}
     {{- end }}

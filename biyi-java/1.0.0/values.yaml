@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-namespace: xtydemo
+namespace: default
 imagePullSecrets: docker-local
 env: {}
 nodeSelector: {}
@@ -55,4 +55,5 @@ vs:
     outsideHost: code-app-svc
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
+logCollect: false
     

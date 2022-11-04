@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-namespace: xtydemo
+namespace: default
 imagePullSecrets: docker-local
 env: {}
 param: {}
@@ -47,6 +47,7 @@ blackWhiteList:
   type: ALLOW
   list: []
 domain: entry.ctbiyi.com
+logCollect: false
 vs:
   cookieMatch:
     enabled: false

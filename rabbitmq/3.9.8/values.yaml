@@ -1169,3 +1169,4 @@ volumePermissions:
     ##    memory: 128Mi
     requests: {}
 domain: entry.ctbiyi.cn
+logCollect: false

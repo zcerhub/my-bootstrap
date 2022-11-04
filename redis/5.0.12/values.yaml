@@ -551,3 +551,4 @@ sysctlImage:
   #   requests:
   #     memory: 128Mi
   #     cpu: 100m
+logCollect: false

@@ -8,6 +8,9 @@ metadata:
     chart: {{ template "pgadmin.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
+    {{ - if .Values.logCollect }}
+    log-collect: true
+    {{ - end }}
 spec:
   replicas: 1
   selector:
