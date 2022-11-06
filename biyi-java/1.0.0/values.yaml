@@ -48,6 +48,8 @@ skywalking:
   enabled: false
   image: ctsi/skywalking-agent:1.1.0N
   collector: 192.168.152.45:32232
+monitor:
+  enabled: false
 domain: entry.ctbiyi.com
 vs:
   cookieMatch:
