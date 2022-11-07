@@ -8,9 +8,6 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
     component: server
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
 spec:
   serviceName: {{ template "zookeeper.headless" . }}
   replicas: {{ .Values.replicaCount }}
@@ -27,6 +24,9 @@ spec:
         app: {{ template "zookeeper.name" . }}
         release: {{ .Release.Name }}
         component: server
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       {{- if .Values.podLabels }}
         ## Custom pod labels
         {{- range $key, $value := .Values.podLabels }}

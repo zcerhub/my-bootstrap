@@ -4,7 +4,7 @@ Expand the name of the chart.
 */}}
 {{- define "zookeeper.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+{{- end }}
 
 {{/*
 Create a default fully qualified app name.
@@ -20,27 +20,27 @@ If release name contains chart name it will be used as a full name.
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-{{- end -}}
-{{- end -}}
+{{- end }}
+{{- end }}
+{{- end }}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
 {{- define "zookeeper.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+{{- end }}
 
 {{/*
 The name of the zookeeper headless service.
 */}}
 {{- define "zookeeper.headless" -}}
 {{- printf "%s-headless" (include "zookeeper.fullname" .) | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+{{- end }}
 
 {{/*
 The name of the zookeeper chroots job.
 */}}
 {{- define "zookeeper.chroots" -}}
 {{- printf "%s-chroots" (include "zookeeper.fullname" .) | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
+{{- end }}
