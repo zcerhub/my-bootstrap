@@ -3,9 +3,9 @@ kind: Deployment
 metadata:
   labels:
     service: {{ .Release.Name }}-code-server
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
   name: {{ .Release.Name }}-deployment
   namespace: {{ .Values.namespace }}
 spec:

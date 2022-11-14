@@ -4,9 +4,9 @@ metadata:
   name: {{ .Values.teamId }}-{{ .Release.Name }}
   labels:
     release: {{ .Release.Name }}
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
 spec:
   podAnnotations:
     sidecar.istio.io/inject: "false"

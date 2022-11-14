@@ -7,9 +7,9 @@ metadata:
   namespace: {{ .Release.Namespace | quote }}
   labels: {{- include "common.labels.standard" . | nindent 4 }}
     app.kubernetes.io/component: node
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -373,8 +373,8 @@ spec:
                   - -c
                   - /opt/bitnami/scripts/start-scripts/prestop-sentinel.sh
           {{- end }}
-          {{- if .Values.repalica.resources }}
-          resources: {{- toYaml .Values.repalica.resources | nindent 12 }}
+          {{- if .Values.replica.resources }}
+          resources: {{- toYaml .Values.replica.resources | nindent 12 }}
           {{- end }}
           volumeMounts:
             - name: start-scripts

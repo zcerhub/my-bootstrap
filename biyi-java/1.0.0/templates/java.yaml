@@ -7,9 +7,9 @@ metadata:
   labels:
     app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
 spec:
   type: ClusterIP
   ports:
@@ -99,7 +99,7 @@ spec:
             value: {{ .Values.skywalking.collector }}
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
-          {{- end -}}
+          {{- end }}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹
       volumes:
