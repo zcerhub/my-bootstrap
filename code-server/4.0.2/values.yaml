@@ -11,4 +11,3 @@ codeApp:
 resources:
   requests: {}
   limits: {}
-logCollect: false

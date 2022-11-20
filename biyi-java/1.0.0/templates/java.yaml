@@ -7,9 +7,6 @@ metadata:
   labels:
     app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
 spec:
   type: ClusterIP
   ports:
@@ -40,6 +37,9 @@ spec:
       labels:
         app: {{ .Release.Name }}-app
         release: {{ .Release.Name }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       annotations:
         prometheus.io/scrape: 'true'
         prometheus.io/path: /actuator/prometheus
