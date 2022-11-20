@@ -12,7 +12,7 @@ maintainers:
   name: Acaleph
 - email: dev@minio.io
   name: Minio
-name: minio-2019-08-07T01-59-21Z
+name: minio-2019-08
 sources:
 - https://github.com/minio/minio
 version: 22.3.1
