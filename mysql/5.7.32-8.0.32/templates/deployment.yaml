@@ -1,15 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "mysql.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
     app: {{ template "mysql.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
 spec:
   strategy:
     type: Recreate
@@ -20,6 +17,9 @@ spec:
     metadata:
       labels:
         app: {{ template "mysql.fullname" . }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
@@ -38,12 +38,14 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
       {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
       {{- end }}
       containers:
-      - name: {{ template "mysql.fullname" . }}
+      - name: {{ .Release.Name }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
         resources:
@@ -56,12 +58,12 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "mysql.fullname" . }}
+              name: {{ .Release.Name }}
               key: mysql-root-password
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ template "mysql.fullname" . }}
+              name: {{ .Release.Name }}
               key: mysql-password
         {{- end }}
         - name: MYSQL_USER
@@ -129,7 +131,7 @@ spec:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ template "mysql.fullname" . }}
+                name: {{ .Release.Name }}
                 key: mysql-root-password
         command:
           - 'sh'
@@ -157,12 +159,12 @@ spec:
       {{- if .Values.configurationFiles }}
       - name: configurations
         configMap:
-          name: {{ template "mysql.fullname" . }}-configuration
+          name: {{ .Release.Name }}-configuration
       {{- end }}
       {{- if .Values.initializationFiles }}
       - name: migrations
         configMap:
-          name: {{ template "mysql.fullname" . }}-initialization
+          name: {{ .Release.Name }}-initialization
       {{- end }}
       {{- if .Values.ssl.enabled }}
       - name: certificates
@@ -172,7 +174,7 @@ spec:
       - name: data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Values.persistence.existingClaim | default (include "mysql.fullname" .) }}
+          claimName: {{ .Values.persistence.existingClaim | default (.Release.Name) }}
       {{- else }}
         emptyDir: {}
       {{- end -}}
