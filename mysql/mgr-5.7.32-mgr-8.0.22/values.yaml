@@ -583,3 +583,13 @@ metrics:
 
 domain: ctbiyi.cn
 logCollect: false
+
+ipaas:
+  useIpaasNode: true
+  tolerations:
+    key: node-role
+    value: ipaas
+  affinity:
+    matchExpressions:
+      key: node-role
+      value: ipaas
