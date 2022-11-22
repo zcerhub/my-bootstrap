@@ -83,6 +83,22 @@ spec:
       schedulerName: {{ .Values.replica.schedulerName | quote }}
       {{- end }}
       terminationGracePeriodSeconds: {{ .Values.replica.terminationGracePeriodSeconds }}
+      {{- if .Values.ipaas.useIpaasNode }}
+      tolerations:
+        - key: {{ .Values.ipaas.tolerations.key }}
+          operator: "Equal"
+          value: {{ .Values.ipaas.tolerations.value }}
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.ipaas.affinity.matchExpressions.key }}
+                    operator: "In"
+                    values:
+                    - {{ .Values.ipaas.affinity.matchExpressions.value }}
+      {{- end }}
       containers:
         - name: redis
           image: {{ template "redis.image" . }}

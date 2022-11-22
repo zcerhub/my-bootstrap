@@ -1375,3 +1375,12 @@ sysctl:
   resources:
     limits: {}
     requests: {}
+ipaas:
+  useIpaasNode: true
+  tolerations:
+    key: node-role
+    value: ipaas
+  affinity:
+    matchExpressions:
+      key: node-role
+      value: ipaas
