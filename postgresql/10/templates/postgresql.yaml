@@ -4,9 +4,6 @@ metadata:
   name: {{ .Values.teamId }}-{{ .Release.Name }}
   labels:
     release: {{ .Release.Name }}
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
 spec:
   podAnnotations:
     sidecar.istio.io/inject: "false"
@@ -22,7 +19,13 @@ spec:
   databases:
     test: biyi  # dbname: owner
   postgresql:
-    version: {{ .Values.postgresql.version  | quote}} 
+    version: {{ .Values.postgresql.version  | quote}}
+  template:
+    metadata:
+      labels:
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
   resources:
     requests:
       memory: {{ .Values.resources.requests.memory| nospace | quote}}

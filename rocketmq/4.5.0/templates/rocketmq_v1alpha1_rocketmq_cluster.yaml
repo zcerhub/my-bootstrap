@@ -111,6 +111,11 @@ metadata:
   # name of broker cluster
   name: {{ .Release.Name }}-broker
   namespace: {{ .Release.Namespace | quote }}
+  lables:
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
+
 spec:
   # size is the number of the broker cluster, each broker cluster contains a master broker and [replicaPerGroup] replica brokers.
   size: {{ .Values.broker.size }}
@@ -171,6 +176,10 @@ kind: NameService
 metadata:
   name: {{ .Release.Name }}-name-server
   namespace: {{ .Release.Namespace | quote }}
+  lables:
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
 spec:
   # size is the the name service instance number of the name service cluster
   size: 1
@@ -223,6 +232,9 @@ spec:
     metadata:
       labels:
         app: {{ .Release.Name }}-console
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
     spec:
       replicas: 1
       selector:

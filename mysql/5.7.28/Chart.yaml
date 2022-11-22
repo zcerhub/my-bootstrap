@@ -11,7 +11,7 @@ keywords:
 maintainers:
 - email: viglesias@google.com
   name: Vic Iglesias
-name: mysql-5.7.28
+name: mysql-5-7-28
 sources:
 - https://github.com/kubernetes/charts
 - https://github.com/docker-library/mysql
