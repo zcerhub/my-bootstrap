@@ -944,3 +944,13 @@ resources:
   limits: {}
   requests: {}
 logCollect: false
+
+ipaas:
+  useIpaasNode: true
+  tolerations:
+    key: node-role
+    value: ipaas
+  affinity:
+    matchExpressions:
+      key: node-role
+      value: ipaas
