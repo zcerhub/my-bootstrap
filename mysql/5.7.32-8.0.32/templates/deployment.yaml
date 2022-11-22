@@ -7,9 +7,9 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
+    {{- if .Values.logCollect }}
+    log-collect: "true"
+    {{- end }}
 spec:
   strategy:
     type: Recreate

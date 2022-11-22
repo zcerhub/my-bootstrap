@@ -7,9 +7,6 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
 spec:
   selector:
     matchLabels:
@@ -20,6 +17,9 @@ spec:
         sidecar.istio.io/inject: "false"
       labels:
         app: {{ template "mysql.fullname" . }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
     spec:
       {{- if .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -36,6 +36,8 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
       {{- if .Values.nodeSelector }}
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}

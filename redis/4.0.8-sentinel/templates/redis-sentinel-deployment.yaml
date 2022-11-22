@@ -3,9 +3,6 @@ kind: Deployment
 metadata:
   name: {{ template "redis-ha.fullname" . }}-sentinel
   labels:
-    {{ - if .Values.logCollect }}
-    log-collect: true
-    {{ - end }}
 {{ include "labels.standard" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas.sentinels }}

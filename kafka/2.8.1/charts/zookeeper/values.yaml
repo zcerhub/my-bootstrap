@@ -335,8 +335,11 @@ schedulerName: ""
 ##
 resources:
   requests:
-    memory: 256Mi
-    cpu: 250m
+    memory: 100Mi
+    cpu: 100m
+  limits:
+    memory: 1000Mi
+    cpu: 1000m
 ## Configure extra options for liveness probe
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
 ## @param livenessProbe.enabled Enable livenessProbe

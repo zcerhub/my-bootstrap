@@ -62,4 +62,4 @@ spec:
           {{- end }}
           resources:
 {{ toYaml $job.resources | indent 12 }}
-{{- end -}}
+{{- end }}

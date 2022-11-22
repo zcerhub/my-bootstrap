@@ -36,6 +36,9 @@ spec:
         chart: {{ template "mongodb.chart" . }}
         release: {{ .Release.Name }}
         component: secondary
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       {{- if .Values.podLabels }}
 {{ toYaml .Values.podLabels | indent 8 }}
       {{- end }}

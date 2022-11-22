@@ -1,5 +1,5 @@
 apiVersion: v1
-appVersion: 4.4.2
+appVersion: 4.4.2-debian-10-r0
 deprecated: true
 description: DEPRECATED NoSQL document-oriented database that stores JSON-like documents
   with dynamic schemas, simplifying the integration of data in content-driven applications.
@@ -13,7 +13,7 @@ keywords:
 - cluster
 - replicaset
 - replication
-name: mongodb-4.4.2-debian-10-r0
+name: mongodb-4-4-2
 sources:
 - https://github.com/bitnami/bitnami-docker-mongodb
 version: 22.3.1

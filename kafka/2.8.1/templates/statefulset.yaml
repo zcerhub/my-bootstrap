@@ -42,6 +42,9 @@ spec:
         {{- if .Values.podLabels }}
         {{- include "common.tplvalues.render" (dict "value" .Values.podLabels "context" $) | nindent 8 }}
         {{- end }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
         {{- if (include "kafka.createConfigmap" .) }}
