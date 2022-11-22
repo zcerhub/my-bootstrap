@@ -42,6 +42,22 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
       {{- end }}
+      {{- if .Values.ipaas.useIpaasNode }}
+      tolerations:
+        - key: {{ .Values.ipaas.tolerations.key }}
+          operator: "Equal"
+          value: {{ .Values.ipaas.tolerations.value }}
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.ipaas.affinity.matchExpressions.key }}
+                    operator: "In"
+                    values:
+                    - {{ .Values.ipaas.affinity.matchExpressions.value }}
+      {{- end }}
       containers:
       - name: {{ template "mysql.fullname" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
