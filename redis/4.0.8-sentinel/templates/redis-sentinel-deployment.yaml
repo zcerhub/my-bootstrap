@@ -17,6 +17,9 @@ spec:
         release: {{ .Release.Name }}
         component: sentinel
         name: {{ template "redis-ha.fullname" . }}-sentinel
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
     spec:

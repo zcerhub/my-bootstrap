@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}
+  name: {{ template "mysql.fullname" . }}
   labels:
     app: {{ template "mysql.fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -45,7 +45,7 @@ spec:
 {{ toYaml .Values.nodeSelector | indent 8 }}
       {{- end }}
       containers:
-      - name: {{ .Release.Name }}
+      - name: {{ template "mysql.fullname" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
         resources:
@@ -58,12 +58,12 @@ spec:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}
+              name: {{ template "mysql.fullname" . }}
               key: mysql-root-password
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: {{ .Release.Name }}
+              name: {{ template "mysql.fullname" . }}
               key: mysql-password
         {{- end }}
         - name: MYSQL_USER
@@ -131,7 +131,7 @@ spec:
           - name: MYSQL_ROOT_PASSWORD
             valueFrom:
               secretKeyRef:
-                name: {{ .Release.Name }}
+                name: {{ template "mysql.fullname" . }}
                 key: mysql-root-password
         command:
           - 'sh'
@@ -159,12 +159,12 @@ spec:
       {{- if .Values.configurationFiles }}
       - name: configurations
         configMap:
-          name: {{ .Release.Name }}-configuration
+          name: {{ template "mysql.fullname" . }}-configuration
       {{- end }}
       {{- if .Values.initializationFiles }}
       - name: migrations
         configMap:
-          name: {{ .Release.Name }}-initialization
+          name: {{ template "mysql.fullname" . }}-initialization
       {{- end }}
       {{- if .Values.ssl.enabled }}
       - name: certificates
@@ -174,7 +174,7 @@ spec:
       - name: data
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
-          claimName: {{ .Values.persistence.existingClaim | default (.Release.Name) }}
+          claimName: {{ .Values.persistence.existingClaim | default (include "mysql.fullname" .) }}
       {{- else }}
         emptyDir: {}
       {{- end -}}

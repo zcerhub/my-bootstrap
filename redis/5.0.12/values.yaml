@@ -233,7 +233,7 @@ master:
   ## Redis Master resource requests and limits
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources:
-    requests:
+    requests: {}
     limits: {}
   #     memory: 256Mi
   #     cpu: 100m
