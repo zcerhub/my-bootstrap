@@ -1,0 +1,12 @@
+{{- if .Values.param }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: param-{{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  micro-service-config.js: |-
+    {{- range $key, $value :=  .Values.param }}
+    ${{ $key }}={{ $value | quote }}
+    {{- end }}
+{{- end }}
