@@ -7,9 +7,6 @@ metadata:
     chart: {{ template "redis.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
 spec:
   selector:
     matchLabels:
@@ -24,6 +21,9 @@ spec:
         chart: {{ template "redis.chart" . }}
         release: {{ .Release.Name }}
         role: master
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
 {{- if .Values.master.podLabels }}
 {{ toYaml .Values.master.podLabels | indent 8 }}
 {{- end }}

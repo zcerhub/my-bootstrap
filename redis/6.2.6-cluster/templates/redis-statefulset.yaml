@@ -7,9 +7,6 @@ metadata:
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
   {{- if .Values.commonAnnotations }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
@@ -25,6 +22,9 @@ spec:
   template:
     metadata:
       labels: {{- include "common.labels.standard" . | nindent 8 }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       {{- if .Values.redis.podLabels }}
       {{- toYaml .Values.redis.podLabels | nindent 8 }}
       {{- end }}

@@ -8,9 +8,6 @@ metadata:
     chart: {{ template "redis.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-    {{- if .Values.logCollect }}
-    log-collect: "true"
-    {{- end }}
 spec:
 {{- if .Values.slave.updateStrategy }}
   strategy:
@@ -30,6 +27,9 @@ spec:
         release: {{ .Release.Name }}
         chart: {{ template "redis.chart" . }}
         role: slave
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       {{- if .Values.slave.podLabels }}
 {{ toYaml .Values.slave.podLabels | indent 8 }}
       {{- end }}

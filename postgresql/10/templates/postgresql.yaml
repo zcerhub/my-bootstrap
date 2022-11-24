@@ -20,7 +20,7 @@ spec:
     test: biyi  # dbname: owner
   postgresql:
     version: {{ .Values.postgresql.version  | quote}}
-  template:
+  podTemplate:
     metadata:
       labels:
         {{- if .Values.logCollect }}

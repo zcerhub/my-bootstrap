@@ -1,7 +1,7 @@
 apiVersion: v1
-name: mysql-mgr-5-7-32-mgr-8-0-32
+name: mysql-5-7-32-mgr-8-0-22-mgr
 version: 22.3.1
-appVersion: 8.0.32
+appVersion: 5.7.32-mgr-8.0.32-mgr
 description: Chart to create a Highly available MySQL cluster
 keywords:
   - mysql
