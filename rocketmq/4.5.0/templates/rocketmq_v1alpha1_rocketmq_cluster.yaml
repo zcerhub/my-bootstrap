@@ -123,12 +123,6 @@ spec:
   brokerImage: {{ .Values.broker.brokerImage }}
   # imagePullPolicy is the image pull policy
   imagePullPolicy: Always
-  template:
-    metadata:
-      labels:
-        {{- if .Values.logCollect }}
-        log-collect: "true"
-        {{- end }}
   # resources describes the compute resource requirements and limits
   resources:
 {{ toYaml .Values.broker.resources | indent 4 }}
@@ -194,12 +188,6 @@ spec:
   #  To have DNS options set along with hostNetwork, you have to specify DNS policy
   #  explicitly to 'ClusterFirstWithHostNet'.
   dnsPolicy: ClusterFirstWithHostNet
-  template:
-    metadata:
-      labels:
-        {{- if .Values.logCollect }}
-        log-collect: "true"
-        {{- end }}
   # resources describes the compute resource requirements and limits
   resources:
 {{ toYaml .Values.resources | indent 4 }}
