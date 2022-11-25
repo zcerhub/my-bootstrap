@@ -20,12 +20,6 @@ spec:
     test: biyi  # dbname: owner
   postgresql:
     version: {{ .Values.postgresql.version  | quote}}
-  podTemplate:
-    metadata:
-      labels:
-        {{- if .Values.logCollect }}
-        log-collect: "true"
-        {{- end }}
   resources:
     requests:
       memory: {{ .Values.resources.requests.memory| nospace | quote}}
