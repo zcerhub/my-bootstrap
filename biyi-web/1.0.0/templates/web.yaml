@@ -44,24 +44,6 @@ spec:
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
-      {{- if .Values.env }}    
-      initContainers:
-      - name: {{ .Release.Name }}-init
-        image: {{ .Values.web.image }}
-        imagePullPolicy: {{ .Values.web.imagePullPolicy }}
-        command:
-        - sh
-        - /init/pre-start.sh
-        volumeMounts:
-        - mountPath: /init/.env
-          name: config
-          subPath: .env
-        - mountPath: /init/pre-start.sh
-          name: config
-          subPath: pre-start.sh
-        - mountPath: /usr/share/nginx/html
-          name: workdir
-      {{- end}}
       containers:
       - name: {{ .Release.Name }}-exporter
         image:  {{ .Values.web.exporterImage }}
@@ -81,10 +63,6 @@ spec:
         ports:
         - containerPort: {{ .Values.web.containerPort }}      
         volumeMounts:
-        {{- if .Values.env }}
-        - mountPath: /usr/share/nginx/html
-          name: workdir
-        {{- end}}
         {{- if .Values.param }}
         - name: param
           mountPath: /usr/share/nginx/html/configs/micro-service-config.js
@@ -93,13 +71,6 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets}}      
       volumes:
-      {{- if .Values.env }}
-      - name: workdir
-        emptyDir: {}  
-      - name: config
-        configMap:
-          name: configmap-{{ .Release.Name }}
-      {{- end}}
       {{- if .Values.param }}
       - name: param
         configMap:
