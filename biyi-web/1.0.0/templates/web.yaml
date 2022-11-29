@@ -17,7 +17,7 @@ spec:
     - port: {{ .Values.web.exporterPort }}
       protocol: TCP
       targetPort: {{ .Values.web.exporterPort }}
-      name: http-exporter     
+      name: http-exporter
   selector:
     app: {{ .Release.Name }}-app
     release: {{ .Release.Name }}
@@ -41,6 +41,9 @@ spec:
       labels:
         app: {{ .Release.Name }}-app
         release: {{ .Release.Name }}
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
       annotations:
         sidecar.istio.io/inject: "false"
     spec:
@@ -58,7 +61,7 @@ spec:
         resources:
 {{- toYaml .Values.resources | nindent 10 }}
         ports:
-        - containerPort: {{ .Values.web.containerPort }}      
+        - containerPort: {{ .Values.web.containerPort }}
         volumeMounts:
         {{- if .Values.param }}
         - name: param
@@ -66,13 +69,13 @@ spec:
           subPath: micro-service-config.js
         {{- end}}
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecrets}}      
+        - name: {{ .Values.imagePullSecrets}}
       volumes:
       {{- if .Values.param }}
       - name: param
         configMap:
           name: param-{{ .Release.Name }}
-      {{- end}}      
+      {{- end}}
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
