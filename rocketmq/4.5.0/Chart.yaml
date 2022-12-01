@@ -1,0 +1,12 @@
+apiVersion: v2
+appVersion: 4.5.0
+description: A Helm chart for Kubernetes
+keywords:
+  - rocketmq-operator
+  - broker
+  - name-service
+  - Console
+name: rocketmq-4-5-0
+sources:
+  - https://github.com/apache/rocketmq-operator.git
+version: 22.3.1

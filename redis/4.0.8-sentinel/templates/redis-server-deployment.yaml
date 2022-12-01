@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Pay attention to the redis-role label at runtime. The self-determination logic in the image sets this value accordingly.
+  name: {{ template "redis-ha.fullname" . }}-server
+  labels:
+    name: {{ template "redis-ha.fullname" . }}-server
+    redis-node: "true"
+{{ include "labels.standard" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicas.servers }}
+  selector:
+    matchLabels:
+        app: {{ template "redis-ha.name" . }}
+        release: {{ .Release.Name }}
+        redis-node: "true"
+  template:
+    metadata:
+      labels:
+        app: {{ template "redis-ha.name" . }}
+        release: {{ .Release.Name }}
+        component: server
+        name: {{ template "redis-ha.fullname" . }}-server
+        redis-node: "true"
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
+      annotations:
+        sidecar.istio.io/inject: "false"
+    spec:
+      serviceAccountName: {{ template "redis-ha.serviceAccountName" . }}
+      {{- if .Values.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.nodeSelector | indent 8 }}
+      {{- end }}
+      {{- if .Values.tolerations }}
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+      {{- end }}
+      affinity:
+{{ tpl .Values.serverAffinity . | indent 8 }}
+      containers:
+      - name: redis
+        image: {{ .Values.redis_image }}
+        resources:
+{{ toYaml .Values.resources.server | indent 10 }}
+        env:
+          - name: REDIS_SENTINEL_SERVICE_HOST
+            value: "redis-sentinel"
+          - name: REDIS_CHART_PREFIX
+            value: {{ template "redis-ha.fullname" . }}-
+{{- if .Values.auth }}
+          - name: REDIS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "redis-ha.fullname" . }}
+                key: auth
+{{- end }}
+        ports:
+          - containerPort: 6379
+        volumeMounts:
+          - mountPath: /redis-master-data
+            name: data
+      - name: metrics
+        image: {{ .Values.metrics.image.registry }}/{{ .Values.metrics.image.repository }}:{{ .Values.metrics.image.tag }}
+        imagePullPolicy: {{ .Values.metrics.image.pullPolicy | quote }}
+        command:
+        - /bin/bash
+        - -c
+        - |
+          if [[ -f '/secrets/redis-password' ]]; then
+           export REDIS_PASSWORD=$(cat /secrets/redis-password)
+          fi
+          redis_exporter
+        args:
+        {{- range $key, $value := .Values.metrics.extraArgs }}
+          - --{{ $key }}={{ $value }}
+        {{- end }}
+        env:
+        - name: REDIS_ALIAS
+          value: {{ template "redis-ha.fullname" . }}
+        {{- if and .Values.usePassword (not .Values.usePasswordFile) }}
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "redis-ha.secretName" . }}
+              key: redis-password
+        {{- end }}
+        volumeMounts:
+        {{- if .Values.usePasswordFile }}
+        - name: redis-password
+          mountPath: /secrets/
+        {{- end }}
+        ports:
+        - name: metrics
+          containerPort: 9121
+        resources:
+{{ toYaml .Values.resources.metrics | indent 10 }}
+      volumes:
+      - name: data
+	  
+
