@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: biyi-1.0.0
-description: Online IDE code-server:biyi_1.0.0
-name: code-server
-version: 1.0.0

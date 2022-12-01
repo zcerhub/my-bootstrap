@@ -1,0 +1,77 @@
+apiVersion: "acid.zalan.do/v1"
+kind: postgresql
+metadata:
+  name: {{ .Values.teamId }}-{{ .Release.Name }}
+  labels:
+    release: {{ .Release.Name }}
+spec:
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
+  teamId: {{ .Values.teamId }}
+  volume:
+    size: {{ .Values.volume.size }}
+  numberOfInstances: {{ .Values.numberOfInstances }}
+  users:
+    biyi:  # database owner
+    - superuser
+    - createdb
+    test_user: []  # role for application foo
+  databases:
+    test: biyi  # dbname: owner
+  postgresql:
+    version: {{ .Values.postgresql.version  | quote}}
+  resources:
+    requests:
+      memory: {{ .Values.resources.requests.memory| nospace | quote}}
+      cpu:  {{ .Values.resources.requests.cpu | nospace | quote}} 
+    limits:
+      memory: {{ .Values.resources.limits.memory| nospace | quote}}
+      cpu:  {{ .Values.resources.limits.cpu | nospace | quote}}
+  {{- if .Values.pgconfigyml }}
+  additionalVolumes:
+#    - name: conf
+#      mountPath: /home/postgres/pgdata/pgroot/data
+#      subPath: postgresql.conf
+#      targetContainers:
+#        - postgres
+#      volumeSource:
+#        configMap:
+#          name: {{ .Values.teamId }}-{{ .Release.Name }}-pgconfig
+    - name: confyml
+      mountPath: /home/postgres/postgres.yml
+      subPath: postgres.yml
+      targetContainers:
+        - postgres
+      volumeSource:
+        configMap:
+          name: {{ .Values.teamId }}-{{ .Release.Name }}-pgconfigyml
+  {{- end -}}
+  {{- if .Values.exporter.enabled }}
+  sidecars:
+    - name: "exporter"
+      image: "jinlingan/postgres_exporter:biyi-v0.1.0"
+      ports:
+        - name: exporter
+          containerPort: 9187
+          protocol: TCP
+      resources:
+        limits:
+          cpu: 100m
+          memory: 100M
+        requests:
+          cpu: 100m
+          memory: 100M
+      env:
+        - name: "DATA_SOURCE_URI"
+          value: "127.0.0.1/postgres?sslmode=disable"
+        - name: "DATA_SOURCE_USER"
+          valueFrom:
+            secretKeyRef:
+              name: postgres.{{ .Values.teamId }}-{{ .Release.Name }}.credentials
+              key: username
+        - name: "DATA_SOURCE_PASS"
+          valueFrom:
+            secretKeyRef:
+              name: postgres.{{ .Values.teamId }}-{{ .Release.Name }}.credentials
+              key: password
+  {{- end }}
