@@ -111,7 +111,7 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
-        {{- if .Values.configurationFiles }}
+        {{- if .Values.uploadedConfigfileDir }}
         - name: configurations
           mountPath: /etc/mysql/conf.d
         {{- end }}
@@ -156,7 +156,7 @@ spec:
 {{ toYaml .Values.metrics.resources | indent 10 }}
         {{- end }}
       volumes:
-      {{- if .Values.configurationFiles }}
+      {{- if .Values.uploadedConfigfileDir }}
       - name: configurations
         configMap:
           name: {{ template "mysql.fullname" . }}-configuration
