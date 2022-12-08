@@ -13,6 +13,9 @@ spec:
     metadata:
       labels:
         service: {{ .Release.Name }}-code-server
+        {{- if .Values.logCollect }}
+        log-collect: "true"
+        {{- end }}
     spec:
       containers:
       - image: {{ .Values.codeServer.image }}
