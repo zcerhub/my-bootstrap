@@ -4,16 +4,11 @@
 
 namespace: default
 imagePullSecrets: docker-local
-env: {}
 param: {}
 nodeSelector: {}
 resources:
-  requests:
-    memory: 100
-    cpu: 100   
-  limits:
-    memory: 512
-    cpu: 2048
+  requests: {}
+  limits: {}
 web:
   image: xty-group/xblog-web:1.0.0
   exporterImage: ctsi/nginx-vts-exporter:0.10.3
@@ -21,25 +16,25 @@ web:
   replicas: 1
   containerPort: 80
   exporterPort: 9913
-circuitBreaker: 
+circuitBreaker:
   enabled: false
   consecutiveErrors: 1
   interval: 1s
   baseEjectionTime: 1m
   maxEjectionPercent: 100
-currentLimiting: 
+currentLimiting:
   enabled: false
   maxConnections: 100
   conetTimeout: 30ms
-  tcpKeepalive: 
+  tcpKeepalive:
     time: 7200s
     interval: 75s
   httpHttp1MaxPendingRequests: 1000
   httpMaxRequestsPerConnection: 10
-loadBalancer: 
+loadBalancer:
   enabled: false
   type: ROUND_ROBIN
-timeout: 
+timeout:
   enabled: false
   time: 15s
 blackWhiteList:
@@ -47,10 +42,10 @@ blackWhiteList:
   type: ALLOW
   list: []
 domain: entry.ctbiyi.com
-logCollect: false
 vs:
   cookieMatch:
     enabled: false
     outsideHost: code-app-svc
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
+logCollect: false

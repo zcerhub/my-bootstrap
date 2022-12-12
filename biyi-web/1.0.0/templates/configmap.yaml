@@ -1,24 +1,3 @@
-{{- if .Values.env }}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: configmap-{{ .Release.Name }}
-  namespace: {{ .Values.namespace }}
-data:
-  .env: |-
-    {{- range $key, $value :=  .Values.env }}
-    {{ $key }}={{ $value | quote }}
-    {{- end }}
-  pre-start.sh: |-
-    #!/bin/bash
-    cat /init/.env
-    cp  /init/.env /app/
-    cd /app/
-    npm install
-    npm run build
-    cp -r dist/* /var/www/html
-{{- end }}
----
 {{- if .Values.param }}
 apiVersion: v1
 kind: ConfigMap
