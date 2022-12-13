@@ -179,6 +179,11 @@ spec:
           volumeMounts:
             - name: data
               mountPath: {{ .Values.slave.persistence.mountPath }}
+            {{- if .Values.uploadedConfigfileDir }}
+            - name: {{ .Release.Name }}-configuration
+              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              subPath: slave.cnf
+            {{- end }}
             {{- if .Values.slave.config }}
             - name: config
               mountPath: /opt/bitnami/mysql/conf/my.cnf
@@ -237,6 +242,11 @@ spec:
           {{- end }}
         {{- end }}
       volumes:
+        {{- if .Values.uploadedConfigfileDir }}
+        - name: {{ .Release.Name }}-configuration
+          configMap:
+            name: {{ .Release.Name }}-configuration
+        {{- end }}
         {{- if .Values.slave.config }}
         - name: config
           configMap:

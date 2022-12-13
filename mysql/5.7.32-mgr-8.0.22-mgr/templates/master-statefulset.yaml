@@ -194,6 +194,11 @@ spec:
             - name: custom-init-scripts
               mountPath: /docker-entrypoint-initdb.d
             {{- end }}
+            {{- if .Values.uploadedConfigfileDir }}
+            - name: {{ .Release.Name }}-configuration
+              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              subPath: master.cnf
+            {{- end }}
             {{- if .Values.master.config }}
             - name: config
               mountPath: /opt/bitnami/mysql/conf/my.cnf
@@ -252,6 +257,11 @@ spec:
           {{- end }}
         {{- end }}
       volumes:
+        {{- if .Values.uploadedConfigfileDir }}
+        - name: {{ .Release.Name }}-configuration
+          configMap:
+            name: {{ .Release.Name }}-configuration
+        {{- end }}
         {{- if .Values.master.config }}
         - name: config
           configMap:
