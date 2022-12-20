@@ -7,12 +7,8 @@ imagePullSecrets: docker-local
 env: {}
 nodeSelector: {}
 resources:
-  requests:
-    memory: 200
-    cpu: 200   
-  limits:
-    memory: 2048
-    cpu: 4096
+  requests: { }
+  limits: { }
 java:
   image: xty-group/xtydemoapi:1.0.0
   imagePullPolicy: Always
