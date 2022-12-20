@@ -1391,3 +1391,5 @@ ipaas:
     matchExpressions:
       key: node-role
       value: ipaas
+
+uploadedConfigfileDir: configs/*
