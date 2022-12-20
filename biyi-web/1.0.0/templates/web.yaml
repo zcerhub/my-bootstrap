@@ -48,6 +48,7 @@ spec:
         sidecar.istio.io/inject: "false"
     spec:
       containers:
+{{- if .Values.serviceMonitor.enabled}}
       - name: {{ .Release.Name }}-exporter
         image:  {{ .Values.web.exporterImage }}
         imagePullPolicy: {{ .Values.web.imagePullPolicy }}
@@ -55,6 +56,7 @@ spec:
         - containerPort: {{ .Values.web.exporterPort }}
         resources:
 {{- toYaml .Values.resources | nindent 10 }}
+{{- end }}
       - name: {{ .Release.Name }}-app
         image: {{ .Values.web.image }}
         imagePullPolicy: {{ .Values.web.imagePullPolicy }}
@@ -75,8 +77,9 @@ spec:
       - name: param
         configMap:
           name: param-{{ .Release.Name }}
-      {{- end}}
+      {{- end }}
 ---
+{{- if .Values.serviceMonitor.enabled}}
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
@@ -103,3 +106,4 @@ spec:
     matchLabels:
       app: {{ .Release.Name }}-app
       release: {{ .Release.Name }}
+{{- end}}

@@ -49,3 +49,5 @@ vs:
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
 logCollect: false
+serviceMonitor:
+  enabled: false

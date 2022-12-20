@@ -778,6 +778,9 @@ metrics:
     limits:
       memory: 200Mi
       CPU: 100m
+    requests:
+      memory: 100Mi
+      CPU: 50m
   ## @param metrics.extraArgs Extra arguments for the binary; possible values [here](https://github.com/oliver006/redis_exporter
   ## extraArgs:
   ##   check-keys: myKey,myOtherKey
