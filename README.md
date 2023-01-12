@@ -15,7 +15,7 @@
 | **mysql-5-7-32-mgr-8-0-32-mgr** | 22.3.3        | mysql-mgr           | 5-7-32-mgr-8-0-32-mgr | 王宇          | 2023.1.5   |
 | **pgadmin-4-12**                | 22.3.1        | pgadmin             | 4.12                  | wangjin_zz  | 2022.10.24 |
 | **postgresql-10**               | 22.3.1        | postgresql          | 10                    | 王宇          | 2022.10.24 |
-| **rabbitmq-3-9-8**              | 22.3.2        | rabbitmq            | 3.9.8                 | wangjin_zz  | 2022.12.1  |
+| **rabbitmq-3-9-8**              | 22.3.2        | rabbitmq            | 3.9.8                 | 王宇  | 2022.12.1  |
 | **redis-4-0-8-sentinel**        | 22.3.1        | redis-sentinel      | 4.0.8                 | wangjin_zz  | 2022.10.24 |
 | **redis-5-0-12**                | 22.3.1        | redis               | 5.0.12                | wangjin_zz  | 2022.10.24 |
 | **redis-6-2-6-cluster**         | 22.3.3        | redis-cluster       | 6.2.6                 | 王宇          | 2023.1.5   |
