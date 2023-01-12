@@ -15,4 +15,4 @@ name: mysql-5-7-32-8-0-22
 sources:
 - https://github.com/kubernetes/charts
 - https://github.com/docker-library/mysql
-version: 22.3.2
+version: 22.3.3
