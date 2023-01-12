@@ -29,15 +29,31 @@ spec:
         {{- end }}
     spec:
 {{- include "mysql.imagePullSecrets" . | indent 6 }}
-      {{- if .Values.master.affinity }}
-      affinity: {{- include "mysql.tplValue" (dict "value" .Values.master.affinity "context" $) | nindent 8 }}
-      {{- end }}
+#      {{- if .Values.master.affinity }}
+#      affinity: {{- include "mysql.tplValue" (dict "value" .Values.master.affinity "context" $) | nindent 8 }}
+#      {{- end }}
       {{- if .Values.master.nodeSelector }}
       nodeSelector: {{- include "mysql.tplValue" (dict "value" .Values.master.nodeSelector "context" $) | nindent 8 }}
       {{- end }}
-      {{- if .Values.master.tolerations }}
-      tolerations: {{- include "mysql.tplValue" (dict "value" .Values.master.tolerations "context" $) | nindent 8 }}
+      {{- if .Values.ipaas.useIpaasNode }}
+      tolerations:
+        - key: {{ .Values.ipaas.tolerations.key }}
+          operator: "Equal"
+          value: {{ .Values.ipaas.tolerations.value }}
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.ipaas.affinity.matchExpressions.key }}
+                    operator: "In"
+                    values:
+                    - {{ .Values.ipaas.affinity.matchExpressions.value }}
       {{- end }}
+#      {{- if .Values.master.tolerations }}
+#      tolerations: {{- include "mysql.tplValue" (dict "value" .Values.master.tolerations "context" $) | nindent 8 }}
+#      {{- end }}
       {{- if .Values.master.securityContext.enabled }}
       securityContext:
         fsGroup: {{ .Values.master.securityContext.fsGroup }}
@@ -178,6 +194,11 @@ spec:
             - name: custom-init-scripts
               mountPath: /docker-entrypoint-initdb.d
             {{- end }}
+            {{- if .Values.uploadedConfigfileDir }}
+            - name: {{ .Release.Name }}-configuration
+              mountPath: /opt/bitnami/mysql/conf/my.cnf
+              subPath: master.cnf
+            {{- end }}
             {{- if .Values.master.config }}
             - name: config
               mountPath: /opt/bitnami/mysql/conf/my.cnf
@@ -236,6 +257,11 @@ spec:
           {{- end }}
         {{- end }}
       volumes:
+        {{- if .Values.uploadedConfigfileDir }}
+        - name: {{ .Release.Name }}-configuration
+          configMap:
+            name: {{ .Release.Name }}-configuration
+        {{- end }}
         {{- if .Values.master.config }}
         - name: config
           configMap:

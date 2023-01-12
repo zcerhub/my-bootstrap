@@ -44,6 +44,22 @@ spec:
       nodeSelector:
 {{ toYaml .Values.nodeSelector | indent 8 }}
       {{- end }}
+      {{- if .Values.ipaas.useIpaasNode }}
+      tolerations:
+        - key: {{ .Values.ipaas.tolerations.key }}
+          operator: "Equal"
+          value: {{ .Values.ipaas.tolerations.value }}
+          effect: "NoSchedule"
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ .Values.ipaas.affinity.matchExpressions.key }}
+                    operator: "In"
+                    values:
+                    - {{ .Values.ipaas.affinity.matchExpressions.value }}
+      {{- end }}
       containers:
       - name: {{ template "mysql.fullname" . }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
@@ -111,7 +127,7 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
-        {{- if .Values.configurationFiles }}
+        {{- if .Values.uploadedConfigfileDir }}
         - name: configurations
           mountPath: /etc/mysql/conf.d
         {{- end }}
@@ -156,7 +172,7 @@ spec:
 {{ toYaml .Values.metrics.resources | indent 10 }}
         {{- end }}
       volumes:
-      {{- if .Values.configurationFiles }}
+      {{- if .Values.uploadedConfigfileDir }}
       - name: configurations
         configMap:
           name: {{ template "mysql.fullname" . }}-configuration
