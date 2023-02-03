@@ -54,4 +54,9 @@ vs:
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
 logCollect: false
-    
+useGpu: false
+nodeAffinityPreset:
+  nodeSelectorTerms:
+    nvidiaComCudaDriverMajor: 455
+    nvidiaComCudaDriverMinor: 06
+    nvidiaComFamily: ampere

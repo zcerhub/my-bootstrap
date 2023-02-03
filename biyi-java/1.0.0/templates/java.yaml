@@ -95,6 +95,38 @@ spec:
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end }}
+      {{- if .Values.useGpu }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor }}
+              - key: nvidia.com/cuda.driver.major
+                operator: In
+                values:
+                  - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor }}
+              {{- end }}
+              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor }}
+              - key: nvidia.com/cuda.driver.minor
+                operator: In
+                values:
+                  - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor }}
+              {{- end }}
+              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily }}
+              - key: nvidia.com/gpu.family
+                operator: In
+                values:
+                  - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily }}
+              {{- end }}
+      {{- end }}
+      {{- if .Values.useGpu }}
+      tolerations:
+        - key: gpu
+          operator: "Equal"
+          value: true
+          effect: "NoSchedule"
+      {{- end }}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹
       volumes:
