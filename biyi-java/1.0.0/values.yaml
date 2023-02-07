@@ -57,6 +57,6 @@ logCollect: false
 useGpu: false
 nodeAffinityPreset:
   nodeSelectorTerms:
-    nvidiaComCudaDriverMajor: 455
-    nvidiaComCudaDriverMinor: 06
+    nvidiaComCudaDriverMajor: '455'
+    nvidiaComCudaDriverMinor: '06'
     nvidiaComFamily: ampere
