@@ -55,6 +55,10 @@ vs:
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
 logCollect: false
 useGpu: false
+gpu:
+  tolerations:
+    key: ai
+    value: biyi-aicapacity
 nodeAffinityPreset:
   nodeSelectorTerms:
     nvidiaComCudaDriverMajor: '455'

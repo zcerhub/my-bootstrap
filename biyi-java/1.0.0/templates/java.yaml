@@ -95,36 +95,37 @@ spec:
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end }}
-      {{- if .Values.useGpu }}
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor }}
-              - key: nvidia.com/cuda.driver.major
-                operator: "In"
-                values:
-                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor | quote }}
-              {{- end }}
-              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor }}
-              - key: nvidia.com/cuda.driver.minor
-                operator: "In"
-                values:
-                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor | quote }}
-              {{- end }}
-              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily }}
-              - key: nvidia.com/gpu.family
-                operator: "In"
-                values:
-                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily | quote }}
-              {{- end }}
-      {{- end }}
+#      因生产环境GPU机器没有这些lable，先暂时注解
+#      {{- if .Values.useGpu }}
+#      affinity:
+#        nodeAffinity:
+#          requiredDuringSchedulingIgnoredDuringExecution:
+#            nodeSelectorTerms:
+#            - matchExpressions:
+#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor }}
+#              - key: nvidia.com/cuda.driver.major
+#                operator: "In"
+#                values:
+#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor | quote }}
+#              {{- end }}
+#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor }}
+#              - key: nvidia.com/cuda.driver.minor
+#                operator: "In"
+#                values:
+#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor | quote }}
+#              {{- end }}
+#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily }}
+#              - key: nvidia.com/gpu.family
+#                operator: "In"
+#                values:
+#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily | quote }}
+#              {{- end }}
+#      {{- end }}
       {{- if .Values.useGpu }}
       tolerations:
-        - key: "gpu"
+        - key: {{ .Values.gpu.tolerations.key }}
           operator: "Equal"
-          value: "true"
+          value: {{ .Values.gpu.tolerations.value }}
           effect: "NoSchedule"
       {{- end }}
       {{- if .Values.skywalking.enabled }}
