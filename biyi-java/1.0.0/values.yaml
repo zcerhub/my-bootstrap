@@ -54,7 +54,7 @@ vs:
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
 logCollect: false
-useGpu: true
+useGpu: false
 gpu:
   resources:
     limits: {}
