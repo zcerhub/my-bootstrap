@@ -103,7 +103,7 @@ spec:
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end }}
-      {{- if .Values.useGpu }}
+      {{- if or .Values.useGpu }}
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -116,12 +116,12 @@ spec:
                 - {{ $val | quote }}
               {{- end }}
       {{- end }}
-      {{- if .Values.useGpu }}
+      {{- if or .Values.useGpu }}
       tolerations:
         {{- range $key, $val := .Values.gpu.tolerations }}
         - key: {{ $key }}
           operator: "Equal"
-          values: {{ $val | quote }}
+          value: {{ $val | quote }}
           effect: "NoSchedule"
         {{- end }}
       {{- end }}

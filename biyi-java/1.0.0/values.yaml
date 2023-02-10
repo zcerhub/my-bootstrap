@@ -58,7 +58,7 @@ useGpu: true
 gpu:
   resources:
     limits: {}
-
+#      nvidia.com/gpu: 1
   nodeAffinityPreset:
     nodeSelectorTerms: {}
 #      nvidiaComCudaDrivesrMajor: '455'
