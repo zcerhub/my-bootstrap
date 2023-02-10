@@ -54,13 +54,15 @@ vs:
     outsideContainerPort: 9000
     cookieRegex: ^(.*?; ?)?(version=code-server)(;.*)?$
 logCollect: false
-useGpu: false
+useGpu: true
 gpu:
-  tolerations:
-    key: ai
-    value: biyi-aicapacity
-nodeAffinityPreset:
-  nodeSelectorTerms:
-    nvidiaComCudaDriverMajor: '455'
-    nvidiaComCudaDriverMinor: '06'
-    nvidiaComFamily: ampere
+  resources:
+    limits: {}
+
+  nodeAffinityPreset:
+    nodeSelectorTerms: {}
+#      nvidiaComCudaDrivesrMajor: '455'
+#      nvidiaComCudaDriverMinor: '06'
+#      nvidiaComFamily: ampere
+  tolerations: {}
+#    ai: biyi-aicapacity

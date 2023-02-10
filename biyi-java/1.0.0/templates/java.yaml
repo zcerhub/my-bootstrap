@@ -71,7 +71,15 @@ spec:
               name: sky-agent-volume
           {{- end }}
           resources:
-{{- toYaml .Values.resources | nindent 12 }}
+            requests:
+{{- toYaml .Values.resources.requests | nindent 14 }}
+            limits:
+{{- if .Values.resources.limits }}
+{{- toYaml .Values.resources.limits | nindent 14 }}
+{{- end }}
+{{- if and .Values.useGpu .Values.gpu.resources.limits}}
+{{- toYaml .Values.gpu.resources.limits | nindent 14 }}
+{{- end }}
           ports:
           - containerPort: {{ .Values.java.containerPort }}   
           env:
@@ -95,38 +103,27 @@ spec:
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end }}
-#      因生产环境GPU机器没有这些lable，先暂时注解
-#      {{- if .Values.useGpu }}
-#      affinity:
-#        nodeAffinity:
-#          requiredDuringSchedulingIgnoredDuringExecution:
-#            nodeSelectorTerms:
-#            - matchExpressions:
-#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor }}
-#              - key: nvidia.com/cuda.driver.major
-#                operator: "In"
-#                values:
-#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMajor | quote }}
-#              {{- end }}
-#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor }}
-#              - key: nvidia.com/cuda.driver.minor
-#                operator: "In"
-#                values:
-#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComCudaDriverMinor | quote }}
-#              {{- end }}
-#              {{- if .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily }}
-#              - key: nvidia.com/gpu.family
-#                operator: "In"
-#                values:
-#                - {{ .Values.nodeAffinityPreset.nodeSelectorTerms.nvidiaComFamily | quote }}
-#              {{- end }}
-#      {{- end }}
+      {{- if .Values.useGpu }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              {{- range $key, $val := .Values.gpu.nodeAffinityPreset.nodeSelectorTerms }}
+              - key: {{ $key }}
+                operator: "In"
+                values:
+                - {{ $val | quote }}
+              {{- end }}
+      {{- end }}
       {{- if .Values.useGpu }}
       tolerations:
-        - key: {{ .Values.gpu.tolerations.key }}
+        {{- range $key, $val := .Values.gpu.tolerations }}
+        - key: {{ $key }}
           operator: "Equal"
-          value: {{ .Values.gpu.tolerations.value }}
+          values: {{ $val | quote }}
           effect: "NoSchedule"
+        {{- end }}
       {{- end }}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹
