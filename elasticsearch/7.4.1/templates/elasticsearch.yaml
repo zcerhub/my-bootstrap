@@ -11,7 +11,7 @@ spec:
       selfSignedCertificate:
         disabled: true  
   nodeSets:
-  - name: {{ .Release.Namespace | quote }}
+  - name: {{ .Values.nodeSets.name }}
     count: {{ .Values.nodeCount }}
     config:
       node.master: true
