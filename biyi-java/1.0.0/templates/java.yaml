@@ -71,7 +71,15 @@ spec:
               name: sky-agent-volume
           {{- end }}
           resources:
-{{- toYaml .Values.resources | nindent 12 }}
+            requests:
+{{- toYaml .Values.resources.requests | nindent 14 }}
+            limits:
+{{- if .Values.resources.limits }}
+{{- toYaml .Values.resources.limits | nindent 14 }}
+{{- end }}
+{{- if and .Values.useGpu .Values.gpu.resources.limits}}
+{{- toYaml .Values.gpu.resources.limits | nindent 14 }}
+{{- end }}
           ports:
           - containerPort: {{ .Values.java.containerPort }}   
           env:
@@ -95,6 +103,28 @@ spec:
           - name: JAVA_TOOL_OPTIONS
             value: "-javaagent:skywalking/agent/skywalking-agent.jar"
           {{- end }}
+      {{- if or .Values.useGpu }}
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              {{- range $key, $val := .Values.gpu.nodeAffinityPreset.nodeSelectorTerms }}
+              - key: {{ $key }}
+                operator: "In"
+                values:
+                - {{ $val | quote }}
+              {{- end }}
+      {{- end }}
+      {{- if or .Values.useGpu }}
+      tolerations:
+        {{- range $key, $val := .Values.gpu.tolerations }}
+        - key: {{ $key }}
+          operator: "Equal"
+          value: {{ $val | quote }}
+          effect: "NoSchedule"
+        {{- end }}
+      {{- end }}
       {{- if .Values.skywalking.enabled }}
       #Skywalking初始化agent空文件夹
       volumes:
