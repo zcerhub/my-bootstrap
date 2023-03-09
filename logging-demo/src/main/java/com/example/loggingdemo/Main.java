@@ -1,10 +1,8 @@
 package com.example.loggingdemo;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Main {
 
@@ -13,9 +11,14 @@ public class Main {
 		logger.info("hello, world!");
 	}*/
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		Log log = LogFactory.getLog(Main.class);
 		log.info("hello, world!");
+	}*/
+
+	public static void main(String[] args) {
+		Logger logger = LoggerFactory.getLogger(Main.class);
+		logger.info("hello, world!");
 	}
 
 }
