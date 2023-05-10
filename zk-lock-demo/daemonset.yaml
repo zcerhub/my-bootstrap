@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: yiyan-license-server
+  labels:
+    k8s-app: yiyan-license-server
+spec:
+  selector:
+    matchLabels:
+      name: yiyan-license-server
+  template:
+    metadata:
+      labels:
+        name: yiyan-license-server
+    spec:
+      tolerations:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/master
+          operator: Exists
+          effect: NoSchedule
+      containers:
+        - name: yiyan-license-server
+          image: quay.io/fluentd_elasticsearch/fluentd:v2.5.2
+          ports:
+            - containerPort: 8080

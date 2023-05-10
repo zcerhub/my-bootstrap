@@ -1,5 +1,0 @@
-apiVersion: v1
-appVersion: "7.4.1"
-description: A distributed search and analysis engine that provides near-real-time search and analysis for all types of data
-name: elasticsearch-7-4-1
-version: 22.3.4

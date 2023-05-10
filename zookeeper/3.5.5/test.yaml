@@ -1,6 +1,0 @@
-secrets:
- - name: test
-   keys:
-     - admin1
-     - admin123
-   mountPath: /

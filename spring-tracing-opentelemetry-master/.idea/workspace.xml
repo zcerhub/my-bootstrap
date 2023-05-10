@@ -1,0 +1,678 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="e337e83e-80d6-4921-b4cf-88d50cf0176a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/main/java/org/example/App.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/main/java/org/example/ConsumerDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/main/java/org/example/ConsumerDemo1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/main/java/org/example/HelloWorld.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/main/java/org/example/ProducerDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../kafka-demo/src/test/java/org/example/AppTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log4j-demo-gradle/src/main/java/com/example/log4jdemogradle/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log4j-demo-gradle/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log4j-demo/src/main/java/com/example/log4jdemo/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../log4j-demo/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logging-demo/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logging-demo/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../logging-demo/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mdc-demo/src/main/java/com/example/mdcdemo/TraceLogger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../mdc-demo/src/main/resources/log4j2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../otel-demo-httpserver/src/main/java/com/example/oteldemohttpserver/DemoController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../otel-demo-httpserver/src/main/java/com/example/oteldemohttpserver/ResourceController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CHANGELOG.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/templates/authorizationpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/templates/destinationrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/templates/java.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/templates/virtualservice.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-java/1.0.0/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/templates/authorizationpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/templates/destinationrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/templates/virtualservice.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/templates/web.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../biyi-web/1.0.0/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/templates/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/templates/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../code-server/4.0.2/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/templates/elasticsearch.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/templates/elasticsearchmonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../elasticsearch/7.4.1/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_affinities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_capabilities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_errors.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_images.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_ingress.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_labels.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_names.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_secrets.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_storage.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_tplvalues.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_utils.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/_warnings.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_cassandra.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_mariadb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_mongodb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_postgresql.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_redis.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/templates/validations/_validations.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/common/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_affinities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_capabilities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_errors.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_images.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_ingress.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_labels.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_names.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_secrets.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_storage.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_tplvalues.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_utils.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/_warnings.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_cassandra.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_mariadb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_mongodb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_postgresql.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_redis.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/templates/validations/_validations.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/charts/common/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/poddisruptionbudget.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/prometheusrules.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/svc-headless.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/templates/tls-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/charts/zookeeper/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/files/tls/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/jaas-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/jmx-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/jmx-metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/kafka-metrics-deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/kafka-metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/kafka-provisioning.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/log4j-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/poddisruptionbudget.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/scripts-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/servicemonitor-jmx-metrics.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/servicemonitor-metrics.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/svc-external-access.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/svc-headless.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/templates/tls-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kafka/2.8.1/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/templates/kibana-monitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/templates/kibana.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kibana/7.4.1/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../logging-demo/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../logging-demo/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../logging-demo/src/main/java/com/example/loggingdemo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../logging-demo/src/main/java/com/example/loggingdemo/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/OWNERS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/ci/distributed-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/_helper_create_bucket.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/post-install-create-bucket-job.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/pvc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../minio/2019-08-07T01-59-21Z/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/.values.yaml.swo" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/.values.yaml.swp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/OWNERS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/files/docker-entrypoint-initdb.d/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/deployment-standalone.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/initialization-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/poddisruptionbudget-arbiter-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/poddisruptionbudget-secondary-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/prometheus-alerting-rule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/prometheus-service-monitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/pvc-standalone.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/statefulset-arbiter-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/statefulset-primary-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/statefulset-secondary-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/svc-headless-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/svc-primary-rs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/templates/svc-standalone.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/values-production.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/values.schema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mongodb/4.4.2-debian-10-r0/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/configurationFiles-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/initializationFiles-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/pvc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/tests/test-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/templates/tests/test.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.28/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/configs/my.cnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/configurationFiles-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/initializationFiles-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/pvc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/tests/test-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/templates/tests/test.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-8.0.22/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/ci/values-production.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/configs/master.cnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/configs/slave.cnf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/files/docker-entrypoint-initdb.d/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/configuration-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/initialization-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/master-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/master-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/master-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/slave-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/slave-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/templates/slave-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/values-production.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mysql/5.7.32-mgr-8.0.22-mgr/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/LICENSE.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/certs/server.cert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/certs/server.key" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/pgadmin-0.1.9.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/publish.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/pvc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/values-bak.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../pgadmin/4.12/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/templates/configmapyml.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/templates/postgresql.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../postgresql/10/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/charts/common-1.10.4.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/ci/default-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/ci/tolerations-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/configuration.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/pdb.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/prometheusrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/svc-headless.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/tls-secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/values.schema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rabbitmq/3.9.8/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/metrics-prometheus.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-auth-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-master-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-sentinel-deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-sentinel-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-server-deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/redis-slave-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/tests/test-redis-master-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/tests/test-redis-sentinel-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/templates/tests/test-redis-slave-service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/4.0.8-sentinel/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/default-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/dev-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/extra-flags-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/production-sentinel-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/production-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/redis-lib-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/ci/redisgraph-module-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/headless-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/health-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/metrics-prometheus.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-master-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-master-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-slave-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-slave-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/redis-with-sentinel-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/templates/secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/values-production.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/5.0.12/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_affinities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_capabilities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_errors.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_images.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_ingress.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_labels.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_names.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_secrets.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_storage.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_tplvalues.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_utils.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/_warnings.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_cassandra.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_mariadb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_mongodb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_postgresql.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_redis.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/templates/validations/_validations.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/charts/common/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/configs/redis-default.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/img/redis-cluster-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/img/redis-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/headless-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/metrics-prometheus.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/poddisruptionbudget.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/prometheusrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/psp.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/redis-role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/redis-rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/redis-serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/redis-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/redis-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/scripts-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/svc-cluster-external-access.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/tls-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/templates/update-cluster.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-cluster/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_affinities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_capabilities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_errors.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_images.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_ingress.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_labels.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_names.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_secrets.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_storage.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_tplvalues.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_utils.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/_warnings.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_cassandra.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_mariadb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_mongodb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_postgresql.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_redis.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/templates/validations/_validations.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/charts/common/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/ci/extra-flags-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/ci/sentinel-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/ci/standalone-values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/configs/master.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/configs/redis.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/configs/replica.conf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/img/redis-cluster-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/img/redis-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/headless-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/health-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/master/psp.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/master/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/master/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/pdb.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/prometheusrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/replicas/hpa.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/replicas/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/replicas/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/scripts-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/sentinel/hpa.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/sentinel/node-services.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/sentinel/ports-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/sentinel/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/sentinel/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/templates/tls-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/values.schema.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/6.2.6-sentinel-6.2.6/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_affinities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_capabilities.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_errors.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_images.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_ingress.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_labels.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_names.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_secrets.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_storage.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_tplvalues.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_utils.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/_warnings.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_cassandra.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_mariadb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_mongodb.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_postgresql.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_redis.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/templates/validations/_validations.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/charts/common/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/img/redis-cluster-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/img/redis-topology.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/headless-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/metrics-prometheus.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/poddisruptionbudget.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/prometheusrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/psp.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/redis-role.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/redis-rolebinding.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/redis-serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/redis-statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/redis-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/scripts-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/svc-cluster-external-access.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/tls-secret.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/templates/update-cluster.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../redis/7.0.11/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/charts/common-1.10.1.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/ingress.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/rocketmq_v1alpha1_rocketmq_cluster.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/servicemonitor-metrics.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/templates/vs.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rocketmq/4.5.0/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/.helmignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/OWNERS" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/config-jmx-exporter.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/config-script.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/job-chroots.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/networkpolicy.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/poddisruptionbudget.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/service-headless.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/service.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/servicemonitors.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/test.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/values.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.5.5/zookeeper-2.1.0.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/Chart.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/Chart.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/charts/common-1.10.4.tgz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/NOTES.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/_helpers.tpl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/extra-list.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/metrics-svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/pdb.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/prometheusrule.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/scripts-configmap.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/serviceaccount.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/servicemonitor.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/statefulset.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/svc-headless.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/svc.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/templates/tls-secrets.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../zookeeper/3.7.0/values.yaml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2NgdrZM8RsbBK6gUNNaaQAumD04" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/code&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.UserServiceApplication">
+    <configuration name="EmailServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tracing.service.emails.EmailServiceApplication" />
+      <module name="email-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tracing.service.emails.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReportServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tracing.service.reports.ReportServiceApplication" />
+      <module name="report-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tracing.service.reports.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tracing.service.users.UserServiceApplication" />
+      <module name="user-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.tracing.service.users.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.ReportServiceApplication" />
+        <item itemvalue="Application.EmailServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e337e83e-80d6-4921-b4cf-88d50cf0176a" name="Changes" comment="" />
+      <created>1680089861090</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1680089861090</updated>
+    </task>
+    <servers />
+  </component>
+</project>

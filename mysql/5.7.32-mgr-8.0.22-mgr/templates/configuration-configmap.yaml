@@ -1,8 +1,0 @@
-{{- if .Values.uploadedConfigfileDir -}}
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: {{ .Release.Name }}-configuration
-data:
-{{  (.Files.Glob .Values.uploadedConfigfileDir).AsConfig | indent 2 }}
-{{- end -}}
