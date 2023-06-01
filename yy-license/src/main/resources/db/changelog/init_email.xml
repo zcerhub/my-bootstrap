@@ -1,0 +1,134 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="autoIncrement" value="false" dbms="oracle"/>
+    <property name="autoIncrement" value="false" dbms="mysql,mssql,h2,postgresql,sybase"/>
+    <property name="intType" value="bigint" dbms="postgresql"/>
+    <property name="intType" value="int(11)" dbms="mysql,mssql,h2,oracle,sybase,maridb"/>
+
+    <property name="longType" value="bigint" dbms="mysql,postgresql"/>
+    <property name="longType" value="number(19)" dbms="mssql,h2,oracle,sybase,maridb"/>
+
+    <changeSet author="ctsi (generated)" id="BASE-2022-1">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="email_msg"/>
+            </not>
+        </preConditions>
+
+        <createTable remarks="邮件失败信息表" tableName="email_msg">
+            <column name="ID" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="SUBJECT" remarks="邮件主题" type="VARCHAR(100)"/>
+            <column name="TEXT" remarks="邮件内容" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECEIVE_EMAIL" remarks="接收人" type="VARCHAR(600)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CC" remarks="抄送人" type="VARCHAR(600)"/>
+            <column name="CONTENT" remarks="备注信息" type="VARCHAR(100)"/>
+            <column defaultValueNumeric="0" name="RETRY_COUNT" remarks="重试次数" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_TYPE" remarks="接收类型 1-多人接收 2-单人接收" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EMAIL_TYPE" remarks="邮件类型 1-简单邮件 2-附件邮件" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_TIME" remarks="创建时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="UPDATE_TIME" remarks="更新时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="1" name="STATUS" remarks="邮件状态 1-需要重发 2-重发失败 3-重发成功" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="IS_DELETE" remarks="是否删除 0-未删除 1-已删除" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql dbms="mysql" >ALTER TABLE `email_msg` CONVERT TO CHARACTER SET UTF8;</sql>
+
+        <rollback>
+            <dropTable tableName="email_msg"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet author="ctsi (generated)" id="BASE-2022-2">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="email_send_log"/>
+            </not>
+        </preConditions>
+
+        <createTable remarks="邮件发送记录表" tableName="email_send_log">
+            <column name="ID" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="EMAIL_ID" remarks="邮件id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_RESULT" remarks="发送结果 1-成功 2-失败" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_TIME" remarks="创建时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SEND_TIME" remarks="发送时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="IS_DELETE" remarks="是否删除 0-未删除 1-已删除" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql dbms="mysql" >ALTER TABLE `email_send_log` CONVERT TO CHARACTER SET UTF8;</sql>
+
+        <rollback>
+            <dropTable tableName="email_send_log"/>
+        </rollback>
+    </changeSet>
+
+
+    <changeSet author="ctsi (generated)" id="BASE-2022-3">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="file_msg"/>
+            </not>
+        </preConditions>
+
+        <createTable remarks="邮件失败信息表" tableName="file_msg">
+            <column name="ID" type="VARCHAR(64)">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="EMAIL_ID" remarks="邮件id" type="VARCHAR(64)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BUCKET_NAME" remarks="附件桶名" type="VARCHAR(1000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_NAME" remarks="附件路径" type="VARCHAR(600)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATE_TIME" remarks="创建时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="IS_DELETE" remarks="是否删除 0-未删除 1-已删除" type="${intType}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <sql dbms="mysql" >ALTER TABLE `file_msg` CONVERT TO CHARACTER SET UTF8;</sql>
+
+        <rollback>
+            <dropTable tableName="file_msg"/>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>

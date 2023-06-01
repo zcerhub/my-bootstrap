@@ -1,0 +1,70 @@
+biyi:
+  code:
+    generator:
+      url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8
+      username: root
+      password: 123456
+      #需要生成的代码的数据库表名，多个数据库表可以用，分割
+      tableNames: biyi_user_login
+      #作者名称
+      auth: xxx
+      #是否生成swagger
+      swagger: true
+      #包配置
+      packageConfig:
+        #报名
+        parent: com.ctbiyi.user
+        entity: domain
+        mapper: repository
+        other: vo
+        xml: mapper.xml
+        #xml生成存放路径
+        xmlOutput: com/ctbiyi/user/repository
+      #模版配置
+      templateConfig:
+        entity: /templates/biyi/vm/entity.java
+        service: /templates/biyi/vm/service.java
+        serviceImpl: /templates/biyi/vm/serviceImpl.java
+        mapper: /templates/biyi/vm/mapper.java
+        xml: /templates/biyi/vm/mapper.xml
+        controller: /templates/biyi/vm/controllerVO.java
+      #策略配置
+      StrategyConfig:
+        enableCapitalMode: false
+        addTablePrefix: null
+        addTableSuffix: null
+        addFieldPrefix: null
+        addFieldSuffix: null
+        #entity配置
+        entityBuilder:
+          superClass: null
+          disableSerialVersionUID: false
+          enableColumnConstant: false
+          enableRemoveIsPrefix: false
+          enableLombok: false
+          enableFileOverride: false
+          formatFileName:
+        #controller配置
+        controllerBuilder:
+          superClass: com.ctbiyi.generator.controller.BaseController
+          #是否运行rest风格
+          enableRestStyle: true
+          enableFileOverride: false
+        #service配置
+        serviceBuilder:
+          superServiceClass: com.ctbiyi.generator.service.BaseService
+          superServiceImplClass: com.ctbiyi.generator.service.impl.BaseServiceImpl
+        mapperBuilder:
+          #s是否开启@mapper注解
+          enableMapperAnnotation: true
+          enableFileOverride: false
+     #vo配置
+      voConfig:
+        generator: true
+        suffix: VO
+        packageSuffix: vo
+        template: /templates/biyi/vm/vo.java.vm
+
+
+
+

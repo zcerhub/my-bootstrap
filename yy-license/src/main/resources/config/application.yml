@@ -1,0 +1,22 @@
+# ===================================================================
+# Standard Spring Boot properties.
+# Full reference is available at:
+# http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
+# ===================================================================
+
+spring:
+  application:
+    name: biyi
+  profiles:
+    active: dev
+
+# 配置actuator
+management:
+  server:
+    # actuator访问端口，不配置则使用server.port开启的端口（本系统对外开放的端口）
+#    port: 8888
+  endpoints:
+    web:
+      exposure:
+        # actuator暴露监控信息
+        include: "info,health,metrics,prometheus"

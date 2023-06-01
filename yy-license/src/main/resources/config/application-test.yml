@@ -1,0 +1,200 @@
+#spring
+spring:
+  datasource:
+    #数据库驱动
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #数据库连接
+    url: jdbc:mysql://localhost:3306/biyi
+    #数据库用户名
+    username: root
+    #数据库密码
+    password: 123456
+    #数据库连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      #最大连接池数
+      maximumPoolSize: 20
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  liquibase:
+    enabled: false
+    change-log: classpath:/db/changelog/master.xml
+  #redis 配置，需根据实际情况自行设置
+  redis:
+    host: xxx.xxx.xxx.xx
+    port: 6001
+    password: xxxxxxxx
+
+
+server:
+  port: 9004
+  error:
+    include-exception: true
+    #异常信息中是否包括message
+    include-message: always
+
+#mybatis-plus
+mybatis-plus:
+  global-config:
+    banner: false
+
+#knife4j增强
+knife4j:
+  # 开启增强配置
+  enable: true
+  # production为true，swagger与knife4j不能访问，页面将提示：You do not have permission to access this page
+  production: false
+  # 开启Swagger的Basic认证功能,默认是false
+  basic:
+    enable: false
+    # Basic认证用户名
+    username: test
+    # Basic认证密码
+    password: 123
+
+biyi:
+  user-service-url: xxx
+  token:
+    authentication:
+      jwt:
+        #token key密钥
+        secret: my-secret-token-to-change-in-production
+        #token失效时间，秒
+        token-validity-in-seconds: 86400
+        #rememberme token失效时间
+        token-validity-in-seconds-for-remember-me: 2592000
+        #SHA256 HS512
+        signature-algorithm: SHA256
+        issuer: testing@secure.istio.io
+        subject: testing@secure.istio.io
+        keyid: oyYwZSLCLVVPHdVp0jXIcLNpGn6dMCumlY-6wSenmFo
+        private-key: -----BEGIN RSA PRIVATE KEY-----
+          MIIEpAIBAAKCAQEAt1cKkQqPh8iOv5BhKh7Rx6A2+1ldpO/jczML/0GBKu4X+lHr
+          Y8YbJrt29jyAXlWM8vHC7tXsqgUG+WziRD0D8nhnh10XC14SeH+3mVuBqph+TqhX
+          TWsh9gtAIbeUHJjEI4I79QK4/wquPHHIGZBQDQQnuMh6vAS3VaUYJdEIoKvUBnAy
+          Y35kJZgyJSbrxLsEExL2zujUD/OY+/In2bq/3rFtDGNlgHyC7Gu2zXSXvfOA4O5m
+          9BBXOc7eEqj7PoOKNaTxLN3YcuRtgR6NIXL4KLb6oyvIzoeiprt4+9q7sc3Dnkc5
+          EV9kwWlEW2DHzhP6VYca0WXIIXc53U1AM3ewxwIDAQABAoIBABIKhaaqJF+XM7zU
+          B0uuxrPfJynqrFVbqcUfQ9H1bzF7Rm7CeuhRiUBxeA5Y+8TMpFcPxT/dWzGL1xja
+          RxWx715/zKg8V9Uth6HF55o2r/bKlLtGw3iBz1C34LKwrul1eu+HlEDS6MNoGKco
+          BynE0qvFOedsCu/Pgv7xhQPLow60Ty1uM0AhbcPgi6yJ5ksRB1XjtEnW0t+c8yQS
+          nU3mU8k230SdMhf4Ifud/5TPLjmXdFpyPi9uYiVdJ5oWsmMWEvekXoBnHWDDF/eT
+          VkVMiTBorT4qn+Ax1VjHL2VOMO5ZbXEcpbIc3Uer7eZAaDQ0NPZK37IkIn9TiZ21
+          cqzgbCkCgYEA5enHZbD5JgfwSNWCaiNrcBhYjpCtvfbT82yGW+J4/Qe/H+bY/hmJ
+          RRTKf0kVPdRwZzq7GphVMWIuezbOk0aFGhk/SzIveW8QpLY0FV/5xFnGNjV9AuNc
+          xrmgVshUsyQvr1TFkbdkC6yuvNgQfXfnbEoaPsXYEMCii2zqdF5lWGUCgYEAzCR2
+          6g8vEQx0hdRS5d0zD2/9IRYNzfP5oK0+F3KHH2OuwlmQVIo7IhCiUgqserXNBDef
+          hj+GNcU8O/yXLomAXG7VG/cLWRrpY8d9bcRMrwb0/SkNr0yNrkqHiWQ/PvR+2MLk
+          viWFZTTp8YizPA+8pSC/oFd1jkZF0UhKVAREM7sCgYB5+mfxyczFopyW58ADM7uC
+          g0goixXCnTuiAEfgY+0wwXVjJYSme0HaxscQdOOyJA1ml0BBQeShCKgEcvVyKY3g
+          ZNixunR5hrVbzdcgKAVJaR/CDuq+J4ZHYKByqmJVkLND4EPZpWSM1Rb31eIZzw2W
+          5FG8UBbr/GfAdQ6GorY+CQKBgQCzWQHkBmz6VG/2t6AQ9LIMSP4hWEfOfh78q9dW
+          MDdIO4JomtkzfLIQ7n49B8WalShGITwUbLDTgrG1neeQahsMmg6+X99nbD5JfBTV
+          H9WjG8CWvb+ZF++NhUroSNtLyu+6LhdaeopkbQVvPwMArG62wDu6ebv8v/5MrG8o
+          uwrUSwKBgQCxV43ZqTRnEuDlF7jMN+2JZWhpbrucTG5INoMPOC0ZVatePszZjYm8
+          LrmqQZHer2nqtFpyslwgKMWgmVLJTH7sVf0hS9po0+iSYY/r8e/c85UdUreb0xyT
+          x8whrOnMMODCAqu4W/Rx1Lgf2vXIx0pZmlt8Df9i2AVg/ePR6jO3Nw==
+          -----END RSA PRIVATE KEY-----
+        public-key: -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt1cKkQqPh8iOv5BhKh7R
+          x6A2+1ldpO/jczML/0GBKu4X+lHrY8YbJrt29jyAXlWM8vHC7tXsqgUG+WziRD0D
+          8nhnh10XC14SeH+3mVuBqph+TqhXTWsh9gtAIbeUHJjEI4I79QK4/wquPHHIGZBQ
+          DQQnuMh6vAS3VaUYJdEIoKvUBnAyY35kJZgyJSbrxLsEExL2zujUD/OY+/In2bq/
+          3rFtDGNlgHyC7Gu2zXSXvfOA4O5m9BBXOc7eEqj7PoOKNaTxLN3YcuRtgR6NIXL4
+          KLb6oyvIzoeiprt4+9q7sc3Dnkc5EV9kwWlEW2DHzhP6VYca0WXIIXc53U1AM3ew
+          xwIDAQAB
+          -----END PUBLIC KEY-----
+      cas:
+        #仅为示例demo
+        casServerUrlPrefix: https://cas.xxxx.cn/cas
+    #Feign DB
+    access-method: DB
+    #id role auth
+    content: id
+  auth:
+    password-check:
+      #密码过期时间，单位 月
+      expire-months: 3
+      #密码最小长度
+      check-min-length: 10
+      #密码最大长度
+      check-max-length: 20
+      #检查密码包含小写字母
+      check-lowercase: true
+      #检查密码包含大写字母
+      check-uppercase: true
+      #检查密码包含数字
+      check-digit: true
+      #检查密码包含键盘相邻字符
+      check-keyboard: true
+      #检查密码包含特殊字符
+      check-special-character: true
+    login:
+      #是否忽略双重认证
+      ignore-double-authentication: false
+      #管理员新增用户默认密码
+      defaultPassword: ww123@Ctsi
+      #双重登录认证，时间间隔配置
+      double-authentication-in-seconds: 86400
+    #用户初始化角色id
+    role:
+      baseRole: 2
+    #登录密码加密私钥与前端公钥搭配使用，上线时需要重新设置以防出现安全问题
+    RSA-prikey: MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALQmvU3NVRAxu6uRlPpGS3R5o+YfxM3oTbnyXa1kwmBUI/+wvigqOugpiY08GRJKIsoWv3DAmp96wx55/oKEZFReMboNfSjFBF7R/n9SfISb82JwnDP3HCRTfiBu6jVUH8QDZBnl2XWuP2JKyKoosrr9AWVW7OyVF0BdhkLv2+mvAgMBAAECgYA3q3D8ReNvaa7wycAbxvUyPRSk3FRYvNyoBXllR6m5Usb9EITyrHofnBZhipzExhwSDw2BrkMZ3TnGhTRc6MSHuQAnkI8g1yB/UJRLX752M+m/MBEm/xNEK4D1z1yIueGv8zxjKVdNw8o8WGJV0V2FMKWLWW/r6PfcUTGERQNIQQJBANv9O2q0cEB7lujyuYvFVTKzG6d+msrzSqZ6yNWQSqVfGy5W2KE39Bg9Iklg0nWg0hWjO+Kn+wQ2BuidlpXn+ykCQQDRpBRx2w6y7yPR8ZThpHPK8HL0ZKarf7oW7ZViAXspL3hhnMXSeq9oTMctdm1riCTlAeJ6Cu5Rk/K0sjLRFbEXAkEAooCGEoVlYgypZjxeWWQUUlZB+FEqUP60xxNuJWvn6A7AClP2w+iMNBd8q02NSXzZk0g4JW7Gms65/bzjDqsFOQJAUFqz+3AbkjpXYIFYr6R5PbAsX8C0ocezbFZki8xFiOPJIKEWsjaURUYokiRyjGUCv0SZqm3GKz6qKNik4b+OwQJAfynVAyHawEWB7laoDiKMk4rtX55TQdtzqmIlfI63wMCmtAByOauQp6YiUzht6I73C/wBQ7o49ys0RTU0LyDQuQ==
+  email:
+    host: smtp.chinatelecom.cn
+    port: 465
+    # 发件邮箱
+    username: xxxx@chinatelecom.cn
+    # 发件邮箱密码
+    password: xxxxx
+    # 是否支持发送失败重试 默认为false，若为true，则需要配置数据库表
+    retry: false
+    # 失败重试次数
+    retrycount: 3
+    # 是否支持分布式 默认为false
+    destribute: false
+    # minio文件存储配置信息
+    minioUrl: https://xxxxx
+    minioAccessKey: xxxxxxx
+    minioSecretKey: xxxxxxx
+  swagger:
+    # 接口分组信息
+    groupName: 接口信息
+    # 指定包路径下的接口
+    basePackage: com.ctbiyi
+    # pathRegex和path都不配置，会显示所有路径
+    # 过滤url路径-正则表达式(优先级高)，例如：/api/captcha/.*  多个路径使用竖线（|）进行分割，例如：/api/captcha/.*|/inner/authorities.*
+    pathRegex:
+    # 过滤url路径（优先级低）：需要使用通配符**，例如：/inner/**
+    path:
+    # 标题
+    title: 接口文档
+    # 接口版本
+    version: 1.0
+    # 接口描述
+    description: 比翼接口
+    # 支持同一路径，不同param的场景(但是swagger对此支持不太友好，使用该场景的系统，推荐使用knife4j)，默认为false
+    enableUrlTemplating: false
+    # 联系人信息
+    contact:
+      # 联系人姓名
+      name: biyi
+      # 联系人主页
+      url:
+      # 联系人邮箱
+      email:
+  captcha:
+    #验证码KEY策略
+    keyProvider: simpleCaptchaKeyProvider
+    #验证码组件缓存实现，提供两种实现，redis和基于guava的缓存，redis支持集群部署，guava只支持单机使用。可选值：guavaCaptchaCache，redisCaptchaCache
+    cache: redisCaptchaCache
+    # 拖拽验证码的坐标误差，默认为5
+    slipOffset: 5
+    #密码输错达到次数，锁定用户
+    bad-password-attempts: 5
+    #锁定时间，单位s
+    lockout-time: 3600
+    email:
+      availableTimes: 3

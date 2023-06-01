@@ -1,0 +1,3385 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.9.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <changeSet author="Lenovo (generated)" id="1661410545474-1">
+        <createTable tableName="biyi_org">
+            <column name="id" remarks="主键" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="org_name" remarks="组织名称" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_parent" remarks="组织父ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_path" remarks="组织路径" type="VARCHAR(255)"/>
+            <column name="org_leader" remarks="组织负责人" type="VARCHAR(255)"/>
+            <column name="org_leader_tel" remarks="负责人电话" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_order" remarks="排序" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted" remarks="0 正常 1删除" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-2">
+        <createTable tableName="biyi_permission">
+            <column name="id" remarks="主键" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="perm_name" remarks="权限名" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_parent" remarks="父权限" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_url" remarks="接口地址" type="VARCHAR(255)"/>
+            <column name="perm_type" remarks="权限类型" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_code" remarks="权限编码" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_path" remarks="页面路由" type="VARCHAR(255)"/>
+            <column name="perm_method" remarks="请求方式" type="CHAR(20)"/>
+            <column name="perm_order" remarks="排序" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_icon" remarks="权限图标" type="VARCHAR(255)"/>
+            <column name="deleted" remarks="是否删除 1 表所删除 0表所未删除" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_sign" remarks="子应用标识" type="VARCHAR(255)"/>
+            <column name="perm_des" remarks="描述" type="VARCHAR(255)"/>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-3">
+        <createTable tableName="biyi_role">
+            <column name="id" remarks="主键" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_name" remarks="角色名" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_code" remarks="角色编码" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_path" remarks="路径" type="VARCHAR(255)"/>
+            <column defaultValueNumeric="0" name="parent_id" remarks="父id" type="BIGINT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="remark" remarks="备注信息" type="VARCHAR(255)"/>
+            <column name="status" remarks="0为启用，1为禁用" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="default_role" remarks="是否为默认角色，0为否，1为是" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-4">
+        <createTable tableName="biyi_role_permission">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="perm_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_empower" remarks="是否可授权权限，0为不可授权，1为可授权" type="INT"/>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="indeterminate1" type="INT"/>
+            <column name="indeterminate2" type="INT"/>
+            <column name="is_select" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-5">
+        <createTable tableName="biyi_user">
+            <column name="id" remarks="主键" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="account" remarks="账号" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" remarks="密码" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="realname" remarks="真实姓名" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gender" remarks="性别  1 男 2 女" type="INT"/>
+            <column name="email" remarks="邮箱" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" remarks="联系方式" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" remarks="状态 0正常  1禁用  2删除 3待审批 4不通过 5已锁定" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apply_time" remarks="申请加入时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="join_time" remarks="审核通过时间" type="datetime"/>
+            <column name="update_time" remarks="更新时间" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-6">
+        <createTable tableName="biyi_user_extend">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="image" remarks="头像" type="VARCHAR(255)"/>
+            <column name="birthday" remarks="生日" type="date"/>
+            <column name="position" remarks="职位" type="INT"/>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="disable_time" remarks="用户禁用时间" type="datetime"/>
+            <column name="lock_time" remarks="用户锁定时间" type="datetime"/>
+            <column name="user_from" remarks="用户来源 0 自建 1管理员新增" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apply_remark" remarks="用户审核备注" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-7">
+        <createTable tableName="biyi_user_login">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="login_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-8">
+        <createTable tableName="biyi_user_org">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="org_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_major" remarks="0 是 主要所属组织  1是挂职" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-10">
+        <createTable tableName="biyi_user_role">
+            <column defaultValueNumeric="0" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_by" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column name="update_time" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueNumeric="0" name="deleted" remarks="是否删除" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-16">
+        <insert tableName="biyi_org">
+            <column name="id" valueNumeric="1"/>
+            <column name="org_name" value="数智"/>
+            <column name="org_parent" valueNumeric="0"/>
+            <column name="org_path" value=",1,"/>
+            <column name="org_leader"/>
+            <column name="org_leader_tel" value="123"/>
+            <column name="org_order" valueNumeric="0"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="create_by" valueNumeric="0"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-10T03:24:45"/>
+            <column name="update_time" valueDate="2022-07-07T06:47:24.846"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-17">
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1"/>
+            <column name="perm_name" value="系统管理"/>
+            <column name="perm_parent" valueNumeric="0"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="header"/>
+            <column name="perm_code" value="system"/>
+            <column name="perm_path" value="/user-system/user"/>
+            <column name="perm_method"/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value="md-settings"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des"/>
+            <column name="create_by" valueNumeric="0"/>
+            <column name="update_by" valueNumeric="0"/>
+            <column name="create_time" valueDate="2022-06-23T04:38:19"/>
+            <column name="update_time" valueDate="2022-06-23T04:38:19"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513093063876610"/>
+            <column name="perm_name" value="用户管理"/>
+            <column name="perm_parent" valueNumeric="1"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="user"/>
+            <column name="perm_path" value="/user-system/user"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value="md-person-add"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:38:19"/>
+            <column name="update_time" valueDate="2022-06-23T04:38:19"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513251755368450"/>
+            <column name="perm_name" value="新增用户"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.add"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:38:57"/>
+            <column name="update_time" valueDate="2022-06-23T04:38:57"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513350367649794"/>
+            <column name="perm_name" value="编辑用户"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.update"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:39:20"/>
+            <column name="update_time" valueDate="2022-06-23T04:39:20"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513437944717314"/>
+            <column name="perm_name" value="审批用户"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.apply"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:39:41"/>
+            <column name="update_time" valueDate="2022-06-23T04:39:41"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513540021493761"/>
+            <column name="perm_name" value="查询用户"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.find"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:40:05"/>
+            <column name="update_time" valueDate="2022-06-23T04:40:05"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539513879210663938"/>
+            <column name="perm_name" value="修改用户状态"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.status"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="6"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:41:26"/>
+            <column name="update_time" valueDate="2022-06-23T04:41:26"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514236296929281"/>
+            <column name="perm_name" value="角色管理"/>
+            <column name="perm_parent" valueNumeric="1"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="role.roleList"/>
+            <column name="perm_path" value="/user-system/role"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value="md-person"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:42:51"/>
+            <column name="update_time" valueDate="2022-06-23T04:42:51"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514485853822977"/>
+            <column name="perm_name" value="分配用户"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="module"/>
+            <column name="perm_code" value="role.roleList.user"/>
+            <column name="perm_path" value="/user-system/assign-user"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:43:51"/>
+            <column name="update_time" valueDate="2022-06-23T04:43:51"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514572235513858"/>
+            <column name="perm_name" value="新建角色"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.add"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:44:11"/>
+            <column name="update_time" valueDate="2022-06-23T04:44:11"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514645438701569"/>
+            <column name="perm_name" value="编辑角色"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.update"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:44:29"/>
+            <column name="update_time" valueDate="2022-06-23T04:44:29"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514890549633026"/>
+            <column name="perm_name" value="停用角色"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.disable"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:45:27"/>
+            <column name="update_time" valueDate="2022-06-23T04:45:27"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539514956224045058"/>
+            <column name="perm_name" value="启用角色"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.enable"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="6"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:45:43"/>
+            <column name="update_time" valueDate="2022-06-23T04:45:43"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515429769355265"/>
+            <column name="perm_name" value="组织管理"/>
+            <column name="perm_parent" valueNumeric="1"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="org.orgList"/>
+            <column name="perm_path" value="/user-system/organization"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value="ios-people"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:47:36"/>
+            <column name="update_time" valueDate="2022-06-23T04:47:36"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515506277654529"/>
+            <column name="perm_name" value="新增组织"/>
+            <column name="perm_parent" valueNumeric="1539515429769355265"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="org.orgList.add"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:47:54"/>
+            <column name="update_time" valueDate="2022-06-23T04:47:54"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515586409832449"/>
+            <column name="perm_name" value="删除组织"/>
+            <column name="perm_parent" valueNumeric="1539515429769355265"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="org.orgList.delete"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:48:13"/>
+            <column name="update_time" valueDate="2022-06-23T04:48:13"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515678843904001"/>
+            <column name="perm_name" value="编辑组织"/>
+            <column name="perm_parent" valueNumeric="1539515429769355265"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="org.orgList.update"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:48:35"/>
+            <column name="update_time" valueDate="2022-06-23T04:48:35"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515856892108802"/>
+            <column name="perm_name" value="权限管理"/>
+            <column name="perm_parent" valueNumeric="1"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="perm.permList"/>
+            <column name="perm_path" value="/user-system/authority"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value="md-unlock"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:49:18"/>
+            <column name="update_time" valueDate="2022-06-23T04:49:18"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539515957916114946"/>
+            <column name="perm_name" value="权限新增"/>
+            <column name="perm_parent" valueNumeric="1539515856892108802"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="perm.permList.add"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:49:42"/>
+            <column name="update_time" valueDate="2022-06-23T04:49:42"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539516017471037442"/>
+            <column name="perm_name" value="权限修改"/>
+            <column name="perm_parent" valueNumeric="1539515856892108802"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="perm.permList.update"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:49:56"/>
+            <column name="update_time" valueDate="2022-06-23T04:49:56"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539516084642816001"/>
+            <column name="perm_name" value="权限删除"/>
+            <column name="perm_parent" valueNumeric="1539515856892108802"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="perm.permList.delete"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:50:12"/>
+            <column name="update_time" valueDate="2022-06-23T04:50:12"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539516151323860993"/>
+            <column name="perm_name" value="权限详情"/>
+            <column name="perm_parent" valueNumeric="1539515856892108802"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="perm.permList.detail"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T04:50:28"/>
+            <column name="update_time" valueDate="2022-07-20T17:25:33.796"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539875655789969409"/>
+            <column name="perm_name" value="用户列表-重置密码"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.resetPwd"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="10"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T04:39:01"/>
+            <column name="update_time" valueDate="2022-06-24T04:39:01"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539894344727883778"/>
+            <column name="perm_name" value="分配角色"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.assign"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="11"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T05:53:16"/>
+            <column name="update_time" valueDate="2022-06-24T05:53:16"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539895133743575042"/>
+            <column name="perm_name" value="查询用户列表"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.find"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="9"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T05:56:24"/>
+            <column name="update_time" valueDate="2022-06-24T05:56:24"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1539897072673845249"/>
+            <column name="perm_name" value="角色授权"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.power"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="10"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T06:04:07"/>
+            <column name="update_time" valueDate="2022-06-24T06:04:07"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1540152476934782978"/>
+            <column name="perm_name" value="分配用户-添加用户"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.user.assign"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="11"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T22:59:00"/>
+            <column name="update_time" valueDate="2022-06-24T22:59:00"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1540153006805401601"/>
+            <column name="perm_name" value="分配用户-取消授权"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="role.roleList.user.cancel"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="12"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T23:01:06"/>
+            <column name="update_time" valueDate="2022-06-24T23:01:06"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1540266235913203713"/>
+            <column name="perm_name" value="业务子应用"/>
+            <column name="perm_parent" valueNumeric="0"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="header"/>
+            <column name="perm_code" value="meeting"/>
+            <column name="perm_path" value="/meeting/meeting-list"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value="ios-calendar"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T22:31:02.062"/>
+            <column name="update_time" valueDate="2022-06-24T22:31:02.062"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1540266429539053569"/>
+            <column name="perm_name" value="会议管理"/>
+            <column name="perm_parent" valueNumeric="1540266235913203713"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="meeting-list"/>
+            <column name="perm_path" value="/meeting/meeting-list"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value="ios-calendar"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T22:31:48.225"/>
+            <column name="update_time" valueDate="2022-07-09T04:48:26.649"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1540284667085852673"/>
+            <column name="perm_name" value="典型页面"/>
+            <column name="perm_parent" valueNumeric="0"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="header"/>
+            <column name="perm_code" value="typical-page"/>
+            <column name="perm_path" value="/typical-page/form-basics"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value="md-book"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T23:44:16.396"/>
+            <column name="update_time" valueDate="2022-06-24T23:44:16.396"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541298247457452033"/>
+            <column name="perm_name" value="会议新增"/>
+            <column name="perm_parent" valueNumeric="1540266429539053569"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="meeting-list-add"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T18:51:52.788"/>
+            <column name="update_time" valueDate="2022-06-27T18:51:52.788"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541298381532573697"/>
+            <column name="perm_name" value="会议编辑"/>
+            <column name="perm_parent" valueNumeric="1540266429539053569"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="meeting-list-update"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T18:52:24.753"/>
+            <column name="update_time" valueDate="2022-06-27T18:52:24.753"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541298548096774145"/>
+            <column name="perm_name" value="删除会议"/>
+            <column name="perm_parent" valueNumeric="1540266429539053569"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="meeting-list-delete"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T18:53:04.465"/>
+            <column name="update_time" valueDate="2022-06-27T18:53:04.465"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541697842704420866"/>
+            <column name="perm_name" value="表单"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical.form"/>
+            <column name="perm_path" value="/typical/form1"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value="ios-paper"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T21:19:43.803"/>
+            <column name="update_time" valueDate="2022-06-28T21:19:43.803"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541698089019117570"/>
+            <column name="perm_name" value="基础表单"/>
+            <column name="perm_parent" valueNumeric="1541697842704420866"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.form-basics"/>
+            <column name="perm_path" value="/typical-page/form-basics"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T21:20:42.445"/>
+            <column name="update_time" valueDate="2022-06-28T21:20:42.445"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541698404074262530"/>
+            <column name="perm_name" value="步骤表单"/>
+            <column name="perm_parent" valueNumeric="1541697842704420866"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.form-step"/>
+            <column name="perm_path" value="/typical-page/form-step"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T21:21:57.559"/>
+            <column name="update_time" valueDate="2022-06-28T21:21:57.559"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541708065536380930"/>
+            <column name="perm_name" value="结果页面"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="result"/>
+            <column name="perm_path" value="/typical-page/result"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value="md-checkmark-circle"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:00:21.036"/>
+            <column name="update_time" valueDate="2022-06-28T17:00:21.036"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541708740404088833"/>
+            <column name="perm_name" value="高级表单"/>
+            <column name="perm_parent" valueNumeric="1541697842704420866"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.form-higher"/>
+            <column name="perm_path" value="/typical-page/form-higher"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:03:01.933"/>
+            <column name="update_time" valueDate="2022-06-28T17:03:01.933"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541709207402090497"/>
+            <column name="perm_name" value="成功"/>
+            <column name="perm_parent" valueNumeric="1541708065536380930"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.success"/>
+            <column name="perm_path" value="/typical-page/success"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:04:53.274"/>
+            <column name="update_time" valueDate="2022-06-28T17:04:53.274"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541709347802222594"/>
+            <column name="perm_name" value="失败"/>
+            <column name="perm_parent" valueNumeric="1541708065536380930"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.fail"/>
+            <column name="perm_path" value="/typical-page/fail"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:05:26.748"/>
+            <column name="update_time" valueDate="2022-06-28T17:05:26.748"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541709526882226177"/>
+            <column name="perm_name" value="登录"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.loginPage"/>
+            <column name="perm_path" value="/typical-page/loginPage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="6"/>
+            <column name="perm_icon" value="md-home"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:06:09.444"/>
+            <column name="update_time" valueDate="2022-06-28T17:06:09.444"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541709766481842177"/>
+            <column name="perm_name" value="登录-居中"/>
+            <column name="perm_parent" valueNumeric="1541709526882226177"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.login-ui"/>
+            <column name="perm_path" value="/typical-page/login-ui"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:07:06.569"/>
+            <column name="update_time" valueDate="2022-06-28T17:07:06.569"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541716501737148417"/>
+            <column name="perm_name" value="站内信"/>
+            <column name="perm_parent" valueNumeric="1"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="message"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value=""/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T17:33:52.379"/>
+            <column name="update_time" valueDate="2022-06-28T17:33:52.379"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541942017179426817"/>
+            <column name="perm_name" value="新建会议"/>
+            <column name="perm_parent" valueNumeric="1540266235913203713"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="meeting.list.addRoute"/>
+            <column name="perm_path" value="/meeting/meeting-add"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="0"/>
+            <column name="perm_icon" value="ios-clock"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T08:29:59.457"/>
+            <column name="update_time" valueDate="2022-06-29T08:29:59.457"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541959726839537666"/>
+            <column name="perm_name" value="登录-居右"/>
+            <column name="perm_parent" valueNumeric="1541709526882226177"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.login-ui-right"/>
+            <column name="perm_path" value="/typical-page/login-ui-right"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:40:21.762"/>
+            <column name="update_time" valueDate="2022-06-29T09:40:21.762"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541960272333938689"/>
+            <column name="perm_name" value="列表"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.list"/>
+            <column name="perm_path" value="/typical-page/list"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="7"/>
+            <column name="perm_icon" value="ios-menu"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:42:31.817"/>
+            <column name="update_time" valueDate="2022-06-29T09:42:31.817"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541960533794267137"/>
+            <column name="perm_name" value="搜索列表"/>
+            <column name="perm_parent" valueNumeric="1541960272333938689"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.search"/>
+            <column name="perm_path" value="/typical-page/search"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:43:34.155"/>
+            <column name="update_time" valueDate="2022-06-29T09:43:34.155"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541960810513473537"/>
+            <column name="perm_name" value="左树右表"/>
+            <column name="perm_parent" valueNumeric="1541960272333938689"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.leftTreeRT"/>
+            <column name="perm_path" value="/typical-page/left-tree-right-table"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:44:40.13"/>
+            <column name="update_time" valueDate="2022-06-29T09:44:40.13"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541961207835697154"/>
+            <column name="perm_name" value="卡片列表"/>
+            <column name="perm_parent" valueNumeric="1541960272333938689"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.cardList"/>
+            <column name="perm_path" value="/typical-page/card-list"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:46:14.858"/>
+            <column name="update_time" valueDate="2022-06-29T09:46:14.859"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541961381723152386"/>
+            <column name="perm_name" value="图文列表"/>
+            <column name="perm_parent" valueNumeric="1541960272333938689"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.imgTextList"/>
+            <column name="perm_path" value="/typical-page/img-text-list"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:46:56.317"/>
+            <column name="update_time" valueDate="2022-06-29T09:46:56.317"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541961580247949314"/>
+            <column name="perm_name" value="详情"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.detail"/>
+            <column name="perm_path" value="/typical-page/detail"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="8"/>
+            <column name="perm_icon" value="md-document"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:47:43.649"/>
+            <column name="update_time" valueDate="2022-06-29T09:47:43.649"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541961780156866561"/>
+            <column name="perm_name" value="高级详情"/>
+            <column name="perm_parent" valueNumeric="1541961580247949314"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.advanced"/>
+            <column name="perm_path" value="/typical-page/advanced"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:48:31.31"/>
+            <column name="update_time" valueDate="2022-06-29T09:48:31.31"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962002081685505"/>
+            <column name="perm_name" value="首页"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.firstPage"/>
+            <column name="perm_path" value="/typical-page/firstPage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value="ios-stats"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:49:24.222"/>
+            <column name="update_time" valueDate="2022-06-29T09:49:24.222"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962140036538369"/>
+            <column name="perm_name" value="主控台"/>
+            <column name="perm_parent" valueNumeric="1541962002081685505"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.console-main"/>
+            <column name="perm_path" value="/typical-page/console-main"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:49:57.113"/>
+            <column name="update_time" valueDate="2022-06-29T09:49:57.113"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962306953060354"/>
+            <column name="perm_name" value="工作台"/>
+            <column name="perm_parent" valueNumeric="1541962002081685505"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.workbench"/>
+            <column name="perm_path" value="/typical-page/workbench"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="0"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:50:36.909"/>
+            <column name="update_time" valueDate="2022-06-29T09:50:36.909"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962540185722881"/>
+            <column name="perm_name" value="个人"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.person"/>
+            <column name="perm_path" value="/typical-page/person"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="10"/>
+            <column name="perm_icon" value="md-person"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:51:32.516"/>
+            <column name="update_time" valueDate="2022-06-29T09:51:32.516"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962697866387458"/>
+            <column name="perm_name" value="个人设置页"/>
+            <column name="perm_parent" valueNumeric="1541962540185722881"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.setting"/>
+            <column name="perm_path" value="/typical-page/setting"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:52:10.11"/>
+            <column name="update_time" valueDate="2022-06-29T09:52:10.11"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541962801335672833"/>
+            <column name="perm_name" value="个人中心"/>
+            <column name="perm_parent" valueNumeric="1541962540185722881"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.center"/>
+            <column name="perm_path" value="/typical-page/center"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:52:34.778"/>
+            <column name="update_time" valueDate="2022-06-29T09:52:34.778"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963067145494530"/>
+            <column name="perm_name" value="权限管理"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.permissionManage"/>
+            <column name="perm_path" value="/typical-page/permissionManage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="11"/>
+            <column name="perm_icon" value="md-unlock"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:53:38.152"/>
+            <column name="update_time" valueDate="2022-06-29T09:53:38.152"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963265238278146"/>
+            <column name="perm_name" value="角色权限管理"/>
+            <column name="perm_parent" valueNumeric="1541963067145494530"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.role-manage"/>
+            <column name="perm_path" value="/typical-page/role-manage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:54:25.381"/>
+            <column name="update_time" valueDate="2022-06-29T09:54:25.381"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963452497174530"/>
+            <column name="perm_name" value="组织架构管理"/>
+            <column name="perm_parent" valueNumeric="1541963067145494530"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.organization-manage"/>
+            <column name="perm_path" value="/typical-page/organization-manage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:55:10.028"/>
+            <column name="update_time" valueDate="2022-06-29T09:55:10.028"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963608051326978"/>
+            <column name="perm_name" value="菜单权限管理"/>
+            <column name="perm_parent" valueNumeric="1541963067145494530"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.menu-manage"/>
+            <column name="perm_path" value="/typical-page/menu-manage"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:55:47.115"/>
+            <column name="update_time" valueDate="2022-06-29T09:55:47.115"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963842848464897"/>
+            <column name="perm_name" value="弹窗&amp;提示"/>
+            <column name="perm_parent" valueNumeric="1540284667085852673"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.modal-message"/>
+            <column name="perm_path" value="/typical-page/modal-message"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="12"/>
+            <column name="perm_icon" value="md-alert"/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:56:43.095"/>
+            <column name="update_time" valueDate="2022-06-29T09:56:43.095"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1541963932103254018"/>
+            <column name="perm_name" value="弹窗"/>
+            <column name="perm_parent" valueNumeric="1541963842848464897"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="typical-page.modal"/>
+            <column name="perm_path" value="/typical-page/modal"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="typical-page"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T09:57:04.375"/>
+            <column name="update_time" valueDate="2022-06-29T09:57:04.375"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1542040441863766018"/>
+            <column name="perm_name" value="会议详情"/>
+            <column name="perm_parent" valueNumeric="1540266429539053569"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="module"/>
+            <column name="perm_code" value="meeting.meeting-detail"/>
+            <column name="perm_path" value="/meeting/meeting-detail"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T15:01:05.723"/>
+            <column name="update_time" valueDate="2022-06-29T15:01:05.723"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1549639673907916802"/>
+            <column name="perm_name" value="用户禁用"/>
+            <column name="perm_parent" valueNumeric="1539513093063876610"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="user.userList.disable"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="11"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1546391376963497985"/>
+            <column name="update_by" valueNumeric="1546391376963497985"/>
+            <column name="create_time" valueDate="2022-07-20T14:17:43.832"/>
+            <column name="update_time" valueDate="2022-07-20T14:17:43.832"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1549649340834934786"/>
+            <column name="perm_name" value="删除角色"/>
+            <column name="perm_parent" valueNumeric="1539514236296929281"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="module"/>
+            <column name="perm_code" value="role.roleList.delete"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="10"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1546391376963497985"/>
+            <column name="update_by" valueNumeric="1546391376963497985"/>
+            <column name="create_time" valueDate="2022-07-20T14:56:08.605"/>
+            <column name="update_time" valueDate="2022-07-20T14:56:08.605"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1549672966393036801"/>
+            <column name="perm_name" value="查询组织"/>
+            <column name="perm_parent" valueNumeric="1539515429769355265"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="button"/>
+            <column name="perm_code" value="org.orgList.search"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1545366255087837186"/>
+            <column name="update_by" valueNumeric="1545366255087837186"/>
+            <column name="create_time" valueDate="2022-07-20T16:30:01.377"/>
+            <column name="update_time" valueDate="2022-07-20T16:31:18.565"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1549676487259611138"/>
+            <column name="perm_name" value="组织列表"/>
+            <column name="perm_parent" valueNumeric="1539515429769355265"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="module"/>
+            <column name="perm_code" value="org.orgList.tree"/>
+            <column name="perm_path" value=""/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="0"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-07-20T16:44:00.819"/>
+            <column name="update_time" valueDate="2022-07-20T16:44:00.819"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1553998959198912514"/>
+            <column name="perm_name" value="信息管理"/>
+            <column name="perm_parent" valueNumeric="1540266235913203713"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="1001"/>
+            <column name="perm_path" value="/meeting/test"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="meeting"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-02T03:59:58.435"/>
+            <column name="update_time" valueDate="2022-08-02T23:43:40.014"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1554345849882984449"/>
+            <column name="perm_name" value="演示项目"/>
+            <column name="perm_parent" valueNumeric="0"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="header"/>
+            <column name="perm_code" value="demo0"/>
+            <column name="perm_path" value="/demo1"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-03T02:58:23.619"/>
+            <column name="update_time" valueDate="2022-08-11T21:24:38.632"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1554345979205959682"/>
+            <column name="perm_name" value="页面1"/>
+            <column name="perm_parent" valueNumeric="1554345849882984449"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="demo-page1"/>
+            <column name="perm_path" value="/app1/demo-page1"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value="md-book"/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-03T02:58:54.452"/>
+            <column name="update_time" valueDate="2022-08-11T21:24:29.558"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1554346067936460801"/>
+            <column name="perm_name" value="页面2"/>
+            <column name="perm_parent" valueNumeric="1554345849882984449"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="demo-page2"/>
+            <column name="perm_path" value="/app1/demo-page2"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="2"/>
+            <column name="perm_icon" value="md-book"/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-03T02:59:15.607"/>
+            <column name="update_time" valueDate="2022-08-11T21:24:31.403"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1554660021233565697"/>
+            <column name="perm_name" value="页面3"/>
+            <column name="perm_parent" valueNumeric="1554345849882984449"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="demo-page3"/>
+            <column name="perm_path" value="/demo-page3"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="3"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-03T23:46:47.905"/>
+            <column name="update_time" valueDate="2022-08-11T21:24:33.074"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1554660371038519297"/>
+            <column name="perm_name" value="页面4"/>
+            <column name="perm_parent" valueNumeric="1554345849882984449"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="demo-page4"/>
+            <column name="perm_path" value="/demo-page4"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="4"/>
+            <column name="perm_icon" value=""/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-03T23:48:11.306"/>
+            <column name="update_time" valueDate="2022-08-11T21:24:35.072"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1558980835116961793"/>
+            <column name="perm_name" value="微服务"/>
+            <column name="perm_parent" valueNumeric="0"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="header"/>
+            <column name="perm_code" value="demo-page1"/>
+            <column name="perm_path" value="/app1/demo-page1"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value="ios-cloud"/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-15T21:56:10.216"/>
+            <column name="update_time" valueDate="2022-08-20T05:55:18.297"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1558980958689546241"/>
+            <column name="perm_name" value="应用"/>
+            <column name="perm_parent" valueNumeric="1558980835116961793"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="/app1/demo-page1"/>
+            <column name="perm_path" value="/app1/demo-page1"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="1"/>
+            <column name="perm_icon" value="md-code-working"/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="app1"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-15T21:56:39.674"/>
+            <column name="update_time" valueDate="2022-08-20T05:55:16.383"/>
+        </insert>
+        <insert tableName="biyi_permission">
+            <column name="id" valueNumeric="1562004505478238210"/>
+            <column name="perm_name" value="测试管理"/>
+            <column name="perm_parent" valueNumeric="1539515856892108802"/>
+            <column name="perm_url" value=""/>
+            <column name="perm_type" value="sider"/>
+            <column name="perm_code" value="user1"/>
+            <column name="perm_path" value="/user-system/user"/>
+            <column name="perm_method" value=""/>
+            <column name="perm_order" valueNumeric="5"/>
+            <column name="perm_icon" value="md-person-add"/>
+            <column name="deleted" valueNumeric="1"/>
+            <column name="perm_sign" value="user-system"/>
+            <column name="perm_des" value=""/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-24T06:11:09.404"/>
+            <column name="update_time" valueDate="2022-08-24T06:12:07.771"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-18">
+        <insert tableName="biyi_role">
+            <column name="id" valueNumeric="1"/>
+            <column name="role_name" value="超级管理员"/>
+            <column name="role_code" value="admin"/>
+            <column name="parent_path" value="1,"/>
+            <column name="parent_id" valueNumeric="0"/>
+            <column name="create_by" valueNumeric="0"/>
+            <column name="update_by" valueNumeric="0"/>
+            <column name="create_time" valueDate="2022-06-21T04:45:33"/>
+            <column name="update_time" valueDate="2022-06-21T04:45:33"/>
+            <column name="remark"/>
+            <column name="status" valueNumeric="0"/>
+            <column name="default_role" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role">
+            <column name="id" valueNumeric="2"/>
+            <column name="role_name" value="基础角色"/>
+            <column name="role_code" value="base_role"/>
+            <column name="parent_path"/>
+            <column name="parent_id" valueNumeric="0"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-25T04:06:50.739"/>
+            <column name="update_time" valueDate="2022-08-25T04:06:50.739"/>
+            <column name="remark" value=""/>
+            <column name="status" valueNumeric="0"/>
+            <column name="default_role" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-19">
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396095148034"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396095148035"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513093063876610"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396103536642"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513251755368450"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396103536643"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513350367649794"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396103536644"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513437944717314"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396107730947"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513540021493761"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396107730950"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539513879210663938"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396107730951"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514236296929281"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396116119553"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514485853822977"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396116119554"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514572235513858"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396116119555"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514645438701569"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396116119556"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514890549633026"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396116119557"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539514956224045058"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396124508161"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515429769355265"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396124508162"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515506277654529"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396124508166"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515586409832449"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396124508167"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515678843904001"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396124508168"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515856892108802"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396132896771"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539515957916114946"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396132896772"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539516017471037442"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539794396132896773"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539516084642816001"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T07:16:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539814425654108161"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539516151323860993"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T08:35:42"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539814425654108162"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539875655789969409"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T08:35:42"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539901851466690562"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539894344727883778"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T14:23:06"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539901851466690563"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539895133743575042"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T14:23:06"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539901852842422273"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1539897072673845249"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T14:23:06"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1539901852859199490"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1540152476934782978"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-24T14:23:06"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541237166252904449"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1540153006805401601"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T22:49:09"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541237166252904450"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1540266235913203713"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T22:49:09"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541237166454231043"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1540266429539053569"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-27T22:49:09"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541265199881961474"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1540284667085852673"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T00:40:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541294528867217410"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541298247457452033"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T02:37:06"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541294533048938497"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541298381532573697"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T02:37:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541294533048938498"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541298548096774145"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T02:37:07"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541325077438685188"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541697842704420866"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T04:38:29"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541325502208434179"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541698089019117570"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T04:40:10"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350179681755137"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541698404074262530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180927463425"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541708065536380930"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180931657731"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541708740404088833"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180935852034"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541709207402090497"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180935852035"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541709347802222594"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180948434945"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541709526882226177"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180948434946"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541709766481842177"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350180948434947"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541716501737148417"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:14"/>
+            <column name="update_time" valueDate="2022-06-28T19:43:30"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350308383973377"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541942017179426817"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:45"/>
+            <column name="update_time" valueDate="2022-06-29T23:14:19"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350308400750594"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541959726839537666"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:45"/>
+            <column name="update_time" valueDate="2022-06-29T23:14:19"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541350308400750595"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541960272333938689"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-28T01:18:45"/>
+            <column name="update_time" valueDate="2022-06-29T23:14:19"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541698563277459458"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541960533794267137"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T05:22:35"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541698563281653762"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541960810513473537"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T05:22:35"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541698563281653763"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541961207835697154"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T05:22:35"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541962871095336961"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541961381723152386"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T17:52:51"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1541962871099531266"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541961580247949314"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T17:52:51"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032402502877185"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541961780156866561"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:29:08"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757483601922"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962002081685505"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757651374081"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962140036538369"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757743648769"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962306953060354"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757747843074"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962540185722881"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757752037378"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962697866387458"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757752037379"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541962801335672833"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757756231681"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963067145494530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757756231682"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963265238278146"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757760425985"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963452497174530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757760425986"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963608051326978"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757764620289"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963842848464897"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757768814593"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1541963932103254018"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757768814594"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1542040441863766018"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757773008898"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1549639673907916802"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757777203202"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1549649340834934786"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757777203203"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1549672966393036801"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757781397506"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1549676487259611138"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757785591810"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1553998959198912514"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757785591811"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1554345849882984449"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757789786113"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1554345979205959682"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757789786114"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1554346067936460801"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757793980417"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1554660021233565697"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757793980418"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1554660371038519297"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757798174721"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1558980835116961793"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757798174722"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1558980958689546241"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1542032757802369025"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="perm_id" valueNumeric="1562004505478238210"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-29T22:30:33"/>
+            <column name="update_time" valueDate="2022-06-29T23:01:28"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094018"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1540266235913203713"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094019"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1540266429539053569"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094020"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541298247457452033"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094021"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541298381532573697"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094022"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541298548096774145"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094023"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1542040441863766018"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094024"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541942017179426817"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094025"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1540284667085852673"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094026"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541697842704420866"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094027"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541698089019117570"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094028"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541698404074262530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094029"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541708740404088833"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094030"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541708065536380930"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.623"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094031"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541709207402090497"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094032"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541709347802222594"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094033"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541709526882226177"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094034"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541709766481842177"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094035"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541959726839537666"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094036"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541960272333938689"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094037"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541960533794267137"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094038"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541960810513473537"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094039"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541961207835697154"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094040"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541961381723152386"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094041"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541961580247949314"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094042"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541961780156866561"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094043"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962002081685505"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094044"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962140036538369"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094045"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962306953060354"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094046"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962540185722881"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094047"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962697866387458"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094048"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541962801335672833"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094049"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963067145494530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094050"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963265238278146"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094051"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963452497174530"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094052"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963608051326978"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094053"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963842848464897"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+        <insert tableName="biyi_role_permission">
+            <column name="id" valueNumeric="1562682100395094054"/>
+            <column name="role_id" valueNumeric="2"/>
+            <column name="perm_id" valueNumeric="1541963932103254018"/>
+            <column name="is_empower" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="update_time" valueDate="2022-08-26T03:03:40.624"/>
+            <column name="indeterminate1" valueNumeric="0"/>
+            <column name="indeterminate2" valueNumeric="0"/>
+            <column name="is_select" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-20">
+        <insert tableName="biyi_user">
+            <column name="id" valueNumeric="1"/>
+            <column name="account" value="admin"/>
+            <column name="password" value="$2a$10$F0H5KbAXhzoml9tR7imKzuab.jE6DUBTXIVd/seJIKPHtgQfZABei"/>
+            <column name="realname" value="admin"/>
+            <column name="gender" valueNumeric="0"/>
+            <column name="email" value="143@qq.com"/>
+            <column name="phone" value="18234568766"/>
+            <column name="status" valueNumeric="0"/>
+            <column name="apply_time" valueDate="2022-05-14T13:44:13"/>
+            <column name="join_time" valueDate="2022-05-14T13:44:19"/>
+            <column name="update_time" valueDate="2022-07-08T22:57:52.083"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-21">
+        <insert tableName="biyi_user_login">
+            <column name="id" valueNumeric="1539176769593176065"/>
+            <column name="user_id" valueNumeric="1"/>
+            <column name="login_time" valueDate="2022-08-25T23:01:05.048"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-22">
+        <insert tableName="biyi_user_org">
+            <column name="id" valueNumeric="1"/>
+            <column name="user_id" valueNumeric="1"/>
+            <column name="org_id" valueNumeric="1"/>
+            <column name="is_major" valueNumeric="0"/>
+            <column name="create_by" valueNumeric="0"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-23T03:07:33"/>
+            <column name="update_time" valueDate="2022-07-08T22:57:52.095"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Lenovo (generated)" id="1661410545474-23">
+        <insert tableName="biyi_user_role">
+            <column name="id" valueNumeric="1535109084760686593"/>
+            <column name="user_id" valueNumeric="1"/>
+            <column name="role_id" valueNumeric="1"/>
+            <column name="create_by" valueNumeric="1"/>
+            <column name="update_by" valueNumeric="1"/>
+            <column name="create_time" valueDate="2022-06-11T00:58:21"/>
+            <column name="update_time" valueDate="2022-06-11T00:58:21"/>
+            <column name="deleted" valueNumeric="0"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
