@@ -90,9 +90,9 @@ public class OutboundAutoConfiguration {
         }
 
         @Bean
-        @ConditionalOnProperty(value = "feign.sentinel.enabled", havingValue = "true"
-                , matchIfMissing = true)
         @ConditionalOnMissingBean(OutboundApiFallbackFactory.class)
+        @ConditionalOnProperty(name = "outbound-gateway-sdk.remoting.http.feign.default-fuse.enable",
+                havingValue = "true",matchIfMissing = true)
         public DefaultOutboundApiFallbackFactory defaultOutboundApiFallbackFactory() {
             return new DefaultOutboundApiFallbackFactory();
         }
