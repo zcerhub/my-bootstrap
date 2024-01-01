@@ -1,33 +1,46 @@
 #server:
 #  port: 13133
-#aaa: bbb
-outbound-gateway-sdk:
-  remoting:
-    http:
-      enabled: true
-      feign:
-        enabled: true
-#        name: aaaa
-        url: localhost:11113
-        default-retryer:
-          enable: false
-          max-period: 1000
-          max-attempts: 12
-          period: 100
-        default-fuse:
-          enable: false
+##aaa: bbb
+#outbound-gateway-sdk:
+#  remoting:
+#    http:
+#      enabled: true
+#      feign:
+#        enabled: true
+##        name: aaaa
+#        url: localhost:11113
+#        default-retryer:
+#          enable: true
+#          max-period: 1000
+#          max-attempts: 12
+#          period: 100
+#        default-fuse:
+#          enable: true
+#      request:
+#        httpMethod: GET
+#        httpPath: hellosdk
+#    flow-limit:
+#      default:
+#        enabled: true
+#        flow-rule:
+#          grade: 1
+#          count: 5
+#          control-behavior: 0
 ##      request-config:
 ##        connectTimeout: 1000
 ##        socketTimeout: 1000
-#      request:
-#        httpMethod: POST
-#        httpPath: hellosdk
 #  request-interceptor:
 #    sys-header:
 #      enable: true
+##
+###  okhttp:
+###    enabled: true
+#feign:
+#  sentinel:
+#    enabled: true
 #
-##  okhttp:
-##    enabled: true
-feign:
-  sentinel:
-    enabled: true
+#spring:
+#  cloud:
+#    sentinel:
+#      transport:
+#        dashboard: localhost:18888   #sentinel控制台的请求地址

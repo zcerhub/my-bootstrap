@@ -1,11 +1,12 @@
 package com.dap.outboundSdk;
 
 
+import cn.hutool.core.util.ObjectUtil;
 import com.dap.gateway.client.OutboundNetworkClient;
 import com.dap.gateway.client.http.OutboundHttpClient;
 import com.dap.gateway.intercept.RequestInterceptor;
 import com.dap.gateway.intercept.request.ObjectHeaderRequestInterceptor;
-import com.dap.gateway.remoting.http.OutboundRestOperations;
+import com.dap.gateway.remoting.http.*;
 import com.dap.gateway.remoting.http.feign.DefaultOutboundFeignRestOperations;
 import com.dap.gateway.remoting.http.feign.OutboundFeignRestOperations;
 import com.dap.gateway.remoting.http.feign.fault.DefaultOutboundApiFallbackFactory;
@@ -13,19 +14,23 @@ import com.dap.gateway.remoting.http.feign.fault.OutboundApiFallbackFactory;
 import com.dap.gateway.remoting.http.feign.fault.OutboundFeignRetry;
 import com.dap.gateway.request.http.HttpRequest;
 import com.dap.gateway.request.http.HttpRequestConfig;
-import com.dap.outboundSdk.entity.DefaultRetryer;
 import feign.Retryer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.FeignClientsConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 
 import java.util.List;
 
+@AutoConfigureAfter(FeignClientsConfiguration.class)
 @Configuration
 @ConditionalOnClass(OutboundNetworkClient.class)
 @EnableConfigurationProperties({OutboundClientHttpRequestConfigProperties.class,
@@ -33,17 +38,18 @@ import java.util.List;
         OutboundClientHttpFeignConfigProperties.class})
 public class OutboundAutoConfiguration {
 
-
     @Autowired
     private OutboundClientHttpFeignConfigProperties outboundClientHttpFeignConfigProperties;
 
+    @Autowired
+    private OutboundClientHttpRequestProperties outboundClientHttpRequestProperties;
 
     @Configuration
     @ConditionalOnClass(OutboundHttpClient.class)
     @ConditionalOnMissingBean(OutboundNetworkClient.class)
     @ConditionalOnProperty(value = "outbound-gateway-sdk.remoting.http.enabled",
             havingValue = "true", matchIfMissing = true)
-    public class OutboundHttpClientConfiguration {
+    public  class OutboundHttpClientConfiguration {
 
         @Autowired(required = false)
         private List<RequestInterceptor> requestInterce;
@@ -53,11 +59,6 @@ public class OutboundAutoConfiguration {
 
         @Autowired
         private OutboundClientHttpRequestConfigProperties outboundClientHttpRequestConfigProperties;
-
-        @Autowired
-        private OutboundClientHttpRequestProperties outboundClientHttpRequestProperties;
-
-
 
         @Bean
         public OutboundNetworkClient outboundNetworkClient() {
@@ -90,6 +91,7 @@ public class OutboundAutoConfiguration {
         }
 
         @Bean
+        @Order(Ordered.LOWEST_PRECEDENCE)
         @ConditionalOnMissingBean(OutboundApiFallbackFactory.class)
         @ConditionalOnProperty(name = "outbound-gateway-sdk.remoting.http.feign.default-fuse.enable",
                 havingValue = "true",matchIfMissing = true)
@@ -98,19 +100,21 @@ public class OutboundAutoConfiguration {
         }
 
 
-        @Bean
-        @ConditionalOnMissingBean(Retryer.class)
-        @ConditionalOnProperty(name = "outbound-gateway-sdk.remoting.http.feign.default-retryer.enable",
-                havingValue = "true",matchIfMissing = true)
-        public Retryer outboundFeignRetry(){
-            DefaultRetryer outBounddefaultRetryer = outboundClientHttpFeignConfigProperties.getDefaultRetryer();
-            return new OutboundFeignRetry(outBounddefaultRetryer.getPeriod(),
-                    outBounddefaultRetryer.getMaxPeriod(),outBounddefaultRetryer.getMaxAttempts());
-        }
-
-
     }
 
+
+    @Bean
+    @ConditionalOnMissingBean(Retryer.class)
+    @ConditionalOnProperty(name = "outbound-gateway-sdk.remoting.http.feign.default-retryer.enable",
+            havingValue = "true",matchIfMissing = true)
+    public Retryer outboundFeignRetry(){
+        DefaultRetryer outBounddefaultRetryer = outboundClientHttpFeignConfigProperties.getDefaultRetryer();
+        if (ObjectUtil.isNull(outBounddefaultRetryer)) {
+            return new OutboundFeignRetry();
+        }
+        return new OutboundFeignRetry(outBounddefaultRetryer.getPeriod(),
+                outBounddefaultRetryer.getMaxPeriod(),outBounddefaultRetryer.getMaxAttempts());
+    }
 
 
 
