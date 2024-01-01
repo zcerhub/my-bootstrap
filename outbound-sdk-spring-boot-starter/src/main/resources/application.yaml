@@ -1,0 +1,28 @@
+#server:
+#  port: 13133
+#aaa: bbb
+outbound-gateway-sdk:
+  remoting:
+    http:
+      enabled: true
+      feign:
+        enabled: true
+#        name: aaaa
+        url: localhost:11113
+        default-retryer:
+          enable: true
+          max-period: 1000
+          max-attempts: 12
+          period: 100
+##      request-config:
+##        connectTimeout: 1000
+##        socketTimeout: 1000
+#      request:
+#        httpMethod: POST
+#        httpPath: hellosdk
+#  request-interceptor:
+#    sys-header:
+#      enable: true
+#
+##  okhttp:
+##    enabled: true
