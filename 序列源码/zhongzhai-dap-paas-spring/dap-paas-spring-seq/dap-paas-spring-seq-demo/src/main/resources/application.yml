@@ -1,0 +1,29 @@
+server:
+  port: 8086
+
+####序列SDK相关配置
+gientech:
+  dap:
+  #序列配置
+    sequence:
+     #sdk名称
+      clientName: seq-demo
+     # 集群名称
+      seqClusterName: seq-cluster
+     # 集群下所有server的地址信息
+      urls: 127.0.0.1:8111
+    #租户编号
+      tenantId: 391312369558487040
+      refreshTime: 'off'
+      readTimeout: 30000
+####分布式管控鉴权相关配置
+dmc:
+  dmcUrl: http://22.21.112.56:9003/prod-api/
+  appinfo:
+    accessid: a1d00843-36e4-4205-b9a1-00e2fd14f83d
+    accessac: k4swlrfODAW8RGlHaphDo/uud05z4m3VuCo10VLVBnLSH:BnztBRxWVGx73BJci0ZKMHWGWCV1XZxdSPfTPQ==
+    tenantid: default-tech
+    appname: PaasConsole
+    on-off: on
+
+  

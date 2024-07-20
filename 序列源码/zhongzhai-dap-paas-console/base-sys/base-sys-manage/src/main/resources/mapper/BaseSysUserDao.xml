@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysUser">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysUser" id="BaseSysUserMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="account" column="account" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="birthday" column="birthday" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="salt" column="salt" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="isDelete" column="is_delete" jdbcType="VARCHAR"/>
+        <result property="address" column="address" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="idCast" column="id_cast" jdbcType="VARCHAR"/>
+        <result property="companyId" column="company_id" jdbcType="VARCHAR"/>
+        <result property="orgId" column="dept_id" jdbcType="VARCHAR"/>
+        <result property="companyOrgName" column="companyOrgName" jdbcType="VARCHAR"/>
+        <result property="orgName" column="orgName" jdbcType="VARCHAR"/>
+        <result property="entryDate" column="entry_date" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_ip" jdbcType="VARCHAR"/>
+        <result property="isLock" column="is_lock" jdbcType="VARCHAR"/>
+        <result property="errorCount" column="error_count" jdbcType="INTEGER"/>
+        <result property="lastErrorDate" column="last_error_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, account, sex, birthday, name, salt, password, email, phone, status, is_delete,  address, create_user_id,
+             create_date, update_user_id,update_date, user_ip,nick_name,id_cast,entry_date,dept_id,company_id,tenant_id,
+             is_lock,error_count,last_error_date
+    </sql>
+    <sql id="Base_Column2">
+        SELECT  A4.id, A4.account,A4.sex,A4.birthday,A4.NAME,A4.email,A4.phone, A4.STATUS, A4.is_delete,  A4.address,A4.create_user_id,
+                A4.create_date,  A4.update_user_id, A4.update_date,  A4.user_ip,A4.nick_name, A4.id_cast, A4.entry_date, A4.company_id, A4.companyOrgName, A4.dept_id, A3.orgName
+    </sql>
+    <sql id="Sql_link">
+        FROM
+        (
+        SELECT
+        A1.id,
+        A1.account,
+        A1.sex,
+        A1.birthday,
+        A1.NAME,
+        A1.salt,
+        A1.PASSWORD,
+        A1.email,
+        A1.phone,
+        A1.STATUS,
+        A1.is_delete,
+        A1.address,
+        A1.create_user_id,
+        A1.create_date,
+        A1.update_user_id,
+        A1.update_date,
+        A1.user_ip,
+        A1.nick_name,
+        A1.id_cast,
+        A1.dept_id,
+        A1.entry_date,
+        A1.company_id,
+        A2.companyOrgName
+        FROM
+        base_sys_user  A1
+        LEFT JOIN (
+        SELECT
+        simple_name  companyOrgName,
+        id  company_id
+        FROM
+        base_sys_org
+        )  A2 ON A1.company_id = A2.company_id
+        )  A4
+        LEFT JOIN (
+        SELECT
+        simple_name  orgName,
+        id  dept_id
+        FROM
+        base_sys_org
+        )  A3 ON A4.dept_id = A3.dept_id
+    </sql>
+    <!--查询单个 -->
+    <select id="getObjectById" parameterType="string"  resultMap="BaseSysUserMap">
+        select
+            id, account, sex, birthday, name, salt, password, email, phone, status, is_delete,  address, create_user_id, create_date, update_user_id,update_date, user_ip,nick_name,id_cast,entry_date,dept_id,company_id,tenant_id
+        from base_sys_user
+        where id = #{id}
+          and is_delete !='1'
+    </select>
+
+
+
+    <!--查询单个 -->
+    <select id="getByAccount" parameterType="string"  resultMap="BaseSysUserMap">
+        select
+        id, account, sex, birthday, name, salt, password, email, phone, status, is_delete,  address, create_user_id, create_date, update_user_id,update_date, user_ip,nick_name,id_cast,entry_date,dept_id,company_id,tenant_id,is_lock,error_count,last_error_date
+        from base_sys_user
+        <where>
+            <if test="account != null and account != ''">
+                and account = #{account,jdbcType=VARCHAR}
+            </if>
+            and is_delete='0'
+        </where>
+    </select>
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="BaseSysUserMap">
+        select
+        id, account, sex, birthday, name, salt, password, email, phone, status, is_delete,  address, create_user_id, create_date, update_user_id,update_date, user_ip,nick_name,id_cast,entry_date,dept_id,company_id,tenant_id
+        from base_sys_user
+        <where>
+            <if test="account != null and account != ''">
+                and account like concat (concat('%', #{account,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="name != null and name != ''">
+                and name like concat(concat('%', #{name,jdbcType=VARCHAR}),'%')
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="getObjectByMap" parameterType="java.util.HashMap" resultMap="BaseSysUserMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_user
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="birthday != null and birthday != ''">
+                and birthday = #{birthday}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="salt != null and salt != ''">
+                and salt = #{salt}
+            </if>
+            <if test="password != null and password != ''">
+                and password = #{password}
+            </if>
+            <if test="email != null and email != ''">
+                and email = #{email}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="address != null and address != ''">
+                and address = #{address}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                and nick_name = #{userIp}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            and is_delete !='1'
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.BaseSysUser">
+        insert into base_sys_user(<include refid="Base_Column"/>)
+        values (#{id},#{account}, #{sex}, #{birthday}, #{name}, #{salt}, #{password}, #{email}, #{phone}, #{status}, #{isDelete},  #{address}, #{createUserId}, #{createDate},#{updateUserId}, #{updateDate}, #{userIp},#{nickName}, #{idCast}, #{entryDate}, #{orgId}, #{companyId},#{tenantId}, #{isLock}, #{errorCount},#{lastErrorDate})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.base.sys.api.entity.BaseSysUser">
+        update base_sys_user
+        <set>
+            <if test="account != null and account != ''">
+                account = #{account},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="birthday != null and birthday != ''">
+                birthday = #{birthday},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt = #{salt},
+            </if>
+            <if test="password != null and password != ''">
+                password = #{password},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                is_delete = #{isDelete},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="userIp != null and userIp != ''">
+                user_ip = #{userIp},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nick_name = #{nickName},
+            </if>
+            <if test="idCast != null">
+                id_cast = #{idCast},
+            </if>
+            <if test="entryDate != null and entryDate != ''">
+                entry_date = #{entryDate},
+            </if>
+            <if test="companyId != null">
+                company_id = #{companyId},
+            </if>
+            <if test="orgId != null and orgId != ''">
+                dept_id = #{orgId},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="isLock != null and isLock != ''">
+                is_lock = #{isLock},
+            </if>
+
+            <if test="errorCount != null and errorCount != ''">
+                error_count = #{errorCount},
+            </if>
+
+            <if test="lastErrorDate != null">
+                last_error_date = #{lastErrorDate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from base_sys_user where id = #{id}
+    </delete>
+
+    <delete id="delObjectByIds" parameterType="string">
+        delete from base_sys_user where id in
+        <foreach collection="idList" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectAccountTotal"  resultType="java.lang.Integer" >
+        select count(1) FROM base_sys_user  where account = #{account}
+    </select>
+</mapper>

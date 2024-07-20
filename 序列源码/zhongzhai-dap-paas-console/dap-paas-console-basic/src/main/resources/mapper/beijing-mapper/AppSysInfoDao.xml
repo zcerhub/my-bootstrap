@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dap.paas.console.basic.entity.beijing.AppSysInfo">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.dap.paas.console.basic.entity.beijing.AppSysInfo" id="appSysInfoMap">
+        <result property="id" column="id"/>
+        <result property="organizationName" column="name"/>
+        <result property="organizationCode" column="sys_code"/>
+        <result property="creDate" column="cre_date" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="cre_user"/>
+        <result property="updDate" column="upd_date" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="upd_user"/>
+        <result property="tenantId" column="tenant_id"/>
+    </resultMap>
+
+
+    <!--保存-->
+    <insert id="saveObject">
+        insert into
+        <include refid="table-name"/>
+        (
+        <include refid="add-column"/>
+        )
+        values
+        (
+        <include refid="add-attribute"/>
+        )
+    </insert>
+
+
+
+    <!--根据id进行更新-->
+    <update id="updateObject">
+        update
+        <include refid="table-name"/>
+        <set>
+            <include refid="set-column"/>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--根据id删除-->
+    <update id="delObjectById">
+        update
+        <include refid="table-name"/>
+        set de_flag=1
+        where id=#{id}
+    </update>
+
+    <!--根据id 进行批量删除-->
+    <update id="deleteByIds">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update
+            <include refid="table-name"/>
+            set de_flag=1
+            where id=#{item}
+        </foreach>
+    </update>
+
+
+
+    <!-- where not null condition -->
+    <sql id="where-nn">
+        <if test="id != null and id!=''">
+            and id = #{id}
+        </if>
+        <if test="organizationName != null and organizationName!=''">
+            and name like concat('%',#{organizationName},'%')
+        </if>
+        <if test="organizationCode != null and organizationCode!=''">
+            and sys_code = #{organizationCode}
+        </if>
+        <if test="creDate != null and creDate!=''">
+            and cre_date = #{creDate}
+        </if>
+        <if test="createUserId != null and createUserId!=''">
+            and cre_user = #{createUserId}
+        </if>
+        <if test="updDate != null and updDate!=''">
+            and upd_date = #{updDate}
+        </if>
+        <if test="updateUserId != null and updateUserId!=''">
+            and upd_user = #{updateUserId}
+        </if>
+        <if test="tenantId != null and tenantId!=''">
+            and tenant_id = #{tenantId}
+        </if>
+    </sql>
+    <!-- all db table field -->
+    <sql id="table-all-field">
+        <trim suffixOverrides=",">
+            id,
+            name,
+            sys_code,
+            cre_date,
+            cre_user,
+            upd_date,
+            upd_user,
+            tenant_id,
+        </trim>
+    </sql>
+    <!-- update not null field -->
+    <sql id="set-column">
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                id = #{id},
+            </if>
+            <if test="organizationName != null and organizationName!=''">
+                name =#{organizationName},
+            </if>
+            <if test="organizationCode != null and organizationCode!=''">
+                sys_code = #{organizationCode},
+            </if>
+            <if test="creDate != null and creDate!=''">
+                cre_date = #{creDate},
+            </if>
+            <if test="createUserId != null and createUserId!=''">
+                cre_user = #{createUserId},
+            </if>
+            <if test="updDate != null and updDate!=''">
+                upd_date = #{updDate},
+            </if>
+            <if test="updateUserId != null and updateUserId!=''">
+                upd_user = #{updateUserId},
+            </if>
+            <if test="tenantId != null and tenantId!=''">
+                tenant_id = #{tenantId},
+            </if>
+        </trim>
+    </sql>
+    <!-- add not null object attribute -->
+    <sql id="add-attribute">
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                #{id},
+            </if>
+            <if test="organizationName != null and organizationName!=''">
+                #{organizationName},
+            </if>
+            <if test="organizationCode != null and organizationCode!=''">
+                #{organizationCode},
+            </if>
+            <if test="creDate != null and creDate!=''">
+                #{creDate},
+            </if>
+            <if test="createUserId != null and createUserId!=''">
+                #{createUserId},
+            </if>
+            <if test="updDate != null and updDate!=''">
+                #{updDate},
+            </if>
+            <if test="updateUserId != null and updateUserId!=''">
+                #{updateUserId},
+            </if>
+            <if test="tenantId != null and tenantId!=''">
+                #{tenantId},
+            </if>
+        </trim>
+    </sql>
+    <!-- add not null table fields -->
+    <sql id="add-column">
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                id,
+            </if>
+            <if test="organizationName != null and organizationName!=''">
+                name,
+            </if>
+            <if test="organizationCode != null and organizationCode!=''">
+                sys_code,
+            </if>
+            <if test="creDate != null and creDate!=''">
+                cre_date,
+            </if>
+            <if test="createUserId != null and createUserId!=''">
+                cre_user,
+            </if>
+            <if test="updDate != null and updDate!=''">
+                upd_date,
+            </if>
+            <if test="updateUserId != null and updateUserId!=''">
+                upd_user,
+            </if>
+            <if test="tenantId != null and tenantId!=''">
+                tenant_id,
+            </if>
+        </trim>
+    </sql>
+    <!-- 表名-->
+    <sql id="table-name">
+        app_sys_info
+    </sql>
+</mapper>

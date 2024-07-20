@@ -1,0 +1,57 @@
+server:
+  port: 8111
+#  tomcat:
+#    max-keep-alive-requests: 1
+#    connection-timeout: 1ms
+#    keep-alive-timeout: 1ms
+#    threads:
+#      max: 0
+#      min-spare: 0
+
+#logging:
+#  level:
+#    root: info
+
+spring:
+  application:
+    name: seq-cluster
+
+#数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://10.64.15.100:3306/paas_dev?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: Esb#2021
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+#序列规则刷新Corn
+gientech:
+  dap:
+    sequence:
+      alertPushUrl: http://22.21.112.62:9612/sync/alert
+      apiKey: e10adc3949ba59abbe56e057f2gg88dd%20
+      appKey: hbdlcsb0vnujh0egyqnrxjlzgq79vq4f
+      refreshRule: 0 0/1 * * * ?
+      registerTime: off
+      refreshTime: off
+    #序列启动初始化开关
+      start:
+        init: off
+    #序列缓存异步刷新Corn
+      cache:
+        async: 0 0/1 * * * ?
+      serviceNodeIp:
+#线程池配置
+#    product:
+#      threadpool:
+#        corePoolSize: 10
+#        maxPoolSize: 100
+#        queueCapacity: 20
+#        keepAliveSeconds: 10
+
+
+dmc:
+  dmcUrl: http://22.21.28.168:9086  #管控平台url

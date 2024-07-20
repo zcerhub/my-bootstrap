@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.TenantManageEntity">
+    <resultMap id="BaseResultMap" type="com.base.sys.api.entity.TenantManageEntity">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="tenantCompany" column="tenant_company" jdbcType="VARCHAR"/>
+        <result property="tenantMail" column="tenant_mail" jdbcType="VARCHAR"/>
+        <result property="tenantName" column="tenant_name" jdbcType="VARCHAR"/>
+        <result property="tenantPhone" column="tenant_phone" jdbcType="VARCHAR"/>
+        <result property="tenantRealmName" column="tenant_realm_name" jdbcType="VARCHAR"/>
+        <result property="tenantStatus" column="tenant_status" jdbcType="VARCHAR"/>
+        <result property="authStatus" column="auth_status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="tenantCode" column="tenant_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="selectPage" resultMap="BaseResultMap" parameterType="com.base.sys.api.entity.TenantManageEntity">
+        select
+        id, tenant_company, tenant_mail, tenant_name,tenant_phone,tenant_realm_name,tenant_status,auth_status,create_time,tenant_code
+        from tenant_info
+        <where>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name like concat(concat('%', #{tenantName}), '%')
+            </if>
+            <if test="tenantCompany != null and tenantCompany != ''">
+                and tenant_company like concat(concat('%', #{tenantCompany}), '%')
+            </if>
+        </where>
+        ORDER BY create_time desc
+    </select>
+    <select id="getObjectById" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            id, tenant_company, tenant_mail, tenant_name,tenant_phone,tenant_realm_name,tenant_status,auth_status,create_time,tenant_code
+        from tenant_info
+        where id = #{id}
+    </select>
+    <select id="queryList" parameterType="com.base.sys.api.entity.TenantManageEntity" resultMap="BaseResultMap">
+        select
+            tenant_name,tenant_code,tenant_company
+        from tenant_info
+        <where>
+            <if test="tenantName != null and tenantName != ''">
+                and tenant_name like concat(concat('%', #{tenantName}), '%')
+            </if>
+            <if test="tenantCompany != null and tenantCompany != ''">
+                and tenant_company like concat(concat('%', #{tenantCompany}), '%')
+            </if>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.TenantManageEntity">
+        insert into tenant_info(id, tenant_company, tenant_mail, tenant_name,tenant_phone,tenant_realm_name,tenant_status,auth_status,create_time,tenant_code)
+        values(#{id},#{tenantCompany},#{tenantMail},#{tenantName},#{tenantPhone},#{tenantRealmName},#{tenantStatus},#{authStatus},#{createTime},#{tenantCode})
+    </insert>
+
+    <select id="getObjectByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+            id, tenant_company, tenant_mail, tenant_name,tenant_phone,tenant_realm_name,tenant_status,auth_status,create_time,tenant_code
+        from tenant_info
+        where tenant_code = #{tenantCode}
+    </select>
+
+    <select id="getIdByCodeOnLogin" parameterType="java.lang.String" resultType="string">
+        select
+            id
+        from tenant_info
+        where tenant_code = #{tenantCode}
+    </select>
+
+
+
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.seq.entity.SeqTemplateRule">
+
+	<resultMap id="BaseResultMap" type="com.dap.paas.console.seq.entity.SeqTemplateRule">
+		<result property="id" column="id" jdbcType="VARCHAR"/>
+		<result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+		<result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+		<result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+		<result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+		<result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+		<result column="rule_name" property="ruleName"/>
+		<result column="rule_type" property="ruleType"/>
+		<result column="rule_desc" property="ruleDesc"/>
+		<result column="rule_info" property="ruleInfo"/>
+	</resultMap>
+
+
+	<sql id="Base_Column">
+		id,
+		update_user_id,
+		create_user_id,
+		update_date,
+		create_date,
+		tenant_id,
+		rule_name,
+		rule_type,
+		rule_desc,
+		rule_info
+	</sql>
+
+	<sql id="Table_Name">
+		from seq_template_rule
+	</sql>
+
+
+
+	<select id="queryPage" parameterType="com.dap.paas.console.seq.entity.SeqTemplateRule" resultMap="BaseResultMap">
+	select <include refid="Base_Column"/>
+		FROM seq_template_rule
+		<where>
+			<if test="ruleName != null and ruleName != ''">
+				AND rule_name like CONCAT(CONCAT('%', #{ruleName}),'%')
+			</if>
+			<if test="ruleType != null and ruleType != ''">
+				AND rule_type= #{ruleType}
+
+			</if>
+			AND tenant_id =#{tenantId}
+		</where>
+	</select>
+
+	<insert id="saveObject" parameterType="com.dap.paas.console.seq.entity.SeqTemplateRule">
+		insert into
+		 seq_template_rule(<include refid="Base_Column"/>)
+		VALUES (#{id},#{updateUserId},#{createUserId}, #{updateDate},#{createDate},#{tenantId},#{ruleName},#{ruleType},#{ruleDesc},#{ruleInfo})
+	</insert>
+
+	<update id="updateObject" >
+		update
+		 seq_template_rule
+		<set>
+			<if test="ruleName != null">
+				rule_name=#{ruleName},
+			</if>
+			<if test="ruleType != null">
+				rule_type=#{ruleType},
+			</if>
+			<if test="ruleDesc != null">
+				rule_desc=#{ruleDesc},
+			</if>
+			<if test="ruleInfo != null">
+				rule_info=#{ruleInfo},
+			</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delObjectById" parameterType="java.lang.String">
+        delete FROM seq_template_rule
+        WHERE id = #{id}
+    </delete>
+
+	<!-- 批量删除  -->
+	<delete id="delObjectByIds" parameterType="java.util.List">
+		delete FROM seq_template_rule where id in
+		<foreach collection="list" item="id" open="(" close=")" separator="," index="">
+			#{id}
+		</foreach>
+	</delete>
+
+	<select id="queryList"   resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column"/>
+		FROM seq_template_rule
+		<where>
+			<if test="ruleType != null and ruleType != ''">
+				AND rule_type =#{ruleType}
+			</if>
+		</where>
+	</select>
+
+	<!--根据map查询单个-->
+	<select id="getObjectByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column"/>
+		FROM seq_template_rule
+		<where>
+			<if test="ruleName != null and ruleName != ''">
+				AND rule_name like CONCAT(CONCAT('%', #{ruleName}),'%')
+			</if>
+			<if test="ruleType != null and ruleType != ''">
+				AND rule_type= #{ruleType}
+			</if>
+			<if test="tenantId != null and tenantId != ''">
+				AND tenant_id =#{tenantId}
+			</if>
+		</where>
+	</select>
+
+	<select id="queryListByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column"/>
+		FROM seq_template_rule
+		<where>
+			<if test="ruleName != null and ruleName != ''">
+				AND rule_name = #{ruleName}
+			</if>
+			<if test="ruleType != null and ruleType != ''">
+				AND rule_type= #{ruleType}
+			</if>
+			<if test="tenantId != null and tenantId != ''">
+				AND tenant_id =#{tenantId}
+			</if>
+		</where>
+	</select>
+
+	<!--查询多个-->
+	<select id="queryListByIds" resultMap="BaseResultMap" parameterType="java.util.Set">
+		SELECT
+		<include refid="Base_Column"/>
+		FROM seq_template_rule
+		WHERE id in
+		<foreach collection="collection" item="id" open="(" close=")" separator="," index="">
+			#{id}
+		</foreach>
+	</select>
+</mapper>

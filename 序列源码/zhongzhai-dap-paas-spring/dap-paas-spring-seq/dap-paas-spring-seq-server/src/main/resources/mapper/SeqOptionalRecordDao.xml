@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.sequence.server.entity.SeqOptionalRecord">
+
+    <resultMap type="com.dap.sequence.server.entity.SeqOptionalRecord" id="SeqOptionalRecordMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="seqCode" column="seq_code" jdbcType="VARCHAR"/>
+        <result property="seqValue" column="seq_value" jdbcType="VARCHAR"/>
+        <result property="seqLock" column="seq_lock" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="instanceRuleId" column="instance_rule_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="optionalStatus" column="optional_status" jdbcType="VARCHAR"/>
+        <result property="paddindValue" column="paddind_value" jdbcType="BIGINT"/>
+        <result property="optionalValue" column="optional_value" jdbcType="BIGINT"/>
+        <result property="serialNumber" column="serial_number" jdbcType="VARCHAR"/>
+        <result property="filterStatus" column="filter_status" jdbcType="VARCHAR"/>
+        <result property="curNumId" column="cur_num_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column">
+        id, seq_code,paddind_value, seq_value, optional_value, seq_lock,create_user_id, update_user_id, instance_rule_id, create_date,
+        update_date, tenant_id, optional_status, serial_number, filter_status, cur_num_id
+    </sql>
+
+    <!--  表名  -->
+    <sql id="Table_Name">
+        seq_optional_record
+    </sql>
+
+    <select id="getRecoveryOptional" resultMap="SeqOptionalRecordMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        where seq_code = #{seqCode} and seq_value = #{seqValue} and optional_status = 2
+    </select>
+
+    <select id="getRecordByValue" resultMap="SeqOptionalRecordMap">
+        select <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        where seq_code = #{seqCode} and optional_value &gt;= #{start} and optional_value &lt;= #{end}
+    </select>
+
+    <select id="selectForUpdate" parameterType="com.dap.sequence.server.entity.SeqOptionalRecord" resultMap="SeqOptionalRecordMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <if test="seqCode != null and seqCode != ''">
+                seq_code = #{seqCode}
+            </if>
+            <if test="seqValue != null and seqValue != ''">
+                and seq_value = #{seqValue}
+            </if>
+            <if test="serialNumber != null and serialNumber != ''">
+                and serial_number = #{serialNumber}
+            </if>
+        </where>
+         for update
+    </select>
+
+    <update id="updateRecordStatus">
+        update
+        <include refid="Table_Name"/>
+        set optional_status = #{optionalStatus}, update_date = #{updateDate}
+        <where>
+            <if test="seqCode != null and seqCode != ''">
+                seq_code = #{seqCode}
+            </if>
+            <if test="seqValue != null and seqValue != ''">
+                and seq_value = #{seqValue}
+            </if>
+            <if test="serialNumber != null and serialNumber != ''">
+                and serial_number = #{serialNumber}
+            </if>
+        </where>
+    </update>
+
+    <!-- 查询补位参数最大的一个数据，或者状态是已回收的数据 -->
+     <select id="getMaxPaddindRecord" resultMap="SeqOptionalRecordMap">
+        select
+        <include refid="Base_Column"/>
+        from seq_optional_record
+        <where>
+            <if test="seqValue != null and seqValue != ''">
+                seq_value = #{seqValue} 
+            </if>
+            <if test="instanceRuleId != null and instanceRuleId != ''">
+                and instance_rule_id = #{instanceRuleId}
+            </if>
+        </where>
+        order by optional_status desc, paddind_value desc limit #{queryNum} for update
+    </select>
+
+    <insert id="saveBatchOptional" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into<include refid="Table_Name"/>(<include refid="Base_Column"/>)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.seqCode},#{item.paddindValue},#{item.seqValue},#{item.optionalValue},#{item.seqLock},
+            #{item.createUserId},#{item.updateUserId},#{item.instanceRuleId},#{item.createDate},
+            #{item.updateDate},#{item.tenantId},#{item.optionalStatus},#{item.serialNumber},#{item.filterStatus},#{item.curNumId})
+        </foreach>
+    </insert>
+
+    <update id="updateFilterStatus">
+        update <include refid="Table_Name"/>
+        <set>
+            filter_status = '1'
+        </set>
+        <where>
+            id in
+            <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+                 #{item.id}
+            </foreach>
+        </where>
+    </update>
+
+    <insert id="saveOptional" keyProperty="id" useGeneratedKeys="true">
+        insert ignore into<include refid="Table_Name"/>(<include refid="Base_Column"/>)
+        values
+        (#{id},#{seqCode},#{paddindValue},#{seqValue},#{optionalValue},#{seqLock},
+        #{createUserId},#{updateUserId},#{instanceRuleId},#{createDate},
+        #{updateDate},#{tenantId},#{optionalStatus},#{serialNumber},#{filterStatus},#{curNumId})
+    </insert>
+</mapper>
+

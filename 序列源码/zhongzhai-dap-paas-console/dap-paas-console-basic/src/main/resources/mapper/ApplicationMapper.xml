@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.Application">
+
+    <resultMap type="com.dap.paas.console.basic.entity.Application" id="ApplicationMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="applicationCode" column="application_code" jdbcType="VARCHAR"/>
+        <result property="applicationName" column="application_name" jdbcType="VARCHAR"/>
+        <result property="organizationId" column="organization_id" jdbcType="VARCHAR"/>
+        <result property="chargeUser" column="charge_user" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="accessKey" column="access_key" jdbcType="VARCHAR"/>
+        <result property="accessKeyStatus" column="access_key_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, application_name, application_code, organization_id, charge_user, description, create_user_id, create_date,update_user_id,update_date,tenant_id,
+            access_key,access_key_status
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="ApplicationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_application
+        WHERE id = #{id}
+        AND deleted !='1'
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.Application" resultMap="ApplicationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_application
+        WHERE deleted !='1'
+        <if test="applicationName != null and applicationName != ''">
+            AND application_name like CONCAT(CONCAT('%', #{applicationName}), '%')
+        </if>
+        <if test="applicationCode != null and applicationCode != ''">
+            AND application_code like CONCAT(CONCAT('%', #{applicationCode}), '%')
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="ApplicationMap">
+        select
+        id, organization_id, application_name,application_code
+        from basic_application
+        WHERE deleted !='1'
+        <if test="organizationId != null and organizationId != ''">
+            AND organization_id = #{organizationId}
+        </if>
+        <if test="accessKeyStatus != null and accessKeyStatus != ''">
+            AND access_key_status = #{accessKeyStatus}
+        </if>
+	<if test="tenantId != null and tenantId != ''">
+            AND tenant_id =#{tenantId}
+        </if>
+    </select>
+
+    <select id="queryListByIdList" parameterType="java.util.List" resultMap="ApplicationMap">
+        select
+        id, organization_id, application_name,application_code
+        from basic_application
+        WHERE deleted !='1'
+        and id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.Application">
+        INSERT INTO basic_application(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{applicationName}, #{applicationCode}, #{organizationId}, #{chargeUser}, #{description},
+                #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate}, #{tenantId},#{accessKey},'0')
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.Application">
+        UPDATE basic_application
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="applicationCode != null and applicationCode != ''">
+                application_code = #{applicationCode},
+            </if>
+            <if test="applicationName != null and applicationName != ''">
+                application_name = #{applicationName},
+            </if>
+            <if test="organizationId != null and organizationId != ''">
+                organization_id = #{organizationId},
+            </if>
+            <if test="chargeUser != null and chargeUser != ''">
+                charge_user = #{chargeUser},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="accessKeyStatus != null and accessKeyStatus != ''">
+                access_key_status = #{accessKeyStatus},
+            </if>
+            <if test="accessKey != null and accessKey != ''">
+                access_key = #{accessKey},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_application
+        SET deleted=1
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_application
+        SET deleted=1
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+    <!--通过实体作为筛选条件查询-->
+    <select id="getObjectByMap" parameterType="java.util.HashMap" resultMap="ApplicationMap">
+        select
+        <include refid="Base_Column"/>
+        from basic_application
+        <where>
+            <if test="applicationCode !=null and applicationCode !=''">
+                and application_code like concat ('%',#{applicationCode},'%')
+            </if>
+            and tenant_id =#{tenantId} and deleted != 1
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="getObjectDataByMap" parameterType="java.util.HashMap" resultMap="ApplicationMap">
+        select
+        <include refid="Base_Column"/>
+        from basic_application
+        <where>
+            <if test="applicationCode !=null and applicationCode !=''">
+                and application_code = #{applicationCode}
+            </if>
+            <if test="accessKey !=null and accessKey !=''">
+                and access_Key = #{accessKey}
+            </if>
+            <if test="accessKeyStatus !=null and accessKeyStatus !=''">
+                and access_key_status = #{accessKeyStatus}
+            </if>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+            and tenant_id =#{tenantId} and deleted != 1
+        </where>
+    </select>
+
+    <select id="checkAccessKey" parameterType="java.util.HashMap" resultType="int">
+        select
+        count(1)
+        from basic_application
+        <where>
+            <if test="appCode !=null and appCode !=''">
+                and application_code = #{appCode}
+            </if>
+            <if test="accessKey !=null and accessKey !=''">
+                and access_Key = #{accessKey}
+            </if>
+            <if test="accessKeyStatus !=null and accessKeyStatus !=''">
+                and access_key_status = #{accessKeyStatus}
+            </if>
+            and tenant_id =#{tenantId} and deleted != 1
+        </where>
+    </select>
+
+    <select id="queryListByMap" parameterType="java.util.Map" resultMap="ApplicationMap">
+        select
+        <include refid="Base_Column"/>
+        from basic_application
+        <where>
+            id in
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
+
+    <select id="getIds" parameterType="java.util.List" resultType="String">
+        select concat(id,':',application_code) from basic_application
+        <where>
+            application_code in
+            <foreach collection="appCodes" item="code" open="(" close=")" separator=",">
+                #{code}
+            </foreach>
+            and deleted != 1
+        </where>
+    </select>
+
+    <!--查询多个-->
+    <select id="queryListByIds" resultMap="ApplicationMap" parameterType="java.util.Set">
+        SELECT
+        <include refid="Base_Column"/>
+        FROM basic_application
+        WHERE id in
+        <foreach collection="collection" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="findExist" parameterType="java.util.List" resultMap="ApplicationMap">
+        select
+        id, application_name, application_code, organization_id, charge_user, description, create_user_id, create_date,tenant_id,
+        access_key,access_key_status
+        from basic_application
+        WHERE deleted !='1' and application_code in
+        <foreach collection="list" item="a" open="(" close=")" separator="," index="">
+            #{a.applicationCode}
+        </foreach>
+    </select>
+
+    <insert id="saveApplicationBatch" parameterType="java.util.List">
+        insert into basic_application(id, application_name, application_code, organization_id, charge_user, description, create_user_id, create_date,tenant_id,
+        access_key,access_key_status)
+        VALUES
+        <foreach collection="list" item="a" separator=",">
+            (#{a.id}, #{a.applicationName}, #{a.applicationCode}, #{a.organizationId},#{a.chargeUser},#{a.description},#{a.createUserId}, #{a.createDate}, #{a.tenantId},
+            #{a.accessKey}, #{a.accessKeyStatus})
+        </foreach>
+    </insert>
+    
+    <!-- 批量更新  -->
+    <update id="updateApplicationBatch" parameterType="java.util.List">
+        <foreach collection="list" item = "item" separator=";">
+            update basic_application set application_name = #{item.applicationName} where id = #{item.id} and tenant_id = #{item.tenantId}
+        </foreach>
+    </update>
+</mapper>

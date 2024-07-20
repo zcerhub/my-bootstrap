@@ -1,0 +1,18 @@
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+target/
+/.project
+
+.vim/
+.settings/
+*.project
+*.classpath
+*factorypath
+logs/
+/dap-paas-console-platform/src/main/resources/static/

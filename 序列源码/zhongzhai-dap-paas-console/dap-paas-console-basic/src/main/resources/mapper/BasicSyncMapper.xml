@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.BasicSync">
+    <resultMap type="com.dap.paas.console.basic.entity.City" id="CityMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="cityName" column="city_name" jdbcType="VARCHAR"/>
+        <result property="cityCode" column="city_code" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap type="com.dap.paas.console.basic.entity.MachineRoom" id="MachineRoomMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="machineRoomCode" column="machine_room_code" jdbcType="VARCHAR"/>
+        <result property="machineRoomName" column="machine_room_name" jdbcType="VARCHAR"/>
+        <result property="organizationId" column="organization_id" jdbcType="VARCHAR"/>
+        <result property="cityId" column="city_id" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap type="com.dap.paas.console.basic.entity.Machine" id="MachineMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="hostCode" column="host_code" jdbcType="VARCHAR"/>
+        <result property="hostIp" column="host_ip" jdbcType="VARCHAR"/>
+        <result property="hostPort" column="host_port" jdbcType="VARCHAR"/>
+        <result property="hostRemark" column="host_remark" jdbcType="VARCHAR"/>
+        <result property="hostSshAccount" column="host_ssh_account" jdbcType="VARCHAR"/>
+        <result property="hostSshPassword" column="host_ssh_password" jdbcType="VARCHAR"/>
+        <result property="machineRoomId" column="machine_room_id" jdbcType="VARCHAR"/>
+        <result property="osRelease" column="os_release" jdbcType="VARCHAR"/>
+        <result property="osVersion" column="os_version" jdbcType="VARCHAR"/>
+        <result property="available" column="available" jdbcType="VARCHAR"/>
+        <result property="coreArch" column="core_arch" jdbcType="VARCHAR"/>
+        <result property="deploymentPath" column="deployment_path" jdbcType="VARCHAR"/>
+        <result property="unitId" column="unit_id" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap type="com.dap.paas.console.basic.entity.Unitization" id="UnitizationMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="unitCode" column="unit_code" jdbcType="VARCHAR"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="machineRoomId" column="machine_room_id" jdbcType="VARCHAR"/>
+        <result property="unitDesc" column="unit_desc" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="unitType" column="unit_type" jdbcType="VARCHAR"/>
+        <result property="bakNo" column="bak_no" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getCityByName" resultMap="CityMap">
+        SELECT id, city_name, city_code, create_user_id, create_date,update_user_id,update_date,tenant_id
+        FROM basic_city
+        WHERE city_name = #{cityName}
+        AND deleted != '1'
+    </select>
+    <!--新增城市数据-->
+    <insert id="saveCity" parameterType="com.dap.paas.console.basic.entity.City">
+        INSERT INTO basic_city(id, city_name, city_code, create_user_id, create_date,update_user_id,update_date,tenant_id)
+        VALUES (#{id}, #{cityName}, #{cityCode}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate}, #{tenantId})
+    </insert>
+    <update id="updateCity" parameterType="com.dap.paas.console.basic.entity.City">
+        UPDATE basic_city
+        SET city_name = #{cityName}
+        WHERE id = #{id}
+    </update>
+    <!--清空城市数据-->
+    <delete id="clearCity" parameterType="string">
+        delete from basic_city
+    </delete>
+
+    <!--新增组织数据-->
+    <insert id="saveOrganization" parameterType="com.dap.paas.console.basic.entity.Organization">
+        INSERT INTO basic_organization(id, organization_name, organization_code, create_user_id, create_date,update_user_id,update_date,tenant_id)
+        VALUES (#{id}, #{organizationName}, #{organizationCode}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+    <!--清空组织数据-->
+    <delete id="clearOrganization" parameterType="string">
+        delete from basic_organization
+    </delete>
+
+    <select id="getMachineRoomById" resultMap="MachineRoomMap">
+        SELECT *
+        FROM basic_machineroom
+        WHERE id = #{id}
+        AND deleted != '1'
+    </select>
+    <!--新增数据中心-->
+    <insert id="saveMachineRoom" parameterType="com.dap.paas.console.basic.entity.MachineRoom">
+        INSERT INTO basic_machineroom(id, machine_room_code, machine_room_name, organization_id, city_id, description, create_user_id, create_date,update_user_id,update_date,tenant_id)
+        VALUES (#{id}, #{machineRoomCode}, #{machineRoomName}, #{organizationId}, #{cityId},
+        #{description},#{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+    <update id="updateMachineRoom" parameterType="com.dap.paas.console.basic.entity.MachineRoom">
+        UPDATE basic_machineroom
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="machineRoomCode != null and machineRoomCode != ''">
+                machine_room_code = #{machineRoomCode},
+            </if>
+            <if test="machineRoomName != null and machineRoomName != ''">
+                machine_room_name = #{machineRoomName},
+            </if>
+            <if test="organizationId != null and organizationId != ''">
+                organization_id = #{organizationId},
+            </if>
+            <if test="cityId != null and cityId != ''">
+                city_id = #{cityId},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--清空数据中心数据-->
+    <delete id="clearMachineRoom" parameterType="string">
+        delete from basic_machineroom
+    </delete>
+    <!--通过主键删除-->
+    <delete id="delMachineRoomById">
+        DELETE FROM basic_machineroom
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getMachineById" resultMap="MachineMap">
+        SELECT *
+        FROM basic_machine
+        WHERE id = #{id}
+        AND deleted != '1'
+    </select>
+    <!--新增机器信息-->
+    <insert id="saveMachine" parameterType="com.dap.paas.console.basic.entity.Machine">
+        INSERT INTO basic_machine(id, host_code, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, os_release, os_version, available, core_arch, create_user_id, create_date,update_user_id,update_date,tenant_id,deployment_path)
+        VALUES (#{id}, #{hostCode}, #{hostIp}, #{hostPort}, #{hostRemark}, #{hostSshAccount}, #{hostSshPassword}, #{machineRoomId},
+        #{osRelease}, #{osVersion}, #{available}, #{coreArch}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId},#{deploymentPath})
+    </insert>
+    <update id="updateMachine" parameterType="com.dap.paas.console.basic.entity.Machine">
+        UPDATE basic_machine
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="hostCode != null and hostCode != ''">
+                host_code = #{hostCode},
+            </if>
+            <if test="hostIp != null and hostIp != ''">
+                host_ip = #{hostIp},
+            </if>
+            <if test="hostPort != null and hostPort != ''">
+                host_port = #{hostPort},
+            </if>
+            <if test="hostRemark != null and hostRemark != ''">
+                host_remark = #{hostRemark},
+            </if>
+            <if test="hostSshAccount != null and hostSshAccount != ''">
+                host_ssh_account = #{hostSshAccount},
+            </if>
+            <if test="hostSshPassword != null and hostSshPassword != ''">
+                host_ssh_password = #{hostSshPassword},
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                machine_room_id = #{machineRoomId},
+            </if>
+            <if test="osRelease != null and osRelease != ''">
+                os_release = #{osRelease},
+            </if>
+            <if test="osVersion != null and osVersion != ''">
+                os_version = #{osVersion},
+            </if>
+            <if test="available != null and available != ''">
+                available = #{available},
+            </if>
+            <if test="coreArch != null and coreArch != ''">
+                core_arch = #{coreArch},
+            </if>
+            <if test="deploymentPath != null and deploymentPath != ''">
+                deployment_path = #{deploymentPath},
+            </if>
+            <if test="unitId != null and unitId != '' ">
+                unit_id = #{unitId},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--清空机器信息数据-->
+    <delete id="clearMachine" parameterType="string">
+        delete from basic_machine
+    </delete>
+    <delete id="delMachineById">
+        DELETE FROM basic_machine
+        WHERE id = #{id}
+    </delete>
+
+    <select id="getUnitizationById" resultMap="UnitizationMap">
+        SELECT *
+        FROM basic_unit_info
+        WHERE id = #{id}
+    </select>
+    <!--新增单元信息-->
+    <insert id="saveUnitization" parameterType="com.dap.paas.console.basic.entity.Unitization">
+        insert into basic_unit_info(id,unit_code,unit_name,machine_room_id,unit_desc,update_user_id,create_user_id,update_date,create_date,tenant_id,unit_type,bak_no)
+        values (#{id},#{unitCode},#{unitName},#{machineRoomId},#{unitDesc},#{updateUserId},#{createUserId},#{updateDate},#{createDate},#{tenantId},#{unitType},#{bakNo})
+    </insert>
+    <update id="updateUnitization" parameterType="com.dap.paas.console.basic.entity.Unitization">
+        update basic_unit_info
+        <set>
+            <if test="unitCode != null and unitCode != ''">
+                unit_code = #{unitCode},
+            </if>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                machine_room_id = #{machineRoomId},
+            </if>
+            <if test="unitDesc != null and unitDesc != ''">
+                unit_desc = #{unitDesc},
+            </if>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="unitType != null and unitType != ''">
+                unit_type = #{unitType},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="bakNo != null and bakNo != '' ">
+                bak_no = #{bakNo}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--清空单元信息数据-->
+    <delete id="clearUnitization" parameterType="string">
+        delete from basic_unit_info
+    </delete>
+    <delete id="delUnitizationById" parameterType="String">
+        delete from basic_unit_info
+        where id=#{id}
+    </delete>
+</mapper>

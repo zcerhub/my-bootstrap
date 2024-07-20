@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysPermissionData">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysPermissionData" id="BaseSysPermissionDataMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="dataRuleId" column="data_rule_id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseSysPermissionDataMap">
+        select
+          id, update_date, update_user_id, create_user_id, create_date, data_rule_id, role_id
+        from base_sys_permission_data
+        where id = #{id}
+    </select>
+
+
+    <!--根据对象的某个属性查询数据列表-->
+    <select id="queryList" resultMap="BaseSysPermissionDataMap">
+        select
+        id, update_date, update_user_id, create_user_id, create_date, data_rule_id, role_id
+        from  base_sys_permission_data
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+        </where>
+    </select>
+
+
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.BaseSysPermissionData">
+        insert into base_sys_permission_data(id, update_date, update_user_id, create_user_id, create_date, data_rule_id, role_id,menu_id,app_id,tenant_id)
+        values (#{id}, #{updateDate}, #{updateUserId}, #{createUserId}, #{createDate}, #{dataRuleId}, #{roleId},#{menuId},#{appId},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject"  parameterType="com.base.sys.api.entity.BaseSysPermissionData" >
+        update auth_login.base_sys_permission_data
+        <set>
+            <if test="id != null and id != ''">
+                id = #{id},
+            </if>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="dataRuleId != null and dataRuleId != ''">
+                data_rule_id = #{dataId},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
+            </if>
+
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from base_sys_permission_data  where id = #{id}
+    </delete>
+    <delete id="delObjectByRoleId">
+        delete from base_sys_permission_data  where role_id = #{roleId}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        delete from base_sys_permission_data where id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </delete>
+
+<!--    <select id="queryCheckData" resultType="string">-->
+<!--        select-->
+<!--        distinct concat("d_",data_rule_id) as data_rule_id-->
+<!--        from  base_sys_permission_data-->
+<!--        <where>-->
+<!--            <if test="roleId != null and roleId != ''">-->
+<!--                and role_id = #{roleId}-->
+<!--            </if>-->
+<!--            <if test="appId != null and appId != ''">-->
+<!--                and app_id = #{appId}-->
+<!--            </if>-->
+<!--            <if test="tenantId != null and tenantId != ''">-->
+<!--                and tenant_id = #{tenantId}-->
+<!--            </if>-->
+<!--            and data_rule_id is not NULL-->
+<!--        </where>-->
+<!--    </select>-->
+
+    <select id="queryCheckData" resultType="string">
+        select
+        distinct data_rule_id
+        from  base_sys_permission_data
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            and data_rule_id is not NULL
+        </where>
+    </select>
+
+<!--    <select id="queryCheckDataMenu" resultType="string">-->
+<!--        select-->
+<!--        distinct concat("m_",menu_id) as meun_id-->
+<!--        from  base_sys_permission_data-->
+<!--        <where>-->
+<!--            <if test="roleId != null and roleId != ''">-->
+<!--                and role_id = #{roleId}-->
+<!--            </if>-->
+<!--            <if test="appId != null and appId != ''">-->
+<!--                and app_id = #{appId}-->
+<!--            </if>-->
+<!--            <if test="tenantId != null and tenantId != ''">-->
+<!--                and tenant_id = #{tenantId}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+    <select id="queryCheckDataMenu" resultType="string">
+        select
+        distinct menu_id
+        from  base_sys_permission_data
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </where>
+    </select>
+    <delete id="delObjectByData">
+        delete from base_sys_permission_data
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+            <if test="dataRuleId != null and dataRuleId != ''">
+                and data_rule_id = #{dataRuleId}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="delObjectByMenu">
+        delete from base_sys_permission_data
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+                and data_rule_id is null
+
+        </where>
+    </delete>
+
+
+
+
+
+
+</mapper>

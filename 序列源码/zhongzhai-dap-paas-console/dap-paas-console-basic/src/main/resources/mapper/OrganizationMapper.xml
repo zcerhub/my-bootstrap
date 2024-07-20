@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.Organization">
+
+    <resultMap type="com.dap.paas.console.basic.entity.Organization" id="OrganizationMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="organizationName" column="organization_name" jdbcType="VARCHAR"/>
+        <result property="organizationCode" column="organization_code" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, organization_name, organization_code, create_user_id, create_date,update_user_id,update_date,tenant_id
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="OrganizationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_organization
+        WHERE id = #{id}
+        AND deleted !='1'
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.Organization" resultMap="OrganizationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_organization
+        WHERE deleted !='1'
+        <if test="organizationCode != null and organizationCode != ''">
+            AND organization_code  like CONCAT(CONCAT('%', #{organizationCode}), '%')
+        </if>
+        <if test="organizationName != null and organizationName != ''">
+            AND organization_name like CONCAT(CONCAT('%', #{organizationName}), '%')
+        </if>
+    </select>
+
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="OrganizationMap">
+        select
+        id, organization_name, organization_code
+        from basic_organization
+        WHERE deleted !='1'
+        <if test="organizationName != null and organizationName != ''">
+            AND organization_name like CONCAT(CONCAT('%', #{organizationName}), '%')
+        </if>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.Organization">
+        INSERT INTO basic_organization(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{organizationName}, #{organizationCode}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.Organization">
+        UPDATE basic_organization
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="organizationCode != null and organizationCode != ''">
+                organization_code = #{organizationCode},
+            </if>
+            <if test="organizationName != null and organizationName != ''">
+                organization_name = #{organizationName},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_organization
+        SET deleted='1'
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_organization
+        SET deleted='1'
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+
+</mapper>

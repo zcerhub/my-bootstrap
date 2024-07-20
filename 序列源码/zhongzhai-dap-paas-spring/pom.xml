@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.dap</groupId>
+        <artifactId>dap-cloud-dependencies</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>dap.paas</groupId>
+    <artifactId>dap-paas-spring</artifactId>
+    <version>5.1.1-SNAPSHOT</version>
+
+    <name>dap-paas-spring-${project.version}</name>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+        <encoding>UTF-8</encoding>
+    </properties>
+
+
+    <distributionManagement>
+<!--    <repository>
+            <id>releases</id> 北京私服
+            <url>http://10.114.10.220:8081/repository/maven-releases/</url>
+        </repository>
+        
+        
+       <snapshotRepository>
+            <id>snapshots</id> 成都私服 
+            <url>http://10.114.14.64:8081/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        
+        <snapshotRepository>
+            <id>snapshots</id>  青岛POC
+            <url>http://116.228.202.222:58984/nexus/content/repositories/snapshots/</url>
+        </snapshotRepository>
+        -->
+<!--        -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://10.64.15.87:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+        
+        
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <project.environment>dev</project.environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>sit</id>
+            <properties>
+                <project.environment>sit</project.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <project.environment>uat</project.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <project.environment>prod</project.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+    <modules>
+<!--        <module>dap-paas-spring-mq</module>-->
+<!--        <module>dap-paas-spring-cache</module>-->
+        <module>dap-paas-spring-seq</module>
+<!--        <module>dap-paas-spring-gov</module>-->
+<!--        <module>dap-paas-spring-config</module>-->
+        <module>dap-paas-spring-common</module>
+        <!--<module>dap-paas-spring-sample</module>-->
+    </modules>
+
+
+
+</project>

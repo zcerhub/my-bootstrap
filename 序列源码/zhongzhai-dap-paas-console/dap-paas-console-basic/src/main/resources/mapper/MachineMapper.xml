@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.Machine">
+
+    <resultMap type="com.dap.paas.console.basic.entity.Machine" id="MachineMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="hostCode" column="host_code" jdbcType="VARCHAR"/>
+        <result property="hostIp" column="host_ip" jdbcType="VARCHAR"/>
+        <result property="hostPort" column="host_port" jdbcType="VARCHAR"/>
+        <result property="hostRemark" column="host_remark" jdbcType="VARCHAR"/>
+        <result property="hostSshAccount" column="host_ssh_account" jdbcType="VARCHAR"/>
+        <result property="hostSshPassword" column="host_ssh_password" jdbcType="VARCHAR"/>
+        <result property="machineRoomId" column="machine_room_id" jdbcType="VARCHAR"/>
+        <result property="osRelease" column="os_release" jdbcType="VARCHAR"/>
+        <result property="osVersion" column="os_version" jdbcType="VARCHAR"/>
+        <result property="available" column="available" jdbcType="VARCHAR"/>
+        <result property="coreArch" column="core_arch" jdbcType="VARCHAR"/>
+        <result property="deploymentPath" column="deployment_path" jdbcType="VARCHAR"/>
+        <result property="unitId" column="unit_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, host_code, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, os_release, os_version, available, core_arch, create_user_id, create_date,update_user_id,update_date,tenant_id,deployment_path,unit_id
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="MachineMap">
+        SELECT id, host_code, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, os_release, os_version, available, core_arch, create_user_id, create_date,update_user_id,update_date,tenant_id,deployment_path,unit_id
+        FROM basic_machine
+        WHERE id = #{id}
+        AND deleted !='1'
+    </select>
+
+    <!--查询单个-->
+    <select id="queryListByIds" resultMap="MachineMap" parameterType="java.util.Set">
+        SELECT id, host_code, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, os_release, os_version, available, core_arch, create_user_id, create_date,update_user_id,update_date,tenant_id,deployment_path,unit_id
+        FROM basic_machine
+        WHERE id in
+        <foreach collection="collection" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+        AND deleted !='1'
+    </select>
+
+    <!--查询单个-->
+    <select id="getObjectByMap" resultMap="MachineMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_machine
+        WHERE deleted !='1'
+        <if test="hostIp != null and hostIp != ''">
+            AND host_ip = #{hostIp}
+        </if>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.Machine" resultMap="MachineMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_machine
+        WHERE deleted !='1'
+        <if test="coreArch != null and coreArch != ''">
+            AND core_arch = #{coreArch}
+        </if>
+        <if test="hostIp != null and hostIp != ''">
+            AND host_ip like CONCAT(CONCAT('%', #{hostIp}),'%')
+        </if>
+        <if test="machineRoomId != null and machineRoomId != ''">
+            AND machine_room_id = #{machineRoomId}
+        </if>
+    </select>
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="MachineMap">
+        select
+        id, host_ip, host_ssh_account,deployment_path
+        from basic_machine
+        <where>
+            and deleted !='1'
+          <if test="machineRoomId != null and machineRoomId != ''">
+              AND machine_room_id = #{machineRoomId}
+            </if>
+            <if test="hostIp != null and hostIp != ''">
+                AND host_ip = #{hostIp}
+            </if>
+            <if test="unitId != null and unitId != ''">
+                AND unit_id = #{unitId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryNotUse" parameterType="java.util.HashMap" resultMap="MachineMap">
+        select
+        id, host_ip, host_ssh_account,deployment_path
+        from basic_machine
+        <where>
+            and deleted !='1' and  unit_id is NULL
+            <if test="machineRoomId != null and machineRoomId != ''">
+                AND machine_room_id = #{machineRoomId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.Machine">
+        INSERT INTO basic_machine(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{hostCode}, #{hostIp}, #{hostPort}, #{hostRemark}, #{hostSshAccount}, #{hostSshPassword}, #{machineRoomId},
+        #{osRelease}, #{osVersion}, #{available}, #{coreArch}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId},#{deploymentPath},#{unitId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.Machine">
+        UPDATE basic_machine
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="hostCode != null and hostCode != ''">
+                host_code = #{hostCode},
+            </if>
+            <if test="hostIp != null and hostIp != ''">
+                host_ip = #{hostIp},
+            </if>
+            <if test="hostPort != null and hostPort != ''">
+                host_port = #{hostPort},
+            </if>
+            <if test="hostRemark != null and hostRemark != ''">
+                host_remark = #{hostRemark},
+            </if>
+            <if test="hostSshAccount != null and hostSshAccount != ''">
+                host_ssh_account = #{hostSshAccount},
+            </if>
+            <if test="hostSshPassword != null and hostSshPassword != ''">
+                host_ssh_password = #{hostSshPassword},
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                machine_room_id = #{machineRoomId},
+            </if>
+            <if test="osRelease != null and osRelease != ''">
+                os_release = #{osRelease},
+            </if>
+            <if test="osVersion != null and osVersion != ''">
+                os_version = #{osVersion},
+            </if>
+            <if test="available != null and available != ''">
+                available = #{available},
+            </if>
+            <if test="coreArch != null and coreArch != ''">
+                core_arch = #{coreArch},
+            </if>
+            <if test="deploymentPath != null and deploymentPath != ''">
+                deployment_path = #{deploymentPath},
+            </if>
+            <if test="unitId != null and unitId != '' ">
+                unit_id = #{unitId},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateByUnitId" parameterType="String">
+        update basic_machine set unit_id = null where unit_id = #{unitId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_machine
+        SET deleted=1
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_machine
+        SET deleted=1
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="findExist" parameterType="java.util.List" resultMap="MachineMap">
+        select
+        id, host_code, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, os_release, os_version, available, core_arch, create_user_id, create_date,update_user_id,update_date,tenant_id,deployment_path,unit_id
+        from basic_machine
+        WHERE deleted !='1' and host_ip in
+        <foreach collection="list" item="m" open="(" close=")" separator="," index="">
+            #{m.hostIp}
+        </foreach>
+    </select>
+
+    <insert id="saveMachineBatch" parameterType="java.util.List">
+        insert into basic_machine(id, host_ip, host_port, host_remark, host_ssh_account, host_ssh_password, machine_room_id, available,
+                                  create_user_id, create_date,tenant_id,deployment_path)
+        VALUES
+        <foreach collection="list" item="m" separator=",">
+            (#{m.id}, #{m.hostIp}, #{m.hostPort}, #{m.hostRemark},#{m.hostSshAccount},#{m.hostSshPassword},#{m.machineRoomId},0,
+             #{m.createUserId}, #{m.createDate}, #{m.tenantId}, #{m.deploymentPath})
+        </foreach>
+    </insert>
+</mapper>

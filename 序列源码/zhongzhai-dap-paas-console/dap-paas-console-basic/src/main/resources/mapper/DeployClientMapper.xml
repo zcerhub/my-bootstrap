@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.DeployClient">
+
+    <resultMap type="com.dap.paas.console.basic.entity.DeployClient" id="DeployClientMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="hostAddress" column="host_address" jdbcType="VARCHAR"/>
+        <result property="hostPort" column="host_port" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="packVersion" column="pack_version" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, name, host_address, host_port, remark, pack_version, state, create_user_id, create_date,update_user_id,update_date,tenant_id
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="DeployClientMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_deployclient
+        WHERE id = #{id}
+        AND deleted !='1'
+        AND state = 1
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.DeployClient" resultMap="DeployClientMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_deployclient
+        WHERE deleted !='1' AND state = 1
+        <if test="applicationName != null and applicationName != ''">
+            AND name = #{name}
+        </if>
+        <if test="hostAddress != null and hostAddress != ''">
+            AND host_address = #{hostAddress}
+        </if>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.DeployClient">
+        INSERT INTO basic_deployclient(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{name}, #{hostAddress}, #{hostPort}, #{remark}, #{packVersion}, #{state}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.DeployClient">
+        UPDATE basic_deployclient
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="hostAddress != null and hostAddress != ''">
+                host_address = #{hostAddress},
+            </if>
+            <if test="hostPort != null and hostPort != ''">
+                host_port = #{hostPort},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="packVersion != null and packVersion != ''">
+                pack_version = #{packVersion},
+            </if>
+            <if test="state != null and state != ''">
+                state = #{state},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_deployclient
+        SET deleted=1
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_deployclient
+        SET deleted=1
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+
+</mapper>

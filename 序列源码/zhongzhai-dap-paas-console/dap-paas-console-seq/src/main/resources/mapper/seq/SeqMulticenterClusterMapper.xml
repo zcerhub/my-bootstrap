@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.seq.entity.SeqMulticenterCluster">
+
+    <resultMap id="BaseResultMap" type="com.dap.paas.console.seq.entity.SeqMulticenterCluster">
+        <!--@Table cache_multicenter_architecture-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" />
+    </resultMap>
+
+    <resultMap id="SeqMulticenterClusterVo" type="com.dap.paas.console.seq.dto.SeqMulticenterClusterVo" extends="BaseResultMap">
+        <result column="node" property="node" />
+        <result column="orgName" property="orgName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column">
+       id, create_date, update_date, update_user_id, create_user_id, tenant_id, name,description
+    </sql>
+
+    <!--  表名  -->
+    <sql id="Table_Name">
+        seq_multicenter_cluster
+    </sql>
+
+    <!--  通用where条件  -->
+    <sql id="Base_Where">
+        <trim suffixOverrides="and">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="name != null and name != ''">
+                and name like concat(concat('%', #{description}), '%')
+            </if>
+            <if test="description != null and description != ''">
+                and description like concat(concat('%', #{description}), '%')
+            </if>
+        </trim>
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from <include refid="Table_Name"/>
+        where id = #{id}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryPage" parameterType="com.dap.paas.console.seq.entity.SeqMulticenterCluster" resultMap="SeqMulticenterClusterVo">
+        SELECT t1.*, (select count(0) from seq_multicenter_node t5 where t5.multi_cluster_id = t1.id) as node 
+        
+        from (
+        SELECT * FROM seq_multicenter_cluster   
+        <where>
+        <if test="name != null and name != ''">
+            AND name like concat('%',#{name},'%')
+        </if>
+
+        <if test="tenantId != null and tenantId != ''">
+            AND tenant_id = #{tenantId}
+        </if>
+    </where>
+        ) t1
+        order by t1.update_date desc
+    </select>
+
+    <select id="queryList" parameterType="com.dap.paas.console.seq.entity.SeqMulticenterCluster" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.seq.entity.SeqMulticenterCluster">
+        insert into <include refid="Table_Name"/>(<include refid="Base_Column"/>)
+        values (#{id},#{createDate}, #{updateDate}, #{updateUserId}, #{createUserId}, #{tenantId}, #{name},#{description})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update <include refid="Table_Name"/>
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <!-- 这里允许更新空值，注意不是null而是空字符串 -->
+            <if test="description != null">
+                description = #{description},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from <include refid="Table_Name"/> where id = #{id}
+    </delete>
+
+    <select id="selectTotal" resultType="int">
+        select count(1) from
+        <include refid="Table_Name"/>
+        <where>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="description != null and description != ''">
+                and description = #{description}
+            </if>
+        </where>
+    </select>
+</mapper>

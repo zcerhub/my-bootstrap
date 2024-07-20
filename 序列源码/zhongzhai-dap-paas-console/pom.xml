@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.dap</groupId>
+        <artifactId>dap-cloud-dependencies</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>dap.paas</groupId>
+    <artifactId>dap-paas-console</artifactId>
+    <name>Dap PaaS Console ${dap.version}</name>
+    <version>5.1.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+        <encoding>UTF-8</encoding>
+        <maven-complier.version>3.7.0</maven-complier.version>
+    </properties>
+
+    <distributionManagement>
+        <repository>
+            <id>releases</id> <!-- 需要和settings.xml中的server块里的id一致 -->
+            <url>http://10.64.15.87:8081/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id> <!-- 需要和settings.xml中的server块里的id一致 -->
+            <url>http://10.64.15.87:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <project.environment>dev</project.environment>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>sit</id>
+            <properties>
+                <project.environment>sit</project.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>uat</id>
+            <properties>
+                <project.environment>uat</project.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <project.environment>prod</project.environment>
+            </properties>
+        </profile>
+    </profiles>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-complier.version}</version>
+                <configuration>
+                    <target>${java.version}</target>
+                    <source>${java.version}</source>
+                    <encoding>${encoding}</encoding>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <modules>
+        <module>base-dao</module>
+        <module>base-sys</module>
+        <module>dap-paas-console-common</module>
+        <module>dap-paas-console-cache</module>
+        <module>dap-paas-console-mq</module>
+        <module>dap-paas-console-config</module>
+        <module>dap-paas-console-basic</module>
+        <module>dap-paas-console-platform</module>
+        <module>dap-paas-console-register</module>
+        <module>dap-paas-console-seq</module>
+        <module>dap-paas-console-gov</module>
+    </modules>
+</project>

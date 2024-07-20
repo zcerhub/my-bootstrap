@@ -1,0 +1,7 @@
+com.dap.sequence.server.rules.DateRuleHandler
+com.dap.sequence.server.rules.EnumRuleHandler
+com.dap.sequence.server.rules.NumberRuleHandler
+com.dap.sequence.server.rules.StringRuleHandler
+com.dap.sequence.server.rules.SpecialCharRuleHandler
+com.dap.sequence.server.rules.OptionalRuleHandler
+com.dap.sequence.server.rules.CheckRuleHandler

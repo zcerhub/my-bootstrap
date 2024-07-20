@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.seq.entity.SeqOptionalRecord">
+
+    <resultMap type="com.dap.paas.console.seq.entity.SeqOptionalRecord" id="SeqOptionalRecordMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="seqCode" column="seq_code" jdbcType="VARCHAR"/>
+        <result property="seqValue" column="seq_value" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="instanceRuleId" column="instance_rule_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="optionalStatus" column="optional_status" jdbcType="VARCHAR"/>
+        <result property="paddindValue" column="paddind_value" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column">
+        id, seq_code,paddind_value, seq_value, create_user_id, update_user_id, instance_rule_id, create_date,
+        update_date, tenant_id, optional_status
+    </sql>
+
+    <!--  表名  -->
+    <sql id="Table_Name">
+        seq_optional_record
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="SeqOptionalRecordMap">
+        select
+        <include refid="Base_Column"/>
+        from seq_optional_record
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="seqCode != null and seqCode != ''">
+                and seq_code = #{seqCode}
+            </if>
+            <if test="seqValue != null and seqValue != ''">
+                and seq_value = #{seqValue}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="instanceRuleId != null and instanceRuleId != ''">
+                and instance_rule_id = #{instanceRuleId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="optionalStatus != null and optionalStatus != ''">
+                and optional_status = #{optionalStatus}
+            </if>
+            <if test="paddindValue != null and paddindValue != ''">
+                and paddind_value = #{paddindValue}
+            </if>
+        </where>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage" resultMap="SeqOptionalRecordMap">
+        select
+        <include refid="Base_Column"/>
+        from
+        <include refid="Table_Name"/>
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="seqCode != null and seqCode != ''">
+                and seq_code = #{seqCode}
+            </if>
+            <if test="seqValue != null and seqValue != ''">
+                and seq_value = #{seqValue}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="instanceRuleId != null and instanceRuleId != ''">
+                and instance_rule_id = #{instanceRuleId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="optionalStatus != null and optionalStatus != ''">
+                and optional_status = #{optionalStatus}
+            </if>
+            <if test="paddindValue != null and paddindValue != ''">
+                and paddind_value = #{paddindValue}
+            </if>
+        </where>
+        ORDER BY create_date
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" keyProperty="id" useGeneratedKeys="true">
+        insert into<include refid="Table_Name"/>(<include refid="Base_Column"/>)
+        values
+        (#{id},#{seqCode},#{paddindValue},
+        #{seqValue},#{createUserId},#{updateUserId},#{instanceRuleId},#{createDate},#{updateDate},#{tenantId},#{optionalStatus})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update
+        <include refid="Table_Name"/>
+        <set>
+            <if test="seqCode != null and seqCode != ''">
+                seq_code = #{seqCode},
+            </if>
+            <if test="seqValue != null and seqValue != ''">
+                seq_value = #{seqValue},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="instanceRuleId != null and instanceRuleId != ''">
+                instance_rule_id = #{instanceRuleId},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="optionalStatus != null and optionalStatus != ''">
+                optional_status = #{optionalStatus},
+            </if>
+            <if test="paddindValue != null and paddindValue != ''">
+                paddind_value = #{paddindValue},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from
+        <include refid="Table_Name"/>
+        where id = #{id}
+    </delete>
+
+</mapper>
+

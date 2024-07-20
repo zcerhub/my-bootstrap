@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.MachineRoom">
+
+    <resultMap type="com.dap.paas.console.basic.entity.MachineRoom" id="MachineRoomMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="machineRoomCode" column="machine_room_code" jdbcType="VARCHAR"/>
+        <result property="machineRoomName" column="machine_room_name" jdbcType="VARCHAR"/>
+        <result property="organizationId" column="organization_id" jdbcType="VARCHAR"/>
+        <result property="cityId" column="city_id" jdbcType="VARCHAR"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, machine_room_code, machine_room_name, organization_id, city_id, description, create_user_id, create_date,update_user_id,update_date,tenant_id
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="MachineRoomMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_machineroom
+        WHERE id = #{id}
+        AND deleted !='1'
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.MachineRoom" resultMap="MachineRoomMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_machineroom
+        WHERE deleted !='1'
+        <if test="machineRoomCode != null and machineRoomCode != ''">
+            AND machine_room_code like CONCAT(CONCAT('%', #{machineRoomCode}),'%')
+        </if>
+        <if test="machineRoomName != null and machineRoomName != ''">
+            AND machine_room_name like CONCAT(CONCAT('%', #{machineRoomName}),'%')
+        </if>
+        <if test="organizationId != null and organizationId != ''">
+            AND organization_id = #{organizationId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            AND city_id = #{cityId}
+        </if>
+    </select>
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="MachineRoomMap">
+        select
+        id, machine_room_code, machine_room_name
+        from basic_machineroom
+        WHERE deleted !='1'
+        <if test="organizationId != null and organizationId != ''">
+            AND organization_id = #{organizationId}
+        </if>
+        <if test="cityId != null and cityId != ''">
+            AND city_id = #{cityId}
+        </if>
+    </select>
+
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.MachineRoom">
+        INSERT INTO basic_machineroom(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{machineRoomCode}, #{machineRoomName}, #{organizationId}, #{cityId},
+        #{description},#{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.MachineRoom">
+        UPDATE basic_machineroom
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="machineRoomCode != null and machineRoomCode != ''">
+                machine_room_code = #{machineRoomCode},
+            </if>
+            <if test="machineRoomName != null and machineRoomName != ''">
+                machine_room_name = #{machineRoomName},
+            </if>
+            <if test="organizationId != null and organizationId != ''">
+                organization_id = #{organizationId},
+            </if>
+            <if test="cityId != null and cityId != ''">
+                city_id = #{cityId},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_machineroom
+        SET deleted=1
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_machineroom
+        SET deleted=1
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+
+    <select id="findExist" parameterType="java.util.List" resultMap="MachineRoomMap">
+        select
+        id, machine_room_code, machine_room_name, organization_id, city_id, description, create_user_id, create_date,update_user_id,update_date,tenant_id
+        from basic_machineroom
+        WHERE deleted !='1' and machine_room_code in
+        <foreach collection="list" item="mr" open="(" close=")" separator="," index="">
+            #{mr.machineRoomCode}
+        </foreach>
+    </select>
+
+    <insert id="saveMachineRoomBatch" parameterType="java.util.List">
+        insert into basic_machineroom(id, machine_room_code, machine_room_name, organization_id, city_id, create_user_id, create_date,tenant_id)
+        VALUES
+        <foreach collection="list" item="mr" separator=",">
+            (#{mr.id}, #{mr.machineRoomCode}, #{mr.machineRoomName}, #{mr.organizationId},#{mr.cityId},#{mr.createUserId}, #{mr.createDate}, #{mr.tenantId})
+        </foreach>
+    </insert>
+
+</mapper>

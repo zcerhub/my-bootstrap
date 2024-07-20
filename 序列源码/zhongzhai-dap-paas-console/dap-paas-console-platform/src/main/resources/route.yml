@@ -1,0 +1,28 @@
+gientech:
+  route:
+    # 系统名称
+    system: app-test
+    # 应用名称
+    appName: route-demo-client
+    metadata:
+      routePath: "bj/idc1"
+      domainPath: "1/2/3"
+      version: "1.0"
+    config:
+      serverAddr: 10.64.15.86:8858
+      dataId: testRules
+      # 配置中心领域数据ID，非必填，默认domain_config
+      domainDataId:
+      # 配置中心路由表数据ID, 非必填，默认route_table_config
+      routeTableDataId:
+      configFormat: 1
+      encryptType: 0
+      status: 2
+      name: route_config
+      userName: admin
+      tenantCode: paas
+      appCode: app-test
+      envCode: scalor
+      configLoadType: 1
+      accessKey: Disf8hNe-9gnGQ
+      url: http://127.0.0.1:9080/v1/config/openApi/publish

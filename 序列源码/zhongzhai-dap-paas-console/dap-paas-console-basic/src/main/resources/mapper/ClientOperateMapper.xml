@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.ClientOperate">
+
+    <resultMap type="com.dap.paas.console.basic.entity.ClientOperate" id="ClientOperateMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="clientId" column="client_id" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="logId" column="log_id" jdbcType="VARCHAR"/>
+        <result property="asyncStatus" column="async_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, client_id, type, log_id, create_user_id, create_date,update_user_id,update_date,tenant_id,async_status
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="ClientOperateMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_clientoperate
+        WHERE client_id = #{id}
+        AND deleted !='1'
+        ORDER BY create_date desc
+        LIMIT 1
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.ClientOperate" resultMap="ClientOperateMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_clientoperate
+        WHERE deleted !='1'
+        <if test="clientId != null and clientId != ''">
+            AND client_id = #{clientId}
+        </if>
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="asyncStatus != null and asyncStatus != ''">
+            and async_status = #{asyncStatus}
+        </if>
+        ORDER BY create_date desc
+    </select>
+
+    <select id="queryList"  parameterType="com.dap.paas.console.basic.entity.ClientOperate" resultMap="ClientOperateMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_clientoperate
+        WHERE deleted !='1'
+        <if test="clientId != null and clientId != ''">
+            AND client_id = #{clientId}
+        </if>
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="logId != null and logId != ''">
+            AND log_id = #{logId}
+        </if>
+        <if test="asyncStatus != null and asyncStatus != ''">
+            and async_status = #{asyncStatus}
+        </if>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.ClientOperate">
+        INSERT INTO basic_clientoperate(<include refid="Base_Column"/>)
+        VALUES (#{id}, #{clientId}, #{type}, #{logId}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate}, #{tenantId})
+    </insert>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        UPDATE basic_clientoperate
+        SET deleted=1
+        WHERE id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        UPDATE basic_clientoperate
+        SET deleted=1
+        WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+    <select id="queryListAsyncNotAsyncStatus" parameterType="com.dap.paas.console.basic.entity.ClientOperate"
+            resultMap="ClientOperateMap">
+        select
+        <include refid="Base_Column"/>
+        from basic_clientoperate
+        <where>
+            <if test="asyncStatus != null ">
+                and async_status = #{asyncStatus}
+            </if>
+        </where>
+    </select>
+    <update id="updateAsyncStatus" parameterType="string">
+        update basic_clientoperate
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.ClientOperate">
+        update basic_clientoperate
+        <set>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId}
+            </if>
+            <if test="updateDate != null and updateDate != ''">
+                update_date = #{updateDate}
+            </if>
+            <if test="createDate != null and createDate != ''">
+                create_date = #{createDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId}
+            </if>
+
+            <if test="clientId != null and clientId != ''">
+                client_id = #{clientId}
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type}
+            </if>
+
+            <if test="logId != null and logId != ''">
+                log_id = #{logId}
+            </if>
+
+            <if test="asyncStatus != null ">
+                async_status = #{asyncStatus}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

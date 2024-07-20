@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysDictionaryInfo">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysDictionaryInfo" id="BaseSysDictionaryInfoMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="dictId" column="dict_id" jdbcType="VARCHAR"/>
+        <result property="dicName" column="dic_name" jdbcType="VARCHAR"/>
+        <result property="dicValue" column="dic_value" jdbcType="VARCHAR"/>
+        <result property="dicDesc" column="dic_desc" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="VARCHAR"/>
+        <result property="orderNum" column="order_num" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseSysDictionaryInfoMap">
+        select
+          id, dict_id, dic_name, dic_value, dic_desc, create_user_id, create_date, update_user_id, update_date,order_num,tenant_id
+        from base_sys_dictionary_info
+        where id = #{id}
+    </select>
+
+
+    <!--查询指定行数据-->
+    <select id="queryList" resultMap="BaseSysDictionaryInfoMap">
+        select
+          id, dict_id, dic_name, dic_value, dic_desc, create_user_id,  update_user_id,order_num,tenant_id
+        from base_sys_dictionary_info
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="dictId != null and dictId != ''">
+                and dict_id = #{dictId}
+            </if>
+            <if test="dicName != null and dicName != ''">
+                and dic_name = #{dicName}
+            </if>
+            <if test="dicValue != null and dicValue != ''">
+                and dic_value = #{dicValue}
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                and dic_desc = #{dicDesc}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null ">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateDate != null  ">
+                and update_date = #{updateDate}
+            </if>
+        </where>
+        order by order_num asc
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryPage" resultMap="BaseSysDictionaryInfoMap">
+        select
+        id, dict_id, dic_name, dic_value, dic_desc, create_user_id,  update_user_id,
+        order_num,tenant_id
+        from base_sys_dictionary_info
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="dictId != null and dictId != ''">
+                and dict_id = #{dictId}
+            </if>
+            <if test="dicName != null and dicName != ''">
+                and dic_name = #{dicName}
+            </if>
+            <if test="dicValue != null and dicValue != ''">
+                and dic_value = #{dicValue}
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                and dic_desc = #{dicDesc}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null ">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateDate != null  ">
+                and update_date = #{updateDate}
+            </if>
+        </where>
+
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" keyProperty="id" useGeneratedKeys="true">
+        insert into base_sys_dictionary_info(id,dict_id, dic_name, dic_value, dic_desc, create_user_id, create_date, update_user_id, update_date,order_num,tenant_id)
+        values (#{id},#{dictId}, #{dicName}, #{dicValue}, #{dicDesc}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate}, #{orderNum},#{tenantId})
+    </insert>
+
+
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update base_sys_dictionary_info
+        <set>
+            <if test="dictId != null and dictId != ''">
+                dict_id = #{dictId},
+            </if>
+            <if test="dicName != null and dicName != ''">
+                dic_name = #{dicName},
+            </if>
+            <if test="dicValue != null and dicValue != ''">
+                dic_value = #{dicValue},
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                dic_desc = #{dicDesc},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="orderNum != null and orderNum != ''">
+                order_num = #{orderNum},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from base_sys_dictionary_info where id = #{id}
+    </delete>
+
+    <select id="deleteByDictId" resultType="java.lang.Integer">
+        delete FROM base_sys_dictionary_info  where dict_id=#{dictId}
+    </select>
+
+</mapper>
