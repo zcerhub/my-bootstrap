@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dap.paas.console.basic.entity.beijing.AppAppInfo">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.dap.paas.console.basic.entity.beijing.AppAppInfo" id="appAppInfoMap">
+        <result property="id" column="id"/>
+        <result property="creDate" column="cre_date"/>
+        <result property="createUserId" column="cre_user"/>
+        <result property="updDate" column="upd_date"/>
+        <result property="updateUserId" column="upd_user"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="organizationId" column="sys_id"/>
+        <result property="sysName" column="sysName"/>
+        <result property="applicationName" column="name"/>
+        <result property="applicationCode" column="app_code"/>
+        <result property="remark" column="remark"/>
+        <result property="appType" column="app_type"/>
+        <result property="appLanguage" column="app_language"/>
+        <result property="appFrame" column="app_frame"/>
+        <result property="image" column="image"/>
+        <result property="usable" column="usable"/>
+        <result property="showStoreFlag" column="show_storeflag"/>
+    </resultMap>
+
+
+
+    <!--保存-->
+    <insert id="saveObject">
+        insert into
+        <include refid="table-name"/>
+        (
+        <include refid="add-column"/>
+        )
+        values
+        (
+        <include refid="add-attribute"/>
+        )
+    </insert>
+
+
+
+    <!--更新-->
+    <update id="updateObject">
+        update
+        <include refid="table-name"/>
+        <set>
+            <include refid="set-column"/>
+        </set>
+        where id=#{id}
+    </update>
+
+
+
+    <!--删除-->
+    <delete id="delObjectById">
+        delete from
+        <include refid="table-name"/>
+        where id =#{id}
+    </delete>
+
+    <!--根据id 进行批量删除-->
+    <update id="deleteByIds">
+        <foreach collection="list" item="item" index="index" separator=";">
+            delete from
+            <include refid="table-name"/>
+            where id =#{item}
+        </foreach>
+    </update>
+
+
+    <!-- where not null condition -->
+    <sql id="where-nn">
+
+        <if test="organizationId != null and organizationId != ''">
+            and appInfo.sys_id = #{organizationId}
+        </if>
+        <if test="applicationName != null and applicationName != ''">
+            and appInfo.name like concat('%',#{name},'%')
+        </if>
+        <if test="applicationCode != null and applicationCode != ''">
+            and appInfo.app_code = #{applicationCode}
+        </if>
+        <if test="remark != null and remark != ''">
+            and appInfo.remark = #{remark}
+        </if>
+        <if test="appType != null and appType != ''">
+            and appInfo.app_type = #{appType}
+        </if>
+        <if test="appLanguage != null and appLanguage != ''">
+            and appInfo.app_language = #{appLanguage}
+        </if>
+        <if test="appFrame != null and appFrame != ''">
+            and appInfo.app_frame = #{appFrame}
+        </if>
+        <if test="creDate != null and creDate != ''">
+            and appInfo.cre_date = #{creDate}
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+            and appInfo.cre_user = #{createUserId}
+        </if>
+        <if test="updDate != null and updDate != ''">
+            and appInfo.upd_date = #{updDate}
+        </if>
+        <if test="updateUserId != null and updateUserId != '' ">
+            and appInfo.upd_user = #{updateUserId}
+        </if>
+        <if test="tenantId != null and tenantId != ''">
+            and appInfo.tenant_id = #{tenantId}
+        </if>
+        <if test="usable != null and usable != ''">
+            and appInfo.usable = #{usable}
+        </if>
+        <if test="showStoreFlag != null and showStoreFlag != ''">
+            and appInfo.show_storeflag = #{showStoreFlag}
+        </if>
+
+    </sql>
+    <!-- all db table field -->
+    <sql id="table-all-field">
+        <trim suffixOverrides=",">
+            id,
+            sys_id,
+            name,
+            app_code,
+            remark,
+            app_type,
+            app_language,
+            app_frame,
+            cre_date,
+            cre_user,
+            upd_date,
+            upd_user,
+            tenant_id,
+            image,
+            usable,
+            show_storeflag,
+        </trim>
+    </sql>
+    <!-- update not null field -->
+    <sql id="set-column">
+        <trim suffixOverrides=",">
+            <if test="id != null and id !=''">
+                id = #{id},
+            </if>
+            <if test="organizationId != null and organizationId !=''">
+                sys_id = #{organizationId},
+            </if>
+            <if test="applicationName != null and applicationName !=''">
+                name =#{applicationName},
+            </if>
+            <if test="applicationCode != null and applicationCode !=''">
+                app_code =#{applicationCode},
+            </if>
+            <if test="remark != null and remark !=''">
+                remark = #{remark},
+            </if>
+            <if test="appType != null and appType !=''">
+                app_type = #{appType},
+            </if>
+            <if test="appLanguage != null and appLanguage !=''">
+                app_language = #{appLanguage},
+            </if>
+            <if test="appFrame != null and appFrame !=''">
+                app_frame = #{appFrame},
+            </if>
+            <if test="creDate != null and creDate !=''">
+                cre_date = #{creDate},
+            </if>
+            <if test="createUserId != null and createUserId !=''">
+                cre_user = #{createUserId},
+            </if>
+            <if test="updDate != null and updDate !=''">
+                upd_date = #{updDate},
+            </if>
+            <if test="updateUserId != null and updateUserId !=''">
+                upd_user = #{updateUserId},
+            </if>
+            <if test="tenantId != null and tenantId !=''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="image != null and image !=''">
+                image = #{image},
+            </if>
+            <if test="usable != null and usable !=''">
+                usable = #{usable},
+            </if>
+            <if test="showStoreFlag != null and showStoreFlag !=''">
+                show_storeflag = #{showStoreFlag},
+            </if>
+        </trim>
+    </sql>
+    <!-- add not null object attribute -->
+    <sql id="add-attribute">
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                #{id},
+            </if>
+
+            <if test="organizationId != null and organizationId!='' ">
+                #{organizationId},
+            </if>
+            <if test="applicationName != null and applicationName!=''">
+                #{applicationName},
+            </if>
+            <if test="applicationCode != null and applicationCode!=''">
+                #{applicationCode},
+            </if>
+            <if test="remark != null and remark!=''">
+                #{remark},
+            </if>
+            <if test="appType != null and appType!=''">
+                #{appType},
+            </if>
+            <if test="appLanguage != null and appLanguage!=''">
+                #{appLanguage},
+            </if>
+            <if test="appFrame != null and appFrame!=''">
+                #{appFrame},
+            </if>
+            <if test="creDate != null and creDate!=''">
+                #{creDate},
+            </if>
+            <if test="createUserId != null and createUserId!=''">
+                #{createUserId},
+            </if>
+            <if test="updDate != null and updDate!=''">
+                #{updDate},
+            </if>
+            <if test="updateUserId != null and updateUserId!=''">
+                #{updateUserId},
+            </if>
+            <if test="tenantId != null and tenantId!=''">
+                #{tenantId},
+            </if>
+            <if test="image != null and image!=''">
+                #{image},
+            </if>
+            <if test="usable != null and usable!=''">
+                #{usable},
+            </if>
+            <if test="showStoreFlag != null and showStoreFlag!=''">
+                #{showStoreFlag},
+            </if>
+        </trim>
+    </sql>
+    <!-- add not null table fields -->
+    <sql id="add-column">
+        <trim suffixOverrides=",">
+            <if test="id != null and id!=''">
+                id,
+            </if>
+            <if test="organizationId != null and organizationId!='' ">
+                sys_id,
+            </if>
+            <if test="applicationName != null and applicationName!='' ">
+                name,
+            </if>
+            <if test="applicationCode != null and applicationCode!='' ">
+                app_code,
+            </if>
+            <if test="remark != null and remark!='' ">
+                remark,
+            </if>
+            <if test="appType != null and appType!='' ">
+                app_type,
+            </if>
+            <if test="appLanguage != null and appLanguage!='' ">
+                app_language,
+            </if>
+            <if test="appFrame != null and appFrame!='' ">
+                app_frame,
+            </if>
+            <if test="creDate != null and creDate!='' ">
+                cre_date,
+            </if>
+            <if test="createUserId != null and createUserId!=''">
+                cre_user,
+            </if>
+            <if test="updDate != null and updDate!=''">
+                upd_date,
+            </if>
+            <if test="updateUserId != null and updateUserId!=''">
+                upd_user,
+            </if>
+            <if test="tenantId != null and tenantId!=''">
+                tenant_id,
+            </if>
+            <if test="image != null and image!=''">
+                image,
+            </if>
+            <if test="usable != null and usable!=''">
+                usable,
+            </if>
+            <if test="showStoreFlag != null and showStoreFlag!=''">
+                show_storeflag,
+            </if>
+
+        </trim>
+    </sql>
+    <!-- 表名-->
+    <sql id="table-name">
+        app_app_info
+    </sql>
+</mapper>

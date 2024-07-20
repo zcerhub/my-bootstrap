@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.Unitization">
+    <resultMap type="com.dap.paas.console.basic.entity.Unitization" id="UnitizationMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="unitCode" column="unit_code" jdbcType="VARCHAR"/>
+        <result property="unitName" column="unit_name" jdbcType="VARCHAR"/>
+        <result property="machineRoomId" column="machine_room_id" jdbcType="VARCHAR"/>
+        <result property="unitDesc" column="unit_desc" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="unitType" column="unit_type" jdbcType="VARCHAR"/>
+        <result property="bakNo" column="bak_no" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column">
+        id,unit_code,unit_name,machine_room_id,unit_desc,update_user_id,create_user_id,update_date,create_date,tenant_id,unit_type,bak_no
+    </sql>
+
+    <select id="queryPage" parameterType="java.util.HashMap" resultMap="UnitizationMap">
+        select <include refid="Base_Column"/>
+        from basic_unit_info
+        <where>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                AND machine_room_id = #{machineRoomId}
+            </if>
+        </where>
+    </select>
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="UnitizationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_unit_info
+        WHERE id = #{id}
+    </select>
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.Unitization">
+        insert into basic_unit_info(<include refid="Base_Column"/>)
+        values (#{id},#{unitCode},#{unitName},#{machineRoomId},#{unitDesc},#{updateUserId},#{createUserId},#{updateDate},#{createDate},#{tenantId},#{unitType},#{bakNo})
+    </insert>
+
+    <!--根据对象的某个属性查询数据列表-->
+    <select id="getObjectByMap" parameterType="java.util.HashMap" resultMap="UnitizationMap">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_unit_info
+        <where>
+            <if test="unitCode != null and unitCode!=''">
+                AND unit_code=#{unitCode}
+            </if>
+            <if test="unitName != null and unitName!=''">
+                AND unit_name=#{unitName}
+            </if>
+        </where>
+    </select>
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.Unitization">
+        update basic_unit_info
+        <set>
+            <if test="unitCode != null and unitCode != ''">
+                unit_code = #{unitCode},
+            </if>
+            <if test="unitName != null and unitName != ''">
+                unit_name = #{unitName},
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                machine_room_id = #{machineRoomId},
+            </if>
+            <if test="unitDesc != null and unitDesc != ''">
+                unit_desc = #{unitDesc},
+            </if>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="unitType != null and unitType != ''">
+                unit_type = #{unitType},
+            </if>
+            <if test="tenantId != null and tenantId != '' ">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="bakNo != null and bakNo != '' ">
+                bak_no = #{bakNo}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delObjectById" parameterType="String">
+        delete from basic_unit_info
+        where id=#{id}
+    </delete>
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="UnitizationMap">
+        select
+        id, unit_name,bak_no,unit_code
+        from basic_unit_info
+        <where>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                AND machine_room_id = #{machineRoomId}
+            </if>
+            <if test="unitType != null and unitType != ''">
+                AND unit_type = #{unitType}
+            </if>
+        </where>
+    </select>
+    <select id="selectCount" parameterType="com.dap.paas.console.basic.entity.Unitization" resultType="int">
+        select count(1) from  basic_unit_info where unit_code = #{unitCode} and bak_no = #{bakNo}
+    </select>
+</mapper>

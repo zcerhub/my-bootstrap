@@ -1,0 +1,1 @@
+(window["jsonpPaas4"]=window["jsonpPaas4"]||[]).push([["chunk-2d0c5405"],{"3dfd":function(n,t,s){"use strict";s.r(t);var u=function(){var n=this,t=n._self._c;return t("div",{attrs:{id:"app"}},[t("router-view")],1)},a=[],r=s("2877"),i={},d=Object(r["a"])(i,u,a,!1,null,null,null);t["default"]=d.exports}}]);

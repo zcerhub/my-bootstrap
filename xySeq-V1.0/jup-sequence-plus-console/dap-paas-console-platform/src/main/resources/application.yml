@@ -1,0 +1,87 @@
+server:
+  port: 9081
+  servlet:
+    session:
+      timeout: PT24H #session超时时间设置
+spring:
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        health-check-interval: 30s
+        health-check-timeout: 5s
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: paas4-seq-console
+  datasource:
+    #    qianbase
+    #    type: com.alibaba.druid.pool.DruidDataSource
+    #    url: jdbc:qianbase://10.12.20.14:20158/defaultdb
+    #    driver-class-name: org.qianbase.Driver
+    #    username: hrbank
+    #    password: hrbank10.114.14.40-
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #   mysql
+#    url: jdbc:mysql://localhost:3306/paas4_container?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
+    #  ob
+    #    url: jdbc:mysql://10.114.14.40:2881/mq_unit?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    #url: jdbc:mysql://10.64.13.85:31570/paas4_container?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://10.64.13.31:6308/xy_local_seq?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: root123456
+  #    url: jdbc:mysql://10.114.10.220:3306/dap_paas?autoReconnect=true&useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+  #    password: root123456
+  #    高斯
+  #      type: com.alibaba.druid.pool.DruidDataSource
+  #      url: jdbc:postgresql://172.30.33.30:8000/dap?currentSchema=paas2022
+  #      driver-class-name: org.postgresql.Driver
+  #      username: root
+  #      password: Abc1234!!
+  #
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  favicon:
+    enabled: false
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml
+  config-location: classpath:mybatis-config.xml
+
+logging:
+  level:
+    org.apache.curator: warn
+    org.apache.zookeeper: warn
+    org.apache.kafka: warn
+    org.springframework.aop.framework.CglibAopProxy: warn
+    org.springframework.data.convert.CustomConversions: ERROR
+    springfox.documentation.spring.web.readers.operation.CachingOperationNameGenerator: warn
+    com.dap.paas.console: debug
+
+# ===== 自定义swagger配置 ===== #
+swagger:
+  enable: true
+  application-name: DAP PaaS
+  application-version: 5.0
+  application-description: DAP5.0API
+
+#==== 定時任務=====
+scheduler:
+  SeqTimeJob:
+    cron: 0 */2 * * * ?
+  SeqUseJob:
+#    cron: 0 */2 * * * ?
+    cron: 0 0 2 * * ?
+  ConfigTimeJob:
+    cron: 0/30 * * * * ?
+

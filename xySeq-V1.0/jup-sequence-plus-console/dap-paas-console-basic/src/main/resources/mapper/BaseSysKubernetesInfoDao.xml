@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.BaseSysKubernetesInfo">
+
+    <resultMap id="BaseResultMap" type="com.dap.paas.console.basic.entity.BaseSysKubernetesInfo">
+        <!--@Table base_sys_kubernetes_info-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="clusterName" column="cluster_name" jdbcType="VARCHAR"/>
+        <result property="containerClusterName" column="container_cluster_name" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="agentIp" column="agent_ip" jdbcType="VARCHAR"/>
+        <result property="agentPort" column="agent_port" jdbcType="INTEGER"/>
+        <result property="agentState" column="agent_state" jdbcType="VARCHAR"/>
+        <result property="images" column="images" jdbcType="VARCHAR"/>
+        <result property="deleted" column="is_delete" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseResultMap">
+        select
+          id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id, is_delete
+        from base_sys_kubernetes_info
+        where id = #{id}
+    </select>
+
+    <select id="getObjectByMap" resultMap="BaseResultMap">
+        select
+        id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id, is_delete
+        from base_sys_kubernetes_info
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+          id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id , is_delete
+        from base_sys_kubernetes_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="clusterName != null and clusterName != ''">
+                and cluster_name like concat(concat('%',#{clusterName}),'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="agentIp != null and agentIp != ''">
+                and agent_ip = #{agentIp}
+            </if>
+            <if test="agentPort != null">
+                and agent_port = #{agentPort}
+            </if>
+            <if test="agentState != null and agentState != ''">
+                and agent_state = #{agentState}
+            </if>
+            <if test="images != null and images != ''">
+                and images = #{images}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deleted != null and deleted != ''">
+                and is_delete = #{deleted}
+            </if>
+            and is_delete !='1'
+        </where>
+        order by create_date desc
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryList" resultMap="BaseResultMap">
+        select
+          id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id
+        from base_sys_kubernetes_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="clusterName != null and clusterName != ''">
+                and cluster_name like concat(concat('%',#{clusterName}),'%')
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="agentIp != null and agentIp != ''">
+                and agent_ip = #{agentIp}
+            </if>
+            <if test="agentPort != null">
+                and agent_port = #{agentPort}
+            </if>
+            <if test="agentState != null and agentState != ''">
+                and agent_state = #{agentState}
+            </if>
+            <if test="images != null and images != ''">
+                and images = #{images}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="deleted != null and deleted != ''">
+                and is_delete = #{deleted}
+            </if>
+            and is_delete !='1'
+        </where>
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryListByMap" resultMap="BaseResultMap">
+        select
+        id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id
+        from base_sys_kubernetes_info
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from base_sys_kubernetes_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="clusterName != null and clusterName != ''">
+                and cluster_name = #{clusterName}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="agentIp != null and agentIp != ''">
+                and agent_ip = #{agentIp}
+            </if>
+            <if test="agentPort != null">
+                and agent_port = #{agentPort}
+            </if>
+            <if test="agentState != null and agentState != ''">
+                and agent_state = #{agentState}
+            </if>
+            <if test="images != null and images != ''">
+                and images = #{images}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" keyProperty="id" useGeneratedKeys="true">
+        insert into base_sys_kubernetes_info(id, cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id, is_delete)
+        values (#{id}, #{clusterName}, #{containerClusterName}, #{type}, #{agentIp}, #{agentPort}, #{agentState}, #{images}, #{createUserId}, #{updateUserId}, #{createDate}, #{updateDate}, #{tenantId}, #{deleted})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into base_sys_kubernetes_info(cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.clusterName}, #{entity.containerClusterName}, #{entity.type}, #{entity.agentIp}, #{entity.agentPort}, #{entity.agentState}, #{entity.images}, #{entity.createUserId}, #{entity.updateUserId}, #{entity.createDate}, #{entity.updateDate}, #{entity.tenantId})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into base_sys_kubernetes_info(cluster_name, container_cluster_name, type, agent_ip, agent_port, agent_state, images, create_user_id, update_user_id, create_date, update_date, tenant_id)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.clusterName}, #{entity.containerClusterName}, #{entity.type}, #{entity.agentIp}, #{entity.agentPort}, #{entity.agentState}, #{entity.images}, #{entity.createUserId}, #{entity.updateUserId}, #{entity.createDate}, #{entity.updateDate}, #{entity.tenantId})
+        </foreach>
+        on duplicate key update
+        cluster_name = values(cluster_name),
+        container_cluster_name = values(container_cluster_name),
+        type = values(type),
+        agent_ip = values(agent_ip),
+        agent_port = values(agent_port),
+        agent_state = values(agent_state),
+        images = values(images),
+        create_user_id = values(create_user_id),
+        update_user_id = values(update_user_id),
+        create_date = values(create_date),
+        update_date = values(update_date),
+        tenant_id = values(tenant_id)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update base_sys_kubernetes_info
+        <set>
+            <if test="clusterName != null and clusterName != ''">
+                cluster_name = #{clusterName},
+            </if>
+            <if test="containerClusterName != null and containerClusterName != ''">
+                container_cluster_name = #{containerClusterName},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="agentIp != null and agentIp != ''">
+                agent_ip = #{agentIp},
+            </if>
+            <if test="agentPort != null">
+                agent_port = #{agentPort},
+            </if>
+            <if test="agentState != null and agentState != ''">
+                agent_state = #{agentState},
+            </if>
+            <if test="images != null and images != ''">
+                images = #{images},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键修改数据-->
+    <update id="updateStatus">
+        update base_sys_kubernetes_info
+        <set>
+            <if test="clusterName != null and clusterName != ''">
+                cluster_name = #{clusterName},
+            </if>
+            <if test="containerClusterName != null and containerClusterName != ''">
+                container_cluster_name = #{containerClusterName},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="agentIp != null and agentIp != ''">
+                agent_ip = #{agentIp},
+            </if>
+            <if test="agentPort != null">
+                agent_port = #{agentPort},
+            </if>
+            <if test="agentState != null and agentState != ''">
+                agent_state = #{agentState},
+            </if>
+            <if test="images != null and images != ''">
+                images = #{images},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        update base_sys_kubernetes_info set is_delete = "1" where id = #{id}
+    </delete>
+
+</mapper>
+

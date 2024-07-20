@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dap.paas.console.basic.entity.beijing.DcServerInfo">
+
+    <resultMap type="com.dap.paas.console.basic.entity.beijing.DcServerInfo" id="dcServerInfoMap">
+        <result property="id" column="id"/>
+        <result property="hostIp" column="address"/>
+        <result property="typeCode" column="type_code"/>
+        <result property="name" column="name"/>
+        <result property="info" column="info"/>
+        <result property="machineRoomId" column="dc_id"/>
+        <result property="hostSshAccount" column="username"/>
+        <result property="hostSshPassword" column="password"/>
+        <result property="hostPort" column="port"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="createUserId" column="cre_user"/>
+        <result property="creDate" column="cre_date"/>
+        <result property="updateUserId" column="upd_user"/>
+        <result property="updDate" column="upd_date"/>
+        <result property="startTime" column="start_time"/>
+        <result property="endTime" column="end_time"/>
+        <result property="deployName" column="deploy_name"/>
+        <result property="deployPasswd" column="deploy_passwd"/>
+        <result property="deployRoot" column="deploy_root"/>
+        <result property="serversStatus" column="servers_status"/>
+        <result property="serversType" column="servers_type"/>
+        <result property="serversSystem" column="servers_system"/>
+        <result property="serversDomain" column="servers_domain"/>
+        <result property="serversCpu" column="servers_cpu"/>
+        <result property="serversMem" column="servers_mem"/>
+        <result property="serversDisk" column="servers_disk"/>
+        <result property="serversNetwork" column="servers_network"/>
+    </resultMap>
+
+
+
+    <insert id="saveObject">
+        insert into
+        <include refid="table-name"/>
+        (
+        <include refid="insert-field-nn"/>
+        )
+        values
+        (
+        <include refid="insert-value-nn"/>
+        )
+    </insert>
+
+
+
+    <update id="updateObject">
+        update
+        <include refid="table-name"/>
+        <set>
+            <include refid="set-nn"/>
+        </set>
+        where id=#{id}
+    </update>
+
+
+    <delete id="deleteByIds">
+        delete from
+        <include refid="table-name"/>
+        where id in
+        <foreach item="item" index="index" collection="array" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+    <delete id="delObjectById">
+        delete from
+        <include refid="table-name"/>
+        where id = #{id}
+    </delete>
+
+    <!-- insert field not null -->
+    <sql id="insert-field-nn">
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="hostIp != null">
+                address,
+            </if>
+            <if test="typeCode != null">
+                type_code,
+            </if>
+            <if test="info != null">
+                info,
+            </if>
+            <if test="machineRoomId != null">
+                dc_id,
+            </if>
+
+            <if test="hostSshAccount != null">
+                username,
+            </if>
+            <if test="hostSshPassword != null">
+                password,
+            </if>
+            <if test="hostPort != null">
+                port,
+            </if>
+            <if test="startTime != null and startTime != ''">
+                start_time,
+            </if>
+            <if test="endTime != null and endTime != ''">
+                end_time,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="creDate != null">
+                cre_date,
+            </if>
+            <if test="createUserId != null">
+                cre_user,
+            </if>
+            <if test="updateUserId != null">
+                upd_user,
+            </if>
+            <if test="updDate != null">
+                upd_date,
+            </if>
+            <if test="deployName != null and deployName != ''">
+                deploy_name,
+            </if>
+            <if test="deployPasswd != null and deployPasswd != ''">
+                deploy_passwd,
+            </if>
+            <if test="deployRoot != null and deployRoot != ''">
+                deploy_root,
+            </if>
+            <if test="serversStatus != null and serversStatus != ''">
+                servers_status,
+            </if>
+            <if test="serversType != null and serversType != ''">
+                servers_type,
+            </if>
+            <if test="serversSystem != null and serversSystem != ''">
+                servers_system,
+            </if>
+            <if test="serversDomain != null and serversDomain != ''">
+                servers_domain,
+            </if>
+            <if test="serversCpu != null and serversCpu != ''">
+                servers_cpu,
+            </if>
+            <if test="serversMem != null and serversMem != ''">
+                servers_mem,
+            </if>
+            <if test="serversDisk != null and serversDisk != ''">
+                servers_disk,
+            </if>
+            <if test="serversNetwork != null and serversNetwork != ''">
+                servers_network,
+            </if>
+            <if test="serversSftpname != null and serversSftpname != ''">
+                servers_sftpname,
+            </if>
+            <if test="serversSftppassword != null and serversSftppassword != ''">
+                servers_sftppassword,
+            </if>
+        </trim>
+    </sql>
+    <!-- insert value not null -->
+    <sql id="insert-value-nn">
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="name != null">
+                #{name},
+            </if>
+            <if test="hostIp != null">
+                #{hostIp},
+            </if>
+            <if test="typeCode != null">
+                #{typeCode},
+            </if>
+            <if test="info != null">
+                #{info},
+            </if>
+            <if test="machineRoomId != null">
+                #{machineRoomId},
+            </if>
+
+            <if test="hostSshAccount != null">
+                #{hostSshAccount},
+            </if>
+            <if test="hostSshPassword != null">
+                #{hostSshPassword},
+            </if>
+            <if test="hostPort != null">
+                #{port},
+            </if>
+            <if test="startTime != null and startTime != ''">
+                #{startTime},
+            </if>
+            <if test="endTime != null and endTime != ''">
+                #{endTime},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId},
+            </if>
+            <if test="creDate != null">
+                #{creDate},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId},
+            </if>
+            <if test="updDate != null">
+                #{updDate},
+            </if>
+            <if test="deployName != null and deployName != ''">
+                #{deployName},
+            </if>
+            <if test="deployPasswd != null and deployPasswd != ''">
+                #{deployPasswd},
+            </if>
+            <if test="deployRoot != null and deployRoot != ''">
+                #{deployRoot},
+            </if>
+            <if test="serversStatus != null and serversStatus != ''">
+                #{serversStatus},
+            </if>
+            <if test="serversType != null and serversType != ''">
+                #{serversType},
+            </if>
+            <if test="serversSystem != null and serversSystem != ''">
+                #{serversSystem},
+            </if>
+            <if test="serversDomain != null and serversDomain != ''">
+                #{serversDomain},
+            </if>
+            <if test="serversCpu != null and serversCpu != ''">
+                #{serversCpu},
+            </if>
+            <if test="serversMem != null and serversMem != ''">
+                #{serversMem},
+            </if>
+            <if test="serversDisk != null and serversDisk != ''">
+                #{serversDisk},
+            </if>
+            <if test="serversNetwork != null and serversNetwork != ''">
+                #{serversNetwork},
+            </if>
+            <if test="serversSftpname != null and serversSftpname != ''">
+                #{serversSftpname},
+            </if>
+            <if test="serversSftppassword != null and serversSftppassword != ''">
+                #{serversSftppassword},
+            </if>
+        </trim>
+    </sql>
+    <!-- where not null -->
+    <sql id="where-nn">
+        <if test="id != null and id != ''">
+            and id = #{id}
+        </if>
+        <if test="name != null and name != ''">
+            and name = #{name}
+        </if>
+        <if test="hostIp != null and hostIp != ''">
+            and address = #{hostIp}
+        </if>
+        <if test="typeCode != null and typeCode != ''">
+            and type_code = #{typeCode}
+        </if>
+        <if test="info != null and info != ''">
+            and info = #{info}
+        </if>
+        <if test="machineRoomId != null and machineRoomId != ''">
+            and dc_id = #{machineRoomId}
+        </if>
+
+        <if test="hostSshAccount != null and hostSshAccount != ''">
+            and username = #{hostSshAccount}
+        </if>
+
+        <if test="hostPort != null">
+            and port = #{hostPort}
+        </if>
+        <if test="startTime != null and startTime != ''">
+            and start_time = #{startTime}
+        </if>
+        <if test="endTime != null and endTime != ''">
+            and end_time = #{endTime}
+        </if>
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId}
+        </if>
+        <if test="creDate != null">
+            and cre_date = #{creDate}
+        </if>
+        <if test="createUserId != null">
+            and cre_user = #{createUserId}
+        </if>
+        <if test="updateUserId != null">
+            and upd_user = #{updateUserId}
+        </if>
+        <if test="updDate != null">
+            and upd_date = #{updDate}
+        </if>
+    </sql>
+
+    <!-- set not null -->
+    <sql id="set-nn">
+        <trim suffixOverrides=",">
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="hostIp != null">
+                address = #{hostIp},
+            </if>
+            <if test="typeCode != null">
+                type_code = #{typeCode},
+            </if>
+            <if test="info != null">
+                info = #{info},
+            </if>
+            <if test="machineRoomId != null">
+                dc_id = #{machineRoomId},
+            </if>
+
+            <if test="hostSshAccount != null">
+                username = #{hostSshAccount},
+            </if>
+            <if test="hostSshPassword != null">
+                password = #{hostSshPassword},
+            </if>
+            <if test="hostPort != null">
+                port = #{hostPort},
+            </if>
+            <if test="startTime != null and startTime != ''">
+                start_time = #{startTime},
+            </if>
+            <if test="endTime != null and endTime != ''">
+                end_time = #{endTime},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="creDate != null">
+                cre_date = #{creDate},
+            </if>
+            <if test="createUserId != null">
+                cre_user = #{createUserId},
+            </if>
+            <if test="updateUserId != null">
+                upd_user = #{updateUserId},
+            </if>
+            <if test="updDate != null">
+                upd_date = #{updDate},
+            </if>
+            <if test="deployName != null and deployName != ''">
+                deploy_name = #{deployName},
+            </if>
+            <if test="deployPasswd != null and deployPasswd != ''">
+                deploy_passwd = #{deployPasswd},
+            </if>
+            <if test="deployRoot != null and deployRoot != ''">
+                deploy_root = #{deployRoot},
+            </if>
+            <if test="serversStatus != null and serversStatus != ''">
+                servers_status = #{serversStatus},
+            </if>
+            <if test="serversType != null and serversType != ''">
+                servers_type = #{serversType},
+            </if>
+            <if test="serversSystem != null and serversSystem != ''">
+                servers_system = #{serversSystem},
+            </if>
+            <if test="serversDomain != null and serversDomain != ''">
+                servers_domain = #{serversDomain},
+            </if>
+            <if test="serversCpu != null and serversCpu != ''">
+                servers_cpu = #{serversCpu},
+            </if>
+            <if test="serversMem != null and serversMem != ''">
+                servers_mem = #{serversMem},
+            </if>
+            <if test="serversDisk != null and serversDisk != ''">
+                servers_disk = #{serversDisk},
+            </if>
+            <if test="serversNetwork != null and serversNetwork != ''">
+                servers_network = #{serversNetwork},
+            </if>
+            <if test="serversSftpname != null and serversSftpname != ''">
+                servers_sftpname = #{serversSftpname},
+            </if>
+            <if test="serversSftppassword != null and serversSftppassword != ''">
+                servers_sftppassword = #{serversSftppassword},
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="table-name">
+        dc_server_info
+    </sql>
+</mapper>

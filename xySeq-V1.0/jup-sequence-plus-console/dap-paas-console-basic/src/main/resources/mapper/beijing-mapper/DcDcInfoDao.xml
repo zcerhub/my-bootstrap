@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.dap.paas.console.basic.entity.beijing.DcDcInfo">
+
+    <resultMap type="com.dap.paas.console.basic.entity.beijing.DcDcInfo" id="dcDcInfoMap">
+        <result property="id" column="id"/>
+        <result property="machineRoomName" column="name"/>
+        <result property="machineRoomCode" column="dc_code"/>
+        <result property="areaId" column="area_id"/>
+        <result property="areaFullName" column="area_full_name"/>
+        <result property="areaDetailAddr" column="area_detail_addr"/>
+        <result property="state" column="state"/>
+        <result property="resNum" column="res_num"/>
+        <result property="description" column="remark"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="createUserId" column="cre_user"/>
+        <result property="creDate" column="cre_date"/>
+        <result property="updateUserId" column="upd_user"/>
+        <result property="updDate" column="upd_date"/>
+
+    </resultMap>
+
+
+
+    <insert id="saveObject">
+        insert into
+        <include refid="table-name"/>
+        (
+        <include refid="insert-field-nn"/>
+        )
+        values
+        (
+        <include refid="insert-value-nn"/>
+        )
+    </insert>
+
+
+
+    <update id="updateObject">
+        update
+        <include refid="table-name"/>
+        <set>
+            <include refid="set-nn"/>
+        </set>
+        where id=#{id}
+    </update>
+
+    <delete id="deleteByIds">
+        delete from
+        <include refid="table-name"/>
+        where id in
+        <foreach item="item" index="index" collection="array" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="delObjectById">
+        delete from
+        <include refid="table-name"/>
+        where id=#{id}
+    </delete>
+
+    <!-- =========== sql ============== -->
+
+    <!-- insert field not null -->
+    <sql id="insert-field-nn">
+        <trim suffixOverrides=",">
+            <if test='id != null and !"".equals(id)'>
+                id,
+            </if>
+            <if test='machineRoomName != null and !"".equals(machineRoomName)'>
+                name,
+            </if>
+            <if test='machineRoomCode != null and !"".equals(machineRoomCode)'>
+                dc_code,
+            </if>
+            <if test='areaId != null and !"".equals(areaId)'>
+                area_id,
+            </if>
+            <if test='areaFullName != null and !"".equals(areaFullName)'>
+                area_full_name,
+            </if>
+            <if test='areaDetailAddr != null and !"".equals(areaDetailAddr)'>
+                area_detail_addr,
+            </if>
+            <if test='state != null and !"".equals(state)'>
+                state,
+            </if>
+            <if test='resNum != null and !"".equals(resNum)'>
+                res_num,
+            </if>
+            <if test='description != null and !"".equals(description)'>
+                remark,
+            </if>
+            <if test='tenantId != null and !"".equals(tenantId)'>
+                tenant_id,
+            </if>
+            <if test='createUserId != null and !"".equals(createUserId)'>
+                cre_user,
+            </if>
+            <if test='creDate != null and !"".equals(creDate)'>
+                cre_date,
+            </if>
+            <if test='updateUserId != null and !"".equals(updateUserId)'>
+                upd_user,
+            </if>
+            <if test='updDate != null and !"".equals(updDate)'>
+                upd_date,
+            </if>
+
+        </trim>
+    </sql>
+    <!-- insert value not null -->
+    <sql id="insert-value-nn">
+        <trim suffixOverrides=",">
+            <if test='id != null and !"".equals(id)'>
+                #{id},
+            </if>
+            <if test='machineRoomName != null and !"".equals(machineRoomName)'>
+                #{machineRoomName},
+            </if>
+            <if test='machineRoomCode != null and !"".equals(machineRoomCode)'>
+                #{machineRoomCode},
+            </if>
+            <if test='areaId != null and !"".equals(areaId)'>
+                #{areaId},
+            </if>
+            <if test='areaFullName != null and !"".equals(areaFullName)'>
+                #{areaFullName},
+            </if>
+            <if test='areaDetailAddr != null and !"".equals(areaDetailAddr)'>
+                #{areaDetailAddr},
+            </if>
+            <if test='state != null and !"".equals(state)'>
+                #{state},
+            </if>
+            <if test='resNum != null and !"".equals(resNum)'>
+                #{resNum},
+            </if>
+            <if test='description != null and !"".equals(description)'>
+                #{remark},
+            </if>
+            <if test='tenantId != null and !"".equals(tenantId)'>
+                #{tenantId},
+            </if>
+            <if test='createUserId != null and !"".equals(createUserId)'>
+                #{createUserId},
+            </if>
+            <if test='creDate != null and !"".equals(creDate)'>
+                #{creDate},
+            </if>
+            <if test='updateUserId != null and !"".equals(updateUserId)'>
+                #{updateUserId},
+            </if>
+            <if test='updDate != null and !"".equals(updDate)'>
+                #{updDate},
+            </if>
+
+        </trim>
+    </sql>
+    <!-- where not null -->
+    <sql id="where-nn">
+        <if test='id != null and !"".equals(id)'>
+            and id = #{id}
+        </if>
+        <if test='machineRoomName != null and !"".equals(machineRoomName)'>
+            <bind name="machineRoomName" value="'%' + _parameter.machineRoomName + '%'" />
+            and name like #{machineRoomName}
+        </if>
+        <if test='machineRoomCode != null and !"".equals(machineRoomCode)'>
+            and dc_code = #{machineRoomCode}
+        </if>
+        <if test='areaId != null and !"".equals(areaId)'>
+            and area_id = #{areaId}
+        </if>
+        <if test='state != null and !"".equals(state)'>
+            and state = #{state}
+        </if>
+        <if test='resNum != null and !"".equals(resNum)'>
+            and res_num = #{resNum}
+        </if>
+    </sql>
+
+    <!-- set not null -->
+    <sql id="set-nn">
+        <trim suffixOverrides=",">
+            <if test='id != null and !"".equals(id)'>
+                id = #{id},
+            </if>
+            <if test='machineRoomName != null and !"".equals(machineRoomName)'>
+                name = #{machineRoomName},
+            </if>
+            <if test='machineRoomCode != null and !"".equals(machineRoomCode)'>
+                dc_code = #{machineRoomCode},
+            </if>
+            <if test='areaId != null and !"".equals(areaId)'>
+                area_id = #{areaId},
+            </if>
+            <if test='areaFullName != null and !"".equals(areaFullName)'>
+                 area_full_name = #{areaFullName},
+            </if>
+            <if test='areaDetailAddr != null and !"".equals(areaDetailAddr)'>
+                area_detail_addr = #{areaDetailAddr},
+            </if>
+            <if test='state != null and !"".equals(state)'>
+                state = #{state},
+            </if>
+            <if test='resNum != null and !"".equals(resNum)'>
+                res_num = #{resNum},
+            </if>
+            <if test='description != null and !"".equals(description)'>
+                remark = #{description},
+            </if>
+            <if test='tenantId != null and !"".equals(tenantId)'>
+                tenant_id = #{tenantId},
+            </if>
+            <if test='createUserId != null and !"".equals(createUserId)'>
+                cre_user = #{createUserId},
+            </if>
+            <if test='creDate != null and !"".equals(creDate)'>
+                cre_date = #{creDate},
+            </if>
+            <if test='updateUserId != null and !"".equals(updateUserId)'>
+                upd_user = #{updateUserId},
+            </if>
+            <if test='updDate != null and !"".equals(updDate)'>
+                upd_date = #{updateUserId},
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="table-name">
+        dc_dc_info
+    </sql>
+</mapper>

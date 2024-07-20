@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysPermission">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysPermission" id="BaseSysPermissionMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="menuId" column="menu_id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="VARCHAR"/>
+        <result property="operateId" column="operate_id" jdbcType="VARCHAR"/>
+        <result property="appId" column="app_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseSysPermissionMap">
+        select id,
+               update_date,
+               update_user_id,
+               create_user_id,
+               create_date,
+               menu_id,
+               role_id,
+               operate_id,
+               app_id
+        from base_sys_permission
+        where id = #{id}
+    </select>
+
+
+    <!--根据对象的某个属性查询数据列表-->
+    <select id="queryList" resultMap="BaseSysPermissionMap">
+        select
+        id, update_user_id, create_user_id, menu_id, role_id, operate_id,app_id
+        from base_sys_permission
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+        </where>
+    </select>
+
+
+
+
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.BaseSysPermission">
+        insert into base_sys_permission(id,update_date, update_user_id, create_user_id, create_date, menu_id, role_id,
+                                        operate_id,app_id,tenant_id)
+        values (#{id},#{updateDate}, #{updateUserId}, #{createUserId}, #{createDate}, #{menuId}, #{roleId}, #{operateId},
+                #{appId},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.base.sys.api.entity.BaseSysPermission">
+        update base_sys_permission
+        <set>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+
+            <if test="menuId != null and menuId != ''">
+                menu_id = #{menuId},
+            </if>
+            <if test="roleId != null and roleId != ''">
+                role_id = #{roleId},
+            </if>
+            <if test="operateId != null and operateId != ''">
+                operate_id = #{operateId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete
+        from base_sys_permission
+        where id = #{id}
+    </delete>
+
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        delete from base_sys_permission where id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </delete>
+
+
+    <select id="selectByRoles" parameterType="java.util.List" resultMap="BaseSysPermissionMap">
+        select
+        id, update_date, update_user_id, create_user_id, create_date, menu_id, role_id, operate_id,app_id
+        from base_sys_permission where role_id in
+
+        <foreach collection="list" item="roleId" open="(" close=")" separator="," index="">
+            #{roleId}
+        </foreach>
+
+    </select>
+
+    <!--根据对象的某个属性查询数据列表-->
+<!--    <select id="queryCheckMenu" resultType="string">-->
+<!--        select-->
+<!--        distinct concat("m_",menu_id)-->
+<!--        from  base_sys_permission-->
+<!--        <where>-->
+<!--            <if test="roleId != null and roleId != ''">-->
+<!--                and role_id = #{roleId}-->
+<!--            </if>-->
+<!--            <if test="appId != null and appId != ''">-->
+<!--                and app_id = #{appId}-->
+<!--            </if>-->
+<!--            <if test="tenantId != null and tenantId != ''">-->
+<!--                and tenant_id = #{tenantId}-->
+<!--            </if>-->
+<!--            and menu_id is not NULL-->
+<!--        </where>-->
+<!--    </select>-->
+    <!--根据对象的某个属性查询数据列表-->
+    <select id="queryCheckMenu" resultType="string">
+        select
+        distinct menu_id
+        from  base_sys_permission
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            and menu_id is not NULL
+        </where>
+    </select>
+
+
+<!--    <select id="queryCheckOperate" resultType="string">-->
+<!--        select-->
+<!--        distinct concat("o_",operate_id) as operate_id-->
+<!--        from  base_sys_permission-->
+<!--        <where>-->
+<!--            <if test="roleId != null and roleId != ''">-->
+<!--                and role_id = #{roleId}-->
+<!--            </if>-->
+<!--            <if test="appId != null and appId != ''">-->
+<!--                and app_id = #{appId}-->
+<!--            </if>-->
+<!--            <if test="tenantId != null and tenantId != ''">-->
+<!--                and tenant_id = #{tenantId}-->
+<!--            </if>-->
+<!--            and operate_id is not NULL-->
+<!--        </where>-->
+<!--    </select>-->
+
+
+    <select id="queryCheckOperate" resultType="string">
+        select
+        distinct operate_id
+        from  base_sys_permission
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            and operate_id is not NULL
+        </where>
+    </select>
+    <delete id="delObjectByOperate">
+        delete from base_sys_permission
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+            <if test="operateId != null and operateId != ''">
+                and operate_id = #{operateId}
+            </if>
+        </where>
+    </delete>
+
+    <delete id="delObjectByMenu">
+        delete from base_sys_permission
+        <where>
+            <if test="roleId != null and roleId != ''">
+                and role_id = #{roleId}
+            </if>
+            <if test="appId != null and appId != ''">
+                and app_id = #{appId}
+            </if>
+            <if test="menuId != null and menuId != ''">
+                and menu_id = #{menuId}
+            </if>
+
+                and operate_id is null
+
+        </where>
+    </delete>
+
+
+    <!--获取对应角色列表的菜单信息-->
+    <select id="getRoleAppMenu" resultType="string">
+        select distinct menu_id from base_sys_permission where
+        app_id = #{appId}
+        and role_id in
+        <foreach collection="roleIds" item="roleIds" index="index" open="(" close=")" separator=",">
+            #{roleIds}
+        </foreach>
+    </select>
+</mapper>

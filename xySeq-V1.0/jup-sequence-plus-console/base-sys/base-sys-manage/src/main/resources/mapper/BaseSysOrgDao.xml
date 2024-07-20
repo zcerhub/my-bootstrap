@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysOrg">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysOrg" id="BaseSysOrgMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="VARCHAR"/>
+        <result property="name"  column="name" jdbcType="VARCHAR"/>
+        <result property="simpleName" column="simple_name" jdbcType="VARCHAR"/>
+        <result property="orgCode" column="code" jdbcType="VARCHAR"/>
+        <result property="orgType" column="type" jdbcType="VARCHAR"/>
+        <result property="orgStatus" column="status" jdbcType="VARCHAR"/>
+        <result property="orgSort" column="sort" jdbcType="INTEGER"/>
+        <result property="isDelete" column="is_delete" jdbcType="VARCHAR"/>
+        <result property="orgDesc" column="description" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, parent_id, name, simple_name, code, type,status, sort, is_delete, description, create_user_id, create_date,update_date,update_user_id,tenant_id
+    </sql>
+    <!--查询单个   可以查到已删除的部门 -->
+    <select id="getObjectById" parameterType="string" resultMap="BaseSysOrgMap">
+        select
+          <include refid="Base_Column"/>
+        from base_sys_org
+        where id = #{id,jdbcType=VARCHAR}
+    </select>
+
+    <!--查询指定行数据 分页 不能查到已经删除的部门 -->
+    <select id="queryPage" parameterType="com.base.sys.api.entity.BaseSysOrg" resultMap="BaseSysOrgMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_org
+        <where>
+            <if test="name != null and name != ''">
+                and name like concat('%', #{name,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="simpleName != null and simpleName != ''">
+                and simple_name like concat('%', #{simpleName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="orgCode != null and orgCode != ''">
+                and code like concat('%', #{orgCode,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="orgType != null and orgType != ''">
+                and type like concat('%', #{orgType,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="orgDesc != null and orgDesc != ''">
+                and description like concat('%', #{orgDesc,jdbcType=VARCHAR}, '%')
+            </if>
+            and is_delete !='1'
+        </where>
+    </select>
+
+    <!--查询指定行数据 分页 不能查到已经删除的部门 -->
+    <select id="queryListByPo" parameterType="com.base.sys.api.entity.BaseSysOrg" resultMap="BaseSysOrgMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_org
+        <where>
+            <if test="orgType != null and orgType != ''">
+                and type = #{orgType}
+            </if>
+           <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete}
+           </if>
+           <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+           </if>
+        </where>
+        order by sort
+    </select>
+    <!--查询指定行数据 分页 不能查到已经删除的部门 -->
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="BaseSysOrgMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_org
+        <where>
+            <if test="orgType != null and orgType != ''">
+                and type = #{orgType}
+            </if>
+           <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete}
+           </if>
+            <if test="parentId != null ">
+                and parent_id = #{parentId}
+            </if>
+            <if test="parentId == null">
+                and  parent_id IS NULL
+            </if>
+           <if test="orgSort != null and orgSort != ''">
+                and sort > #{orgSort}
+           </if>
+        </where>
+        order by sort
+    </select>
+
+    <!--通过实体作为筛选条件查询  不能查到已经删除的部门 查处一个对象 -->
+    <select id="getObjectByMap" parameterType="java.util.HashMap" resultMap="BaseSysOrgMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_org
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="parentId != null and parentId != ''">
+                and parent_id = #{parentId}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+            <if test="simpleName != null and simpleName != ''">
+                and simple_name = #{simpleName}
+            </if>
+            <if test="orgCode != null and orgCode != ''">
+                and code = #{orgCode}
+            </if>
+            <if test="orgType != null and orgType != ''">
+                and type = #{orgType}
+            </if>
+            <if test="orgStatus != null and orgStatus != ''">
+                and status = #{orgStatus}
+            </if>
+            <if test="orgSort != null">
+                and sort = #{orgSort}
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="orgDesc != null and orgDesc != ''">
+                and description = #{orgDesc}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null ">
+                and create_date = #{createDate}
+            </if>
+            and is_delete !='1'
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.BaseSysOrg">
+        insert into base_sys_org(<include refid="Base_Column"/>)
+        values (#{id},#{parentId}, #{name}, #{simpleName}, #{orgCode}, #{orgType}, #{orgStatus}, #{orgSort}, #{isDelete}, #{orgDesc}, #{createUserId}, #{createDate}, #{updateDate},#{updateUserId},#{tenantId})
+    </insert>
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.base.sys.api.entity.BaseSysOrg">
+        update base_sys_org
+        <set>
+            parent_id = #{parentId},
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="simpleName != null and simpleName != ''">
+                simple_name = #{simpleName},
+            </if>
+            <if test="orgCode != null and orgCode != ''">
+                code = #{orgCode},
+            </if>
+            <if test="orgType != null and orgType != ''">
+                type = #{orgType},
+            </if>
+            <if test="orgStatus != null and orgStatus != ''">
+                status = #{orgStatus},
+            </if>
+            <if test="orgSort != null">
+                sort = #{orgSort},
+            </if>
+            <if test="isDelete != null and isDelete != ''">
+                is_delete = #{isDelete},
+            </if>
+            <if test="orgDesc != null and orgDesc != ''">
+                description = #{orgDesc},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from base_sys_org where id = #{id}
+    </delete>
+    <!-- count-->
+    <select id="selectTotal" resultType="int">
+        select count(1) from
+        base_sys_org
+        <where>
+        <if test="parentId != null ">
+            and parent_id = #{parentId}
+        </if>
+        <if test="parentId == null">
+            and parent_id is null
+        </if>
+    </where>
+    </select>
+
+</mapper>

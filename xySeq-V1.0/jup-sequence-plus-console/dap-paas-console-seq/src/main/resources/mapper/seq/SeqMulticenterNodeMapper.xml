@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.seq.entity.SeqMulticenterNode">
+
+    <resultMap id="BaseResultMap" type="com.dap.paas.console.seq.entity.SeqMulticenterNode">
+        <!--@Table cache_multicenter_cluster-->
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="seqClusterId" column="seq_cluster_id" jdbcType="VARCHAR"/>
+        <result property="multiClusterId" column="multi_cluster_id" jdbcType="VARCHAR"/>
+        <result property="syncMethod" column="sync_method" jdbcType="INTEGER"/>
+        <result property="machineRoomId" column="machine_room_id" jdbcType="VARCHAR"/>
+        <result property="cityId" column="city_id" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="syncTaskId" column="synctask_id" jdbcType="VARCHAR"/>
+        <result property="currentDb" column="current_db" jdbcType="VARCHAR"/>
+        <result property="dbUser" column="db_user" jdbcType="VARCHAR"/>
+        <result property="dbPassword" column="db_password" jdbcType="VARCHAR"/>
+        <result property="dbUrl" column="db_url" jdbcType="VARCHAR"/>
+        <result property="dbDriver" column="db_driver" jdbcType="VARCHAR"/>
+        <result property="currentDbName" column="currentDbName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column">
+       id, create_date, update_date, update_user_id, create_user_id, tenant_id, seq_cluster_id, multi_cluster_id, sync_method, machine_room_id, city_id,status,synctask_id,current_db,db_user,db_password,db_url,db_driver
+    </sql>
+
+    <!--  表名  -->
+    <sql id="Table_Name">
+        seq_multicenter_node
+    </sql>
+
+    <!--  通用where条件  -->
+    <sql id="Base_Where">
+        <trim suffixOverrides="and">
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="seqClusterId != null and seqClusterId != ''">
+                and seq_cluster_id = #{seqClusterId}
+            </if>
+            <if test="multiClusterId != null and multiClusterId != ''">
+                and multi_cluster_id = #{multiClusterId}
+            </if>
+            <if test="syncMethod != null and syncMethod != ''">
+                and sync_method = #{syncMethod}
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                and machine_room_id = #{machineRoomId}
+            </if>
+            <if test="cityId != null and cityId != ''">
+                and city_id = #{cityId}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="syncTaskId != null and syncTaskId != ''">
+                and synctask_id = #{syncTaskId}
+            </if>
+        </trim>
+    </sql>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from <include refid="Table_Name"/>
+        where id = #{id}
+    </select>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryPage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column"/>
+        from <include refid="Table_Name"/>
+        <where>
+            <include refid="Base_Where"/>
+        </where>
+    </select>
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.dap.paas.console.seq.entity.SeqMulticenterNode">
+        insert into <include refid="Table_Name"/>(<include refid="Base_Column"/>)
+        values (#{id},#{createDate}, #{updateDate}, #{updateUserId}, #{createUserId}, #{tenantId}, #{seqClusterId}, #{multiClusterId}, #{syncMethod}, #{machineRoomId}, #{cityId},#{status},#{syncTaskId},#{currentDb},#{dbUser},#{dbPassword},#{dbUrl},#{dbDriver})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update <include refid="Table_Name"/>
+        <set>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="seqClusterId != null and seqClusterId != ''">
+                seq_cluster_id = #{seqClusterId},
+            </if>
+            <if test="multiClusterId != null and multiClusterId != ''">
+                multi_cluster_id = #{multiClusterId},
+            </if>
+            <if test="syncMethod != null and syncMethod != ''">
+                sync_method = #{syncMethod},
+            </if>
+            <if test="machineRoomId != null and machineRoomId != ''">
+                machine_room_id = #{machineRoomId},
+            </if>
+            <if test="cityId != null and cityId != ''">
+                city_id = #{cityId},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="syncTaskId != null and syncTaskId != ''">
+                synctask_id = #{syncTaskId},
+            </if>
+            <if test="currentDb != null and currentDb != ''">
+                current_db = #{currentDb},
+            </if>        <if test="dbUser != null and dbUser != ''">
+            db_user = #{dbUser},
+        </if>        <if test="dbPassword != null and dbPassword != ''">
+            db_password = #{dbPassword},
+        </if>        <if test="dbUrl != null and dbUrl != ''">
+            db_url = #{dbUrl},
+        </if>        <if test="dbDriver != null and dbDriver != ''">
+            db_driver = #{dbDriver},
+        </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from <include refid="Table_Name"/> where id = #{id}
+    </delete>
+
+    <select id="selectTotal" resultType="int">
+        select count(1) from
+        <include refid="Table_Name"/>
+        <where>
+            <if test="createDate != null">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateDate != null">
+                and update_date = #{updateDate}
+            </if>
+            <if test="updateUserId != null">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="seqClusterId != null">
+                and seq_cluster_id = #{seqClusterId}
+            </if>
+            <if test="multiClusterId != null">
+                and multi_cluster_id = #{multiClusterId}
+            </if>
+            <if test="syncMethod != null">
+                and sync_method = #{syncMethod}
+            </if>
+            <if test="machineRoomId != null">
+                and machine_room_id = #{machineRoomId}
+            </if>
+            <if test="cityId != null">
+                and city_id = #{cityId}
+            </if>
+            <if test="status != null and status != ''">
+                and status = #{status}
+            </if>
+            <if test="syncTaskId != null and syncTaskId != ''">
+                and synctask_id = #{syncTaskId}
+            </if>
+        </where>
+    </select>
+
+    <!--根据对象的某个属性查询数据列表-->
+    <select id="queryNodes" parameterType="com.dap.paas.console.seq.entity.SeqMulticenterNode" resultMap="BaseResultMap">
+        SELECT t1.*,t2.name currentDbName
+        FROM seq_multicenter_node t1  left join seq_service_cluster t2 on t1.current_db=t2.id
+        <where>
+            <if test="multiClusterId != null and multiClusterId != ''">
+                AND t1.multi_cluster_id = #{multiClusterId}
+            </if>
+            AND t1.tenant_id = #{tenantId}
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseLogAudit">
+
+    <resultMap type="com.base.sys.api.entity.BaseLogAudit" id="BaseLogAuditMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="operatorUserId" column="operator_user_id" jdbcType="VARCHAR"/>
+        <result property="operatorUserName" column="operator_user_name" jdbcType="VARCHAR"/>
+        <result property="menuName" column="menu_name" jdbcType="VARCHAR"/>
+        <result property="buttonName" column="button_name" jdbcType="VARCHAR"/>
+        <result property="operateResult" column="operate_result" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="methonName" column="methon_name" jdbcType="VARCHAR"/>
+        <result property="operateIp" column="operate_ip" jdbcType="VARCHAR"/>
+        <result property="desc" column="description" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="componentType" column="component_type" jdbcType="VARCHAR"/>
+
+    </resultMap>
+    <sql id="Base_Column">
+        id, operator_user_id, operator_user_name, menu_name, button_name, operate_result, create_user_id, create_date,methon_name,operate_ip,description,tenant_id,component_type
+    </sql>
+    <!--查询单个-->
+    <select id="getObjectById" parameterType="string" resultMap="BaseLogAuditMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_log_audit
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage" parameterType="com.base.sys.api.entity.BaseLogAudit" resultMap="BaseLogAuditMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_log_audit
+        <where>
+            <if test="operatorUserName != null and operatorUserName != ''">
+                and operator_user_name like concat(concat('%', #{operatorUserName}), '%')
+            </if>
+            <if test="menuName != null and menuName != ''">
+                and menu_name like concat(concat('%', #{menuName}), '%')
+            </if>
+            <if test="buttonName != null and buttonName != ''">
+                and button_name like concat(concat('%', #{buttonName}), '%')
+            </if>
+            <if test="operateResult != null and operateResult != ''">
+                and operate_result like concat(concat('%', #{operateResult}), '%')
+            </if>
+            <if test="methonName != null and methonName != ''">
+                and methon_name like concat(concat('%', #{methonName}), '%')
+            </if>
+            <if test="desc != null and desc != ''">
+                and description like concat(concat('%', #{desc}), '%')
+            </if>
+            <if test="operateTime != null and operateTime.size()>0">
+                and TO_char(create_date,'yyyy-mm-dd hh24:mi:ss') between #{operateTime[0]} and #{operateTime[1]}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="componentType != null and componentType != ''">
+                and component_type = #{componentType}
+            </if>
+
+        </where>
+        ORDER BY create_date desc
+    </select>
+
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="BaseLogAuditMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_log_audit
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="getObjectByMap" parameterType="java.util.HashMap" resultMap="BaseLogAuditMap">
+        select
+        <include refid="Base_Column"/>
+        from base_sys_log_audit
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="operator != null and operator != ''">
+                and operator = #{operator}
+            </if>
+            <if test="operateModule != null and operateModule != ''">
+                and operate_module = #{operateModule}
+            </if>
+            <if test="operateType != null and operateType != ''">
+                and operate_type = #{operateType}
+            </if>
+            <if test="operateInfo != null and operateInfo != ''">
+                and operate_info = #{operateInfo}
+            </if>
+            <if test="operateResult != null and operateResult != ''">
+                and operate_result = #{operateResult}
+            </if>
+            <if test="operatorIp != null and operatorIp != ''">
+                and operator_ip = #{operatorIp}
+            </if>
+            <if test="createDate != null">
+                and operate_time = #{createDate}
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                and tenant_id = #{tenantId}
+            </if>
+            <if test="componentType != null and componentType != ''">
+                and component_type = #{componentType}
+            </if>
+        </where>
+    </select>
+    <!--新增所有列-->
+    <insert id="saveObject" parameterType="com.base.sys.api.entity.BaseLogAudit">
+        insert into base_sys_log_audit(<include refid="Base_Column"/>)
+        values (#{id},#{operatorUserId}, #{operatorUserName}, #{menuName},
+        #{buttonName}, #{operateResult}, #{createUserId}, #{createDate},
+        #{methonName}, #{operateIp}, #{desc},#{tenantId},#{componentType})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="updateObject" parameterType="com.base.sys.api.entity.BaseLogAudit">
+        update base_sys_log_audit
+        <set>
+            <if test="operatorUserName != null and operatorUserName != ''">
+                operator_user_name = #{operatorUserName},
+            </if>
+            <if test="menuName != null and menuName != ''">
+                menu_name = #{menuName},
+            </if>
+            <if test="buttonName != null and buttonName != ''">
+                button_name = #{buttonName},
+            </if>
+            <if test="operateResult != null and operateResult != ''">
+                operate_result = #{operateResult},
+            </if>
+            <if test="methonName != null and methonName != ''">
+                methon_name = #{methonName},
+            </if>
+            <if test="operateIp != null and operateIp != ''">
+                operate_ip = #{operateIp},
+            </if>
+            <if test="desc != null and desc != ''">
+                description = #{desc},
+            </if>
+            <if test="createDate != null">
+                operate_time = #{createDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+            <if test="componentType != null and componentType != ''">
+             component_type = #{componentType},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectByIds" parameterType="string">
+        delete from base_sys_log_audit where id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById" parameterType="string">
+        delete from base_sys_log_audit where id = #{id}
+    </delete>
+</mapper>

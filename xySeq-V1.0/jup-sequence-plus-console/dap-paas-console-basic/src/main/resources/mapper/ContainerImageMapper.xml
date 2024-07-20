@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.ContainerImage">
+    <resultMap id="BaseResultMap" type="com.dap.paas.console.basic.entity.ContainerImage">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="image_type" jdbcType="VARCHAR" property="imageType"/>
+        <result column="image_name" jdbcType="VARCHAR" property="imageName"/>
+        <result column="image_address" jdbcType="VARCHAR" property="imageAddress"/>
+        <result column="image_version" jdbcType="VARCHAR" property="imageVersion"/>
+        <result column="image_pull_secret" jdbcType="VARCHAR" property="imagePullSecret"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="update_date" jdbcType="TIMESTAMP" property="updateDate"/>
+        <result column="tenant_id" jdbcType="VARCHAR" property="tenantId"/>
+        <result column="component_version" jdbcType="VARCHAR" property="componentVersion"/>
+
+    </resultMap>
+    <sql id="Base_Column_List">
+        id,
+        image_type,
+        image_name,
+        image_address,
+        image_version,
+        image_pull_secret,
+        remark,
+        create_user_id,
+        update_user_id,
+        create_date,
+        update_date,
+        tenant_id,
+        component_version
+    </sql>
+    <select id="getObjectById"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from basic_container_image
+        where id =  #{id}
+    </select>
+    <select id="queryPage" parameterType="com.dap.paas.console.basic.entity.ContainerImage"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from basic_container_image
+                where 1=1
+        <if test="imageType != null ">
+            AND image_type =  #{imageType,jdbcType=VARCHAR}
+        </if>
+        <if test="imageName != null and imageName != ''">
+            AND image_name like CONCAT(CONCAT('%'
+              , #{imageName})
+              , '%')
+        </if>
+    </select>
+    <select id="queryList" parameterType="com.dap.paas.console.basic.entity.ContainerImage" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from basic_container_image
+                where 1=1
+        <if test="imageType != null and imageType != ''">
+            AND image_type =  #{imageType}
+        </if>
+        <if test="imageName != null and imageName != ''">
+            AND image_name like CONCAT(CONCAT('%'
+              , #{imageName})
+              , '%')
+        </if>
+    </select>
+    <delete id="delObjectById">
+        delete
+        from basic_container_image
+        where id = #{id}
+    </delete>
+    <!-- 批量删除  -->
+    <delete id="delObjectByIds" parameterType="java.util.List">
+        delete
+        from basic_container_image
+                WHERE id in
+        <foreach collection="list" item="id" open="(" close=")" separator="," index="">
+            #{ids}
+        </foreach>
+    </delete>
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.ContainerImage">
+        insert into basic_container_image (id, image_type, image_name,
+                                           image_address, image_version, image_pull_secret,
+                                           remark, create_user_id, update_user_id,
+                                           create_date, update_date, tenant_id,component_version)
+        values (#{id,jdbcType=VARCHAR}, #{imageType,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR},
+                #{imageAddress,jdbcType=VARCHAR}, #{imageVersion,jdbcType=VARCHAR}, #{imagePullSecret,jdbcType=VARCHAR},
+                #{remark,jdbcType=VARCHAR}, #{createUserId,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR},
+                #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{tenantId,jdbcType=VARCHAR}, #{componentVersion,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dap.paas.console.basic.entity.ContainerImage">
+        insert into basic_container_image
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="imageType != null">
+                image_type,
+            </if>
+            <if test="imageName != null">
+                image_name,
+            </if>
+            <if test="imageAddress != null">
+                image_address,
+            </if>
+            <if test="imageVersion != null">
+                image_version,
+            </if>
+            <if test="imagePullSecret != null">
+                image_pull_secret,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createUserId != null">
+                create_user_id,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="tenantId != null">
+                tenant_id,
+            </if>
+            <if test="component_version != null">
+                component_version,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="imageType != null">
+                #{imageType,jdbcType=VARCHAR},
+            </if>
+            <if test="imageName != null">
+                #{imageName,jdbcType=VARCHAR},
+            </if>
+            <if test="imageAddress != null">
+                #{imageAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="imageVersion != null">
+                #{imageVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePullSecret != null">
+                #{imagePullSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tenantId != null">
+                #{tenantId,jdbcType=VARCHAR},
+            </if>
+             <if test="componentVersion != null">
+                #{componentVersion,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.ContainerImage">
+        update basic_container_image
+        <set>
+            <if test="imageType != null">
+                image_type = #{imageType,jdbcType=VARCHAR},
+            </if>
+            <if test="imageName != null">
+                image_name = #{imageName,jdbcType=VARCHAR},
+            </if>
+            <if test="imageAddress != null">
+                image_address = #{imageAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="imageVersion != null">
+                image_version = #{imageVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="imagePullSecret != null">
+                image_pull_secret = #{imagePullSecret,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tenantId != null">
+                tenant_id = #{tenantId,jdbcType=VARCHAR},
+            </if>
+             <if test="componentVersion != null">
+                component_version = #{componentVersion,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dap.paas.console.basic.entity.ContainerImage">
+        update basic_container_image
+        set image_type        = #{imageType,jdbcType=VARCHAR},
+            image_name        = #{imageName,jdbcType=VARCHAR},
+            image_address     = #{imageAddress,jdbcType=VARCHAR},
+            image_version     = #{imageVersion,jdbcType=VARCHAR},
+            image_pull_secret = #{imagePullSecret,jdbcType=VARCHAR},
+            remark            = #{remark,jdbcType=VARCHAR},
+            create_user_id    = #{createUserId,jdbcType=VARCHAR},
+            update_user_id    = #{updateUserId,jdbcType=VARCHAR},
+            create_date       = #{createDate,jdbcType=TIMESTAMP},
+            update_date       = #{updateDate,jdbcType=TIMESTAMP},
+            tenant_id         = #{tenantId,jdbcType=VARCHAR},
+            component_version = #{componentVersion,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

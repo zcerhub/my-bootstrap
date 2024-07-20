@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.FilePackage">
+
+    <resultMap type="com.dap.paas.console.basic.entity.FilePackage" id="FilePackageMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="version" column="package_version" jdbcType="VARCHAR"/>
+        <result property="remark" column="package_remark" jdbcType="VARCHAR"/>
+        <result property="packageName" column="package_name" jdbcType="VARCHAR"/>
+        <result property="sdkName" column="sdk_name" jdbcType="VARCHAR"/>
+        <result property="packageUrl" column="package_url" jdbcType="VARCHAR"/>
+        <result property="sdkUrl" column="sdk_url" jdbcType="VARCHAR"/>
+        <result property="tableName" column="tablename" jdbcType="VARCHAR"/>
+        <result property="cpuArchitecture" column="CPU_architecture" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+    id, update_user_id, create_user_id,tenant_id,product_name,package_version,package_remark,package_name,sdk_name,package_url,sdk_url,tablename,CPU_architecture
+    </sql>
+
+    <!--通过id查询-->
+    <select id="getObjectById" parameterType="String" resultMap="FilePackageMap">
+        select <include refid="Base_Column"/>
+        from basic_filepackage where deleted != '1' and id = #{id}
+    </select>
+
+    <!--通过tablename查询当前tablename下所有数据-->
+    <select id="queryList" parameterType="java.util.HashMap" resultMap="FilePackageMap">
+        select <include refid="Base_Column"/>
+        from basic_filepackage
+        where deleted != '1'
+            <if test="tableName != null and tableName != ''">
+                AND tablename = #{tableName}
+            </if>
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryPage"  parameterType="com.dap.paas.console.basic.entity.FilePackage" resultMap="FilePackageMap">
+        select <include refid="Base_Column"/>
+        from basic_filepackage
+        where deleted !='1'
+        <if test="tableName != null and tableName != ''">
+            AND tablename = #{tableName}
+        </if>
+    </select>
+
+
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.FilePackage">
+        insert into basic_filepackage (<include refid="Base_Column"/>)
+        values (#{id}, #{updateUserId}, #{createUserId},#{tenantId},#{productName},#{version},#{remark},#{packageName},#{sdkName},#{packageUrl},#{sdkUrl},#{tableName},#{cpuArchitecture})
+    </insert>
+
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.FilePackage">
+        update basic_filepackage
+        <set>
+        <if test="updateDate != null ">
+            update_date = #{updateDate},
+        </if>
+        <if test="updateUserId != null and updateUserId != ''">
+            update_user_id = #{updateUserId},
+        </if>
+        <if test="createUserId != null and createUserId != ''">
+            create_user_id = #{createUserId},
+        </if>
+        <if test="createDate != null ">
+            create_date = #{createDate},
+        </if>
+        <if test="tenantId != null and tenantId != '' ">
+            tenant_id = #{tenantId},
+        </if>
+        <if test="packageUrl != null ">
+            package_url = #{packageUrl},
+        </if>
+        <if test="tenantId != null and tenantId != '' ">
+            tenant_id = #{tenantId},
+        </if>
+        <if test="productName != null ">
+            product_name = #{productName},
+        </if>
+        <if test="version != null and version != '' ">
+            package_version = #{version},
+        </if>
+        <if test="remark != null ">
+            package_remark = #{remark},
+        </if>
+        <if test="packageName != null ">
+            package_name = #{packageName},
+        </if>
+        <if test="sdkName != null ">
+            SDK_name = #{sdkName},
+        </if>
+        <if test="packageUrl != null ">
+            package_url = #{packageUrl},
+        </if>
+        <if test="sdkUrl != null ">
+            sdk_url = #{sdkUrl},
+        </if>
+        <if test="tableName != null ">
+            tablename = #{tableName},
+        </if>
+        <if test="cpuArchitecture != null ">
+            CPU_architecture = #{cpuArchitecture},
+        </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delObjectById" parameterType="String">
+        delete from basic_filepackage where id = #{id}
+    </delete>
+</mapper>

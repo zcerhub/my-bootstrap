@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.paas.console.basic.entity.ConfigTemplate">
+    <resultMap id="templateMap" type="com.dap.paas.console.basic.entity.ConfigTemplate">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="LONGVARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="componentType" column="component_type" jdbcType="VARCHAR"/>
+        <result property="moduleType" column="module_type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="deleted" column="deleted" jdbcType="TINYINT"/>
+
+    </resultMap>
+
+    <sql id="Base_Column">
+        id, name, content, component_type, module_type, status, create_user_id,
+        create_date, update_user_id, update_date, tenant_id, deleted
+    </sql>
+
+    <select id="getObjectById" resultMap="templateMap" parameterType="java.lang.String">
+        SELECT <include refid="Base_Column"/>
+        FROM basic_config_template
+        WHERE id = #{id}
+        AND deleted = 0
+    </select>
+
+    <select id="queryPage" parameterType="com.dap.paas.console.basic.entity.ConfigTemplate" resultMap="templateMap">
+        SELECT id, name, component_type, module_type, status, update_user_id, update_date
+        FROM basic_config_template
+        WHERE deleted = 0
+        <if test="name != null and name != ''">
+            AND name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="componentType != null and componentType != ''">
+            AND component_type = #{componentType}
+        </if>
+        <if test="moduleType != null and moduleType != ''">
+            AND module_type = #{moduleType}
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        ORDER BY create_date desc
+    </select>
+
+    <select id="queryList" parameterType="com.dap.paas.console.basic.entity.ConfigTemplate" resultMap="templateMap">
+        SELECT name, id, content
+        FROM basic_config_template
+        WHERE deleted = 0
+        <if test="name != null and name != ''">
+            AND name like CONCAT('%',#{name},'%')
+        </if>
+        <if test="componentType != null and componentType != ''">
+            AND component_type = #{componentType}
+        </if>
+        <if test="moduleType != null and moduleType != ''">
+            AND module_type = #{moduleType}
+        </if>
+        <if test="status != null and status != ''">
+            AND status = #{status}
+        </if>
+        ORDER BY create_date desc
+    </select>
+
+    <update id="delObjectById" parameterType="java.lang.String">
+        UPDATE basic_config_template
+        SET deleted = 1
+        WHERE id = #{id}
+    </update>
+
+    <insert id="saveObject" parameterType="com.dap.paas.console.basic.entity.ConfigTemplate">
+        INSERT INTO basic_config_template
+        (id, name, content, component_type, module_type, status, create_user_id,
+        create_date, update_user_id, update_date, tenant_id, deleted)
+        VALUES
+        (#{id}, #{name}, #{content}, #{componentType}, #{moduleType}, #{status}, #{createUserId},
+         #{createDate}, #{updateUserId}, #{updateDate}, #{tenantId}, #{deleted})
+    </insert>
+
+    <update id="updateObject" parameterType="com.dap.paas.console.basic.entity.ConfigTemplate">
+        UPDATE basic_config_template
+        SET
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="componentType != null and componentType != ''">
+                component_type = #{componentType},
+            </if>
+            <if test="moduleType != null and moduleType != ''">
+                module_type = #{moduleType},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="deleted != null">
+                deleted = #{deleted},
+            </if>
+            update_user_id = #{updateUserId},
+            update_date = #{updateDate}
+        WHERE id = #{id}
+    </update>
+</mapper>

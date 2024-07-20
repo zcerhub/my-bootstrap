@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.base.sys.api.entity.BaseSysDictionary">
+
+    <resultMap type="com.base.sys.api.entity.BaseSysDictionary" id="BaseSysDictionaryMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="dicCode" column="dic_code" jdbcType="VARCHAR"/>
+        <result property="dicName" column="dic_name" jdbcType="VARCHAR"/>
+        <result property="dicDesc" column="dic_desc" jdbcType="VARCHAR"/>
+        <result property="cateCode" column="cate_code" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="updateDate" column="update_date" jdbcType="VARCHAR"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="getObjectById" resultMap="BaseSysDictionaryMap">
+        select
+          id, dic_code, dic_name, dic_desc, cate_code, create_user_id, create_date, update_user_id, update_date,tenant_id
+        from base_sys_dictionary
+        where id = #{id}
+    </select>
+
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryPage" resultMap="BaseSysDictionaryMap">
+        select
+        id, dic_code, dic_name, dic_desc, cate_code, create_user_id, create_date, update_user_id, update_date,tenant_id,create_org_id
+
+        from base_sys_dictionary
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="dicCode != null and dicCode != ''">
+                and dic_code like CONCAT(CONCAT('%', #{dicCode}), '%')
+            </if>
+            <if test="dicName != null and dicName != ''">
+                and dic_name like CONCAT(CONCAT('%', #{dicName}), '%')
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                and dic_desc = #{dicDesc}
+            </if>
+            <if test="cateCode != null and cateCode != ''">
+                and cate_code = #{cateCode}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null ">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateDate != null ">
+                and update_date = #{updateDate}
+            </if>
+        </where>
+    </select>
+
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryList" resultMap="BaseSysDictionaryMap">
+        select
+        id, dic_code, dic_name, dic_desc, cate_code, create_user_id, update_user_id,tenant_id
+        create_org_id
+        from base_sys_dictionary
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="dicCode != null and dicCode != ''">
+                and dic_code = #{dicCode}
+            </if>
+            <if test="dicName != null and dicName != ''">
+                and dic_name = #{dicName}
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                and dic_desc = #{dicDesc}
+            </if>
+            <if test="cateCode != null and cateCode != ''">
+                and cate_code = #{cateCode}
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createDate != null ">
+                and create_date = #{createDate}
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateDate != null ">
+                and update_date = #{updateDate}
+            </if>
+        </where>
+    </select>
+
+
+
+    <!--新增所有列-->
+    <insert id="saveObject" keyProperty="id" useGeneratedKeys="true">
+        insert into base_sys_dictionary(id,dic_code, dic_name, dic_desc, cate_code, create_user_id, create_date, update_user_id, update_date,tenant_id)
+        values (#{id},#{dicCode}, #{dicName}, #{dicDesc}, #{cateCode}, #{createUserId}, #{createDate}, #{updateUserId}, #{updateDate},#{tenantId})
+    </insert>
+
+
+
+    <!--通过主键修改数据-->
+    <update id="updateObject">
+        update base_sys_dictionary
+        <set>
+            <if test="dicCode != null and dicCode != ''">
+                dic_code = #{dicCode},
+            </if>
+            <if test="dicName != null and dicName != ''">
+                dic_name = #{dicName},
+            </if>
+            <if test="dicDesc != null and dicDesc != ''">
+                dic_desc = #{dicDesc},
+            </if>
+            <if test="cateCode != null and cateCode != ''">
+                cate_code = #{cateCode},
+            </if>
+            <if test="createUserId != null and createUserId != ''">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createDate != null ">
+                create_date = #{createDate},
+            </if>
+            <if test="updateUserId != null and updateUserId != ''">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="updateDate != null ">
+                update_date = #{updateDate},
+            </if>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="delObjectById">
+        delete from base_sys_dictionary where id = #{id}
+    </delete>
+
+    <select id="selectDictCodeTotal"  resultType="java.lang.Integer" >
+        select count(1) FROM base_sys_dictionary  where dic_code = #{dictCode}
+    </select>
+
+
+</mapper>
