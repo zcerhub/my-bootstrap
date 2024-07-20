@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dap.sequence.client.entity.SeqRecoveryRecord">
+
+    <resultMap type="com.dap.sequence.client.entity.SeqRecoveryRecord" id="SeqRecoveryRecordMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="seqCode" column="seq_code" jdbcType="VARCHAR"/>
+        <result property="recoveryStatus" column="recovery_status" jdbcType="VARCHAR"/>
+        <result property="serialNumber" column="serial_number" jdbcType="VARCHAR"/>
+        <result property="createUserId" column="create_user_id" jdbcType="VARCHAR"/>
+        <result property="updateUserId" column="update_user_id" jdbcType="VARCHAR"/>
+        <result property="createDate" column="create_date" jdbcType="TIMESTAMP"/>
+        <result property="updateDate" column="update_date" jdbcType="TIMESTAMP"/>
+        <result property="tenantId" column="tenant_id" jdbcType="VARCHAR"/>
+        <result property="seqLock" column="seq_lock" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Recovery_Column">
+        id, seq_code,recovery_status, serial_number,create_user_id, update_user_id, create_date,
+        update_date, tenant_id, seq_lock
+    </sql>
+
+    <!--  表名  -->
+    <sql id="Recovery_Name">
+        seq_recovery_record
+    </sql>
+
+    <select id="selectRecoveryForUpdate" parameterType="com.dap.sequence.client.entity.SeqRecoveryRecord" resultMap="SeqRecoveryRecordMap">
+        select
+        <include refid="Recovery_Column"/>
+        from
+        <include refid="Recovery_Name"/>
+        <where>
+            <if test="seqCode != null and seqCode != ''">
+                seq_code = #{seqCode}
+            </if>
+            <if test="serialNumber != null and serialNumber != ''">
+                and serial_number = #{serialNumber}
+            </if>
+            <if test="recoveryStatus != null and recoveryStatus != ''">
+                and recovery_status = #{recoveryStatus}
+            </if>
+        </where>
+        limit #{limit}
+        for update
+    </select>
+
+    <select id="queryRecoveryRecords" parameterType="com.dap.sequence.client.entity.SeqRecoveryRecord" resultMap="SeqRecoveryRecordMap">
+        select
+        <include refid="Recovery_Column"/>
+        from
+        <include refid="Recovery_Name"/>
+        <where>
+            <if test="seqCode != null and seqCode != ''">
+                seq_code = #{seqCode}
+            </if>
+            <if test="serialNumber != null and serialNumber != ''">
+                and serial_number = #{serialNumber}
+            </if>
+            <if test="recoveryStatus != null and recoveryStatus != ''">
+                and recovery_status = #{recoveryStatus}
+            </if>
+        </where>
+    </select>
+
+    <insert id="saveBatchRecovery" keyProperty="id" useGeneratedKeys="true">
+        insert into<include refid="Recovery_Name"/>(<include refid="Recovery_Column"/>)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.id},#{item.seqCode},#{item.recoveryStatus},#{item.serialNumber},
+            #{item.createUserId},#{item.updateUserId},#{item.createDate},
+            #{item.updateDate},#{item.tenantId},#{item.seqLock})
+        </foreach>
+    </insert>
+
+    <update id="updateRecoveryStatus">
+        update <include refid="Recovery_Name"/>
+        <set>
+            recovery_status = #{recoveryStatus}
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <insert id="saveRecovery" keyProperty="id" useGeneratedKeys="true">
+        insert into<include refid="Recovery_Name"/>(<include refid="Recovery_Column"/>)
+        values
+        (#{id},#{seqCode},#{recoveryStatus},#{serialNumber},
+        #{createUserId},#{updateUserId},#{createDate},
+        #{updateDate},#{tenantId},#{curNumId})
+    </insert>
+</mapper>
+
